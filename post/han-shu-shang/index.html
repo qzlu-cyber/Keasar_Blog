@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>Keasar`Blog</title>
+<title>函数（上） | Keasar`Blog</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1591104870641">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,6 +38,8 @@
 
 
 
+  <meta name="description" content="函数（上）" />
+  <meta name="keywords" content="JavaScript" />
 </head>
 
 <body>
@@ -174,10 +176,26 @@
   <div class="main-continer">
     
     <div
-      class="section-layout bg-color mist">
+      class="section-layout mist bg-color">
       <div class="section-layout-wrapper">
-        <div id="sidebarMeta" class="sidebar">
-    
+        
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper  right-motion" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active language" data-lan="index">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item language" data-lan="preview">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body mist" id="sidebar_body">
+        
+          
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper ">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -210,58 +228,869 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84%E6%A6%82%E5%BF%B5">函数的概念</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%A4%E4%B8%AA%E9%98%B6%E6%AE%B5%E9%87%8D%E7%82%B9">函数的两个阶段（重点）</a>
+<ul>
+<li><a href="#%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E9%98%B6%E6%AE%B5">函数定义阶段</a>
+<ul>
+<li><a href="#%E5%A3%B0%E6%98%8E%E5%BC%8F">声明式</a></li>
+<li><a href="#%E8%B5%8B%E5%80%BC%E5%BC%8F">赋值式</a></li>
+</ul>
+</li>
+<li><a href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E9%98%B6%E6%AE%B5">函数调用阶段</a>
+<ul>
+<li><a href="#%E8%B0%83%E7%94%A8%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0">调用一个函数</a></li>
+<li><a href="#%E8%B0%83%E7%94%A8%E4%B8%8A%E7%9A%84%E5%8C%BA%E5%88%AB">调用上的区别</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0%E9%87%8D%E7%82%B9">函数的参数（重点）</a>
+<ul>
+<li><a href="#%E8%A1%8C%E5%8F%82%E5%92%8C%E5%AE%9E%E5%8F%82%E7%9A%84%E4%BD%9C%E7%94%A8">行参和实参的作用</a></li>
+<li><a href="#%E5%8F%82%E6%95%B0%E4%B8%AA%E6%95%B0%E7%9A%84%E5%85%B3%E7%B3%BB">参数个数的关系</a></li>
+</ul>
+</li>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84return%E9%87%8D%E7%82%B9">函数的return（重点）</a>
+<ul>
+<li><a href="#%E7%BB%88%E6%96%AD%E5%87%BD%E6%95%B0">终断函数</a></li>
+<li><a href="#%E8%BF%94%E5%9B%9E%E5%80%BC">返回值</a></li>
+</ul>
+</li>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84%E4%BC%98%E7%82%B9">函数的优点</a></li>
+<li><a href="#%E9%A2%84%E8%A7%A3%E6%9E%90%E9%87%8D%E7%82%B9">预解析（重点）</a>
+<ul>
+<li><a href="#%E8%A7%A3%E9%87%8A%E4%BB%A3%E7%A0%81">解释代码</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
 </div>
+
 <script>
-  let sidebarMeta = document.querySelector('#sidebarMeta');
-  let scheme = 'mist';
-  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
-  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
-    document.addEventListener('scroll', function(e) {
-      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
-        sidebarWrapper.classList.add('home-sidebar-fixed')
-      } else {
-        sidebarWrapper.classList.remove('home-sidebar-fixed')
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
       }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
     });
   }
-  </script>
-        <div class="section-box tag-line box-shadow-wrapper">
-          <section class="section tags-section posts-expand bg-color">
-            <div class="padding-wrapper">
-  <div class="tag-timeline-box">
-    <div class="tag-timeline-wrapper">
-      <div class="tag-timeline-title">
-        <h2>
-          Gridea
-          <small class="language" data-lan="tag">标签</small>
-        </h2>
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
+          
+        
       </div>
+    </div>
+  
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+        <div class="section-box box-shadow-wrapper">
+          <div class="section bg-color post post-page">
+            <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://qzlu-cyber.github.io/Keasar_Blog/post/han-shu-shang/">
+      函数（上）
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span>2020-06-02</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">分类于</span>
       
       
-      
-      
-      
-      
-      
-      
-      
-      <a href="https://qzlu-cyber.github.io/Keasar_Blog/post/hello-gridea/">
-        <div class="motion-warpper">
-          <div class="tag-post-node">
-            <h1>
-              12-12
-              <small>Hello Gridea</small>
-            </h1>
-          </div>
-        </div>
+      <a href="https://qzlu-cyber.github.io/Keasar_Blog/tag/5OF6wA66L/">
+        <span>JavaScript</span>
       </a>
       
       
+    </span>
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>8<span class="language" data-lan="minute">分钟</span></span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>2161<span class="pc-show language" data-lan="words">字数</span></span>
+    </span>
+    
+    
+    
+    <span id="/Keasar_Blog/post/han-shu-shang/" data-flag-title="函数（上）" class="meta-item pc-show leancloud_visitors">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-eye"></i>
+      <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
+    </span>
+    
+  </div>
+</header>
+            <div class="post-body next-md-body" id="post_body">
+              <h2 id="函数的概念">函数的概念</h2>
+<ul>
+<li>
+<p>对于 js 来说，函数就是把任意一段代码放在一个 <strong>盒子</strong> 里面</p>
+</li>
+<li>
+<p>在我想要让这段代码执行的时候，直接执行这个 <strong>盒子</strong> 里面的代码就行</p>
+</li>
+<li>
+<p>先看一段代码</p>
+<pre><code class="language-javascript">// 这个是我们以前写的一段代码
+for (var i = 0; i &lt; 10; i++) {
+  console.log(i)
+}
+
+// 函数，这个 {} 就是那个 “盒子”
+function fn() {
+  // 这个函数我们以前写的代码
+  for (var i = 0; i &lt; 10; i++) {
+    console.log(i)
+  }
+}
+</code></pre>
+</li>
+</ul>
+<h2 id="函数的两个阶段重点">函数的两个阶段（重点）</h2>
+<ul>
+<li>按照我们刚才的说法，两个阶段就是 <strong>放在盒子里面</strong> 和 <strong>让盒子里面的代码执行</strong></li>
+</ul>
+<h3 id="函数定义阶段">函数定义阶段</h3>
+<ul>
+<li>
+<p>定义阶段就是我们把代码 <strong>放在盒子里面</strong></p>
+</li>
+<li>
+<p>我们就要学习怎么 <strong>放进去</strong>，也就是书写一个函数</p>
+</li>
+<li>
+<p>我们有两种定义方式 <strong>声明式</strong> 和 <strong>赋值式</strong></p>
+</li>
+</ul>
+<h4 id="声明式">声明式</h4>
+<ul>
+<li>
+<p>使用 <code>function</code> 这个关键字来声明一个函数</p>
+</li>
+<li>
+<p>语法：</p>
+<pre><code class="language-javascript">function fn() {
+  // 一段代码
+}
+// function: 声明函数的关键字，表示接下来是一个函数了
+// fn: 函数的名字，我们自己定义的（遵循变量名的命名规则和命名规范）
+// (): 必须写，是用来放参数的位置（一会我们再聊）
+// {}: 就是我们用来放一段代码的位置（也就是我们刚才说的 “盒子”）
+</code></pre>
+</li>
+</ul>
+<h4 id="赋值式">赋值式</h4>
+<ul>
+<li>
+<p>其实就是和我们使用 <code>var</code> 关键字是一个道理了</p>
+</li>
+<li>
+<p>首先使用 <code>var</code> 定义一个变量，把一个函数当作值直接赋值给这个变量就可以了</p>
+</li>
+<li>
+<p>语法：</p>
+<pre><code class="language-javascript">var fn = function () {
+  // 一段代码
+}
+// 不需要在 function 后面书写函数的名字了，因为在前面已经有了
+</code></pre>
+</li>
+</ul>
+<h3 id="函数调用阶段">函数调用阶段</h3>
+<ul>
+<li>就是让 <strong>盒子里面</strong> 的代码执行一下</li>
+<li>让函数执行</li>
+<li>两种定义函数的方式不同，但是调用函数的方式都以一样的</li>
+</ul>
+<h4 id="调用一个函数">调用一个函数</h4>
+<ul>
+<li>
+<p>函数调用就是直接写 <code>函数名()</code> 就可以了</p>
+<pre><code class="language-javascript">// 声明式函数
+function fn() {
+  console.log('我是 fn 函数')
+}
+
+// 调用函数
+fn()
+
+// 赋值式函数
+var fn2 = function () {
+  console.log('我是 fn2 函数')
+}
+
+// 调用函数
+fn()
+</code></pre>
+<ul>
+<li>注意： <strong>定义完一个函数以后，如果没有函数调用，那么写在 {} 里面的代码没有意义，只有调用以后才会执行</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="调用上的区别">调用上的区别</h4>
+<ul>
+<li>
+<p>虽然两种定义方式的调用都是一样的，但是还是有一些区别的</p>
+</li>
+<li>
+<p>声明式函数： 调用可以在 <strong>定义之前或者定义之后</strong></p>
+<pre><code class="language-javascript">// 可以调用
+fn()
+
+// 声明式函数
+function fn() {
+  console.log('我是 fn 函数')
+}
+
+// 可以调用
+fn()
+</code></pre>
+</li>
+<li>
+<p>赋值式函数： 调用只能在 <strong>定义之前</strong></p>
+<pre><code class="language-javascript">// 会报错
+fn()
+
+// 赋值式函数
+var fn = function () {
+  console.log('我是 fn 函数')
+}
+
+// 可以调用
+fn()
+</code></pre>
+</li>
+</ul>
+<h2 id="函数的参数重点">函数的参数（重点）</h2>
+<ul>
+<li>
+<p>我们在定义函数和调用函数的时候都出现过 <code>()</code></p>
+</li>
+<li>
+<p>现在我们就来说一下这个 <code>()</code> 的作用</p>
+</li>
+<li>
+<p>就是用来放参数的位置</p>
+</li>
+<li>
+<p>参数分为两种 <strong>行参</strong> 和 <strong>实参</strong></p>
+<pre><code class="language-javascript">// 声明式
+function fn(行参写在这里) {
+  // 一段代码
+}
+
+fn(实参写在这里)
+
+// 赋值式函数
+var fn = function (行参写在这里) {
+  // 一段代码
+}
+fn(实参写在这里)
+</code></pre>
+</li>
+</ul>
+<h3 id="行参和实参的作用">行参和实参的作用</h3>
+<ol>
+<li>
+<p>行参</p>
+<ul>
+<li>
+<p>就是在函数内部可以使用的变量，在函数外部不能使用</p>
+</li>
+<li>
+<p>每写一个单词，就相当于在函数内部定义了一个可以使用的变量（遵循变量名的命名规则和命名规范）</p>
+</li>
+<li>
+<p>多个单词之间以 <code>,</code> 分隔</p>
+<pre><code class="language-javascript">// 书写一个参数
+function fn(num) {
+  // 在函数内部就可以使用 num 这个变量
+}
+
+var fn1 = function (num) {
+	// 在函数内部就可以使用 num 这个变量
+}
+
+// 书写两个参数
+function fun(num1, num2) {
+  // 在函数内部就可以使用 num1 和 num2 这两个变量
+}
+
+var fun1 = function (num1, num2) {
+  // 在函数内部就可以使用 num1 和 num2 这两个变量
+}
+</code></pre>
+</li>
+<li>
+<p>如果只有行参的话，那么在函数内部使用的值个变量是没有值的，也就是 <code>undefined</code></p>
+</li>
+<li>
+<p><strong>行参的值是在函数调用的时候由实参决定的</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>实参</p>
+<ul>
+<li>
+<p>在函数调用的时候给行参赋值的</p>
+</li>
+<li>
+<p>也就是说，在调用的时候是给一个实际的内容的</p>
+<pre><code class="language-javascript">function fn(num) {
+  // 函数内部可以使用 num 
+}
+
+// 这个函数的本次调用，书写的实参是 100
+// 那么本次调用的时候函数内部的 num 就是 100
+fn(100) 
+
+// 这个函数的本次调用，书写的实参是 200
+// 那么本次调用的时候函数内部的 num 就是 200
+fn(200)
+</code></pre>
+</li>
+<li>
+<p><strong>函数内部的行参的值，由函数调用的时候传递的实参决定</strong></p>
+</li>
+<li>
+<p><strong>多个参数的时候，是按照顺序一一对应的</strong></p>
+<pre><code class="language-javascript">function fn(num1, num2) {
+  // 函数内部可以使用 num1 和 num2
+}
+
+// 函数本次调用的时候，书写的参数是 100 和 200
+// 那么本次调用的时候，函数内部的 num1 就是 100，num2 就是 200
+fn(100, 200)
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="参数个数的关系">参数个数的关系</h3>
+<ol>
+<li>
+<p>行参比实参少</p>
+<ul>
+<li>
+<p>因为是按照顺序一一对应的</p>
+</li>
+<li>
+<p>行参少就会拿不到实参给的值，所以在函数内部就没有办法用到这个值</p>
+<pre><code class="language-javascript">function fn(num1, num2) {
+  // 函数内部可以使用 num1 和 num2
+}
+
+// 本次调用的时候，传递了两个实参，100 200 和 300
+// 100 对应了 num1，200 对应了 num2，300 没有对应的变量
+// 所以在函数内部就没有办法依靠变量来使用 300 这个值
+fn(100, 200, 300)
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>行参比实参多</p>
+<ul>
+<li>
+<p>因为是按照顺序一一对应的</p>
+</li>
+<li>
+<p>所以多出来的行参就是没有值的，就是 <code>undefined</code></p>
+<pre><code class="language-javascript">function fn(num1, num2, num3) {
+  // 函数内部可以使用 num1 num2 和 num3
+}
+
+// 本次调用的时候，传递了两个实参，100 和 200
+// 就分别对应了 num1 和 num2
+// 而 num3 没有实参和其对应，那么 num3 的值就是 undefined
+fn(100, 200)
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="函数的return重点">函数的return（重点）</h2>
+<ul>
+<li>return 返回的意思，其实就是给函数一个 <strong>返回值</strong> 和 <strong>终断函数</strong></li>
+</ul>
+<h3 id="终断函数">终断函数</h3>
+<ul>
+<li>
+<p>当我开始执行函数以后，函数内部的代码就会从上到下的依次执行</p>
+</li>
+<li>
+<p>必须要等到函数内的代码执行完毕</p>
+</li>
+<li>
+<p>而 <code>return</code> 关键字就是可以在函数中间的位置停掉，让后面的代码不在继续执行</p>
+<pre><code class="language-javascript">function fn() {
+  console.log(1)
+  console.log(2)
+  console.log(3)
+  
+  // 写了 return 以后，后面的 4 和 5 就不会继续执行了
+  return
+  console.log(4)
+  console.log(5)
+}
+
+// 函数调用
+fn()
+</code></pre>
+</li>
+</ul>
+<h3 id="返回值">返回值</h3>
+<ul>
+<li>
+<p>函数调用本身也是一个表达式，表达式就应该有一个值出现</p>
+</li>
+<li>
+<p>现在的函数执行完毕之后，是不会有结果出现的</p>
+<pre><code class="language-javascript">// 比如 1 + 2 是一个表达式，那么 这个表达式的结果就是 3
+console.log(1 + 2) // 3
+
+function fn() {
+  // 执行代码
+}
+
+// fn() 也是一个表达式，这个表达式就没有结果出现
+console.log(fn()) // undefined
+</code></pre>
+</li>
+<li>
+<p><code>return</code> 关键字就是可以给函数执行完毕一个结果</p>
+<pre><code class="language-javascript">function fn() {
+  // 执行代码
+  return 100
+}
+
+// 此时，fn() 这个表达式执行完毕之后就有结果出现了
+console.log(fn()) // 100
+</code></pre>
+<ul>
+<li>我们可以在函数内部使用 <code>return</code> 关键把任何内容当作这个函数运行后的结果</li>
+</ul>
+</li>
+</ul>
+<h2 id="函数的优点">函数的优点</h2>
+<ul>
+<li>函数就是对一段代码的封装，在我们想调用的时候调用</li>
+<li>函数的几个优点
+<ol>
+<li>封装代码，使代码更加简洁</li>
+<li>复用，在重复功能的时候直接调用就好</li>
+<li>代码执行时机，随时可以在我们想要执行的时候执行</li>
+</ol>
+</li>
+</ul>
+<h2 id="预解析重点">预解析（重点）</h2>
+<ul>
+<li><strong>预解析</strong> 其实就是聊聊 js 代码的编译和执行</li>
+<li>js 是一个解释型语言，就是在代码执行之前，先对代码进行通读和解释，然后在执行代码</li>
+<li>也就是说，我们的 js 代码在运行的时候，会经历两个环节 <strong>解释代码</strong> 和 <strong>执行代码</strong></li>
+</ul>
+<h3 id="解释代码">解释代码</h3>
+<ul>
+<li>
+<p>因为是在所有代码执行之前进行解释，所以叫做 <strong>预解析（预解释）</strong></p>
+</li>
+<li>
+<p>需要解释的内容有两个</p>
+<ul>
+<li>声明式函数
+<ul>
+<li>在内存中先声明有一个变量名是函数名，并且这个名字代表的内容是一个函数</li>
+</ul>
+</li>
+<li><code>var</code> 关键字
+<ul>
+<li>在内存中先声明有一个变量名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>看下面一段代码</p>
+<pre><code class="language-javascript">fn()
+console.log(num)
+
+function fn() {
+  console.log('我是 fn 函数')
+}
+
+var num = 100
+</code></pre>
+</li>
+<li>
+<p>经过预解析之后可以变形为</p>
+<pre><code class="language-javascript">function fn() {
+  console.log('我是 fn 函数')
+}
+var num
+
+fn()
+console.log(num)
+num = 100
+</code></pre>
+</li>
+<li>
+<p>赋值是函数会按照 <code>var</code> 关键字的规则进行预解析</p>
+</li>
+</ul>
+
+            </div>
+            
+            
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong class="language" data-lan="author">本文作者：</strong>
+      Keasar
+    </li>
+    <li class="post-copyright-link">
+      <strong class="language" data-lan="link">本文链接：</strong>
+      <a href="https://qzlu-cyber.github.io/Keasar_Blog/post/han-shu-shang/" title="函数（上）">https://qzlu-cyber.github.io/Keasar_Blog/post/han-shu-shang/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong class="language" data-lan="copyright">版权声明： </strong>
+      本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+      <a href="https://qzlu-cyber.github.io/Keasar_Blog/tag/5OF6wA66L/"># JavaScript</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="Hello Gridea" href="https://qzlu-cyber.github.io/Keasar_Blog/post/hello-gridea/">Hello Gridea</a>
+        <a class="nav-mobile-next" title="Hello Gridea" href="https://qzlu-cyber.github.io/Keasar_Blog/post/hello-gridea/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>
 </div>
-          </section>
+            
+            
+  <script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: '00K414IJmQeBNc9fa3hhlowu-gzGzoHsz',
+    appKey: 'G1WPh4BmIzV6HJM048mAhCPO',
+    avatar: '',
+    placeholder: '请留下您宝贵的评论：',
+    pageSize: '',
+    lang: 'zh-cn',
+    enableQQ: true,
+    visitor: 'true' === 'true',
+    highlight: 'true' === 'true',
+    avatarForce: 'true' === 'false',
+  });
+</script>
+
+          </div>
         </div>
       </div>
     </div>
@@ -990,6 +1819,253 @@
   }
 
 </script>
+    <div class="light-box" id="light_box"></div>
+<script>
+  let imgs = document.querySelectorAll('.post-body img');
+  let lightBox = document.querySelector('#light_box');
+  lightBox.addEventListener('mousedown', (e) => {
+    e.preventDefault()
+  })
+  lightBox.addEventListener('mousewheel', (e) => {
+    e.preventDefault()
+  })
+  let width = window.innerWidth * 0.8;
+  lightBox.onclick = () => {
+    let img = lightBox.querySelector('img');
+    lightBox.style = '';
+    img && img.remove();
+  }
+  imgs.forEach(item => {
+    item.onclick = function (e) {
+      let lightImg = document.createElement('img');
+      lightImg.src = this.src;
+      lightBox.style = `height: 100%; opacity: 1; background-color: rgba(0, 0, 0, 0.5);cursor: zoom-out;`;
+      lightImg.style = `width: ${width}px; border: 1px solid #fff; border-radius: 2px;`;
+      lightImg.onclick = function () {
+        lightBox.style = '';
+        this.remove();
+      }
+      lightBox.append(lightImg);
+    }
+  })
+</script>
+    <div class="reward-mask" style="display: none;">
+  <div class="reward-relative">
+    <span class="close" aria-hidden="true">x</span>
+    <div class="reward-body">
+      <h2>感谢您的支持，我会继续努力的!</h2>
+      <div class="reward-img-box">
+        <div style="position: relative; width: 140px; height: 140px;">
+          
+          
+          
+        </div>
+      </div>
+      <p class="reward-word">扫码打赏，你说多少就多少</p>
+      <p class="reward-tip">打开微信扫一扫，即可进行扫码打赏哦</p>
+    </div>
+    <div class="bottom">
+      
+      
+    </div>
+  </div>
+</div>
+<style>
+  .reward-mask {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #00000054;
+  }
+
+  .reward-relative {
+    position: relative;
+    width: 480px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #fff;
+    top: 50%;
+    margin-top: -205px;
+  }
+
+  .reward-relative .close {
+    position: absolute;
+    right: 10px;
+    font-weight: normal;
+    font-size: 16px;
+    color: #929292;
+  }
+
+  .reward-body {
+    padding: 40px 20px 20px;
+  }
+
+  .bottom {
+    display: flex;
+  }
+
+  .reward-btn {
+    text-align: center;
+  }
+
+  .reward-btn-text {
+    display: inline-block;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    background-color: #ff9734;
+    color: #FFF;
+    margin-top: 20px;
+  }
+
+  .pay-text {
+    margin-top: 10px;
+    padding: 10px;
+    flex: 1;
+    transition: all .2s linear;
+  }
+
+  .pay-text:hover {
+    background-color: #a5a5a536;
+  }
+
+  .reward-body h2 {
+    padding-top: 10px;
+    text-align: center;
+    color: #a3a3a3;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0 20px;
+  }
+
+  .reward-body h2:after,
+  .reward-body h2:before {
+    font-family: Arial, Helvetica, sans-serif;
+    background: 0 0;
+    width: 0;
+    height: 0;
+    font-style: normal;
+    color: #eee;
+    font-size: 80px;
+    position: absolute;
+    top: 20px;
+  }
+
+  .reward-body h2:before {
+    content: '\201c';
+    left: 50px;
+  }
+
+  .reward-body h2:after {
+    content: '\201d';
+    right: 80px;
+  }
+
+  .reward-img-box {
+    display: inline-block;
+    padding: 10px;
+    border: 6px solid #ea5f00;
+    margin: 0 auto;
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .reward-img {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .reward-relative {
+      height: 100%;
+      top: 0px;
+      margin-top: 0;
+      width: auto;
+    }
+
+    .reward-relative .bottom {
+      flex-direction: column;
+    }
+
+    .reward-relative .pay-text {
+      width: 80%;
+      margin: 5px auto;
+      border: 1px solid silver;
+      padding: 6px;
+      border-radius: 4px;
+    }
+
+    .reward-body h2:after {
+      right: 40px;
+    }
+
+    .reward-body h2:after,
+    .reward-body h2:before {
+      font-size: 60px;
+    }
+
+    .reward-body h2:before {
+      left: 20px;
+    }
+  }
+</style>
+<script>
+  !function () {
+    var mask = document.querySelector('.reward-mask');
+    let close = document.querySelector('.reward-relative .close');
+    let rewardBtn = document.querySelector('.reward-btn');
+
+    let zfb = document.querySelector('#zfb'),
+      wx = document.querySelector('#wx'),
+      zfbBtn = document.querySelector('#zfbBtn'),
+      wxBtn = document.querySelector('#wxBtn');
+
+    if (zfbBtn && wxBtn) {
+      zfbBtn.addEventListener('click', () => {
+        window.Velocity(zfb, 'transition.slideLeftIn', {
+          duration: 400
+        });
+        window.Velocity(wx, 'transition.slideRightOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+
+      wxBtn.addEventListener('click', () => {
+        window.Velocity(wx, 'transition.slideRightIn', {
+          duration: 400
+        });
+        window.Velocity(zfb, 'transition.slideLeftOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+    }
+
+    rewardBtn.addEventListener('click', (e) => {
+      window.Velocity(mask, 'transition.slideDownIn', {
+        duration: 400
+      })
+    });
+
+    close.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.Velocity(mask, 'transition.slideUpOut', {
+        duration: 400
+      })
+    })
+  }()
+</script>
+
   </div>
 </body>
 
@@ -1739,7 +2815,6 @@ num = 100
 
 
 <script src="/media/js/mouse/love.js"></script>
-
 
 
 </html>
