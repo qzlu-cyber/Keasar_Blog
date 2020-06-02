@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qzlu-cyber.github.io/Keasar_Blog</id>
     <title>Keasar`Blog</title>
-    <updated>2020-06-02T13:43:18.252Z</updated>
+    <updated>2020-06-02T13:45:39.643Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qzlu-cyber.github.io/Keasar_Blog"/>
     <link rel="self" href="https://qzlu-cyber.github.io/Keasar_Blog/atom.xml"/>
@@ -16,6 +16,16 @@
         <link href="https://qzlu-cyber.github.io/Keasar_Blog/post/han-shu-shang/">
         </link>
         <updated>2020-06-02T13:31:02.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="函数的概念">函数的概念</h2>
+<ul>
+<li>
+<p>对于 js 来说，函数就是把任意一段代码放在一个 <strong>盒子</strong> 里面</p>
+</li>
+<li>
+<p>在我想要让这段代码执行的时候，直接执行这个 <strong>盒子</strong> 里面的代码就行</p>
+</li>
+</ul>
+]]></summary>
         <content type="html"><![CDATA[<h2 id="函数的概念">函数的概念</h2>
 <ul>
 <li>
@@ -24,6 +34,9 @@
 <li>
 <p>在我想要让这段代码执行的时候，直接执行这个 <strong>盒子</strong> 里面的代码就行</p>
 </li>
+</ul>
+<!-- more -->
+<ul>
 <li>
 <p>先看一段代码</p>
 <pre><code class="language-javascript">// 这个是我们以前写的一段代码
