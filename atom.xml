@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qzlu-cyber.github.io/Keasar_Blog</id>
     <title>Keasar`Blog</title>
-    <updated>2020-06-02T13:45:39.643Z</updated>
+    <updated>2020-06-03T06:41:48.687Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qzlu-cyber.github.io/Keasar_Blog"/>
     <link rel="self" href="https://qzlu-cyber.github.io/Keasar_Blog/atom.xml"/>
@@ -10,6 +10,119 @@
     <logo>https://qzlu-cyber.github.io/Keasar_Blog/images/avatar.png</logo>
     <icon>https://qzlu-cyber.github.io/Keasar_Blog/favicon.ico</icon>
     <rights>All rights reserved 2020, Keasar`Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页]]></title>
+        <id>https://qzlu-cyber.github.io/Keasar_Blog/post/centos76-an-zhuang-docker-bing-zai-docker-zhong-li-yong-tomcat-bu-shu-jing-tai-wang-ye/</id>
+        <link href="https://qzlu-cyber.github.io/Keasar_Blog/post/centos76-an-zhuang-docker-bing-zai-docker-zhong-li-yong-tomcat-bu-shu-jing-tai-wang-ye/">
+        </link>
+        <updated>2020-06-03T06:40:59.000Z</updated>
+        <summary type="html"><![CDATA[<h3 id="centos76安装docker并在docker中利用tomcat部署静态网页">CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页</h3>
+]]></summary>
+        <content type="html"><![CDATA[<h3 id="centos76安装docker并在docker中利用tomcat部署静态网页">CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页</h3>
+<!-- more -->
+<h4 id="1-安装docker">1. 安装Docker</h4>
+<ul>
+<li>
+<p>更新yum包</p>
+<pre><code>yum update
+</code></pre>
+</li>
+<li>
+<p>查看是否安装过docker</p>
+<pre><code>whereis docker
+</code></pre>
+</li>
+<li>
+<p>如果安装过，则删除之前的版本</p>
+<pre><code>yum remove docker docker-common docker-selinux docker-engine
+</code></pre>
+</li>
+<li>
+<p>设置yum源</p>
+<pre><code>yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+</code></pre>
+</li>
+<li>
+<p>查看docker版本</p>
+<pre><code>yum list docker-ce --showduplicates | sort -r
+</code></pre>
+</li>
+<li>
+<p>安装</p>
+<pre><code>yum install docker-ce 
+</code></pre>
+</li>
+<li>
+<p>启动Docker</p>
+<pre><code>systemctl start docker
+</code></pre>
+</li>
+<li>
+<p>开机启动</p>
+<pre><code>systemctl enable docker
+</code></pre>
+</li>
+<li>
+<p>验证安装是否成功</p>
+<pre><code>docker version
+</code></pre>
+<ul>
+<li>
+<p>如下存在Client和Server则成功</p>
+<figure data-type="image" tabindex="1"><img src="X:%5Cclassworks%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%5Cdockerversion.png" alt="dockerversion" loading="lazy"></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>2.Docker常用命令</p>
+<pre><code>docker 运行容器命令
+docker ps
+ 
+docker 所有容器命令
+docker ps -a
+ 
+docker 删除容器命令
+docker rm 容器id
+ 
+docker 镜像查看命令
+</code></pre>
+<p>3.利用Tomcat部署静态网页</p>
+<ul>
+<li>
+<p>拉取Tomcat</p>
+<pre><code>docker pull tomcat
+</code></pre>
+</li>
+<li>
+<p>启动容器，验证Tomcat服务</p>
+<pre><code>docker run -p 8080:8080 tomcat
+</code></pre>
+</li>
+<li>
+<p>访问</p>
+<p>服务器外网IP:8080即可</p>
+<p>如果不行，看是否能ping通或者是服务器端口是否开放</p>
+</li>
+<li>
+<p>将静态页面拷贝到docker中tomcat的webapps下，建议挂载</p>
+<ul>
+<li>
+<p>将Tomcat启动，进入docker中查看命令：</p>
+<pre><code>docker exec -it 容器id /bin/bash //容器ID可通过 docker ps命令查询
+</code></pre>
+</li>
+<li>
+<p>挂载静态文件</p>
+<p>首先将静态资源文件夹上传至云服务器，例如我的上传至了/root下，即SongMove文件夹。下面这条命令即是将静态资源目录映射到容器的/ROOT下</p>
+<pre><code>docker run -d -v /root/SongMove/:/usr/local/tomcat/webapps/ROOT/ -p 8080:8080 tomcat:latest
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>4.服务器IP:8080访问即可</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[函数（上）]]></title>
         <id>https://qzlu-cyber.github.io/Keasar_Blog/post/han-shu-shang/</id>

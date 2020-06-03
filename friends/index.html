@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Keasar`Blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1591105520023">
+<link rel="shortcut icon" href="/favicon.ico?v=1591166505493">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -188,7 +188,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">2</span>
+        <span class="site-item-stat-count">3</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -1051,6 +1051,114 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qzlu-cyber.github.io/Keasar_Blog/post/centos76-an-zhuang-docker-bing-zai-docker-zhong-li-yong-tomcat-bu-shu-jing-tai-wang-ye/"" data-c="
+          &lt;h3 id=&#34;centos76安装docker并在docker中利用tomcat部署静态网页&#34;&gt;CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页&lt;/h3&gt;
+&lt;!-- more --&gt;
+&lt;h4 id=&#34;1-安装docker&#34;&gt;1. 安装Docker&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;更新yum包&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看是否安装过docker&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;whereis docker
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果安装过，则删除之前的版本&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum remove docker docker-common docker-selinux docker-engine
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置yum源&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看docker版本&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum list docker-ce --showduplicates | sort -r
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum install docker-ce 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;启动Docker&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;systemctl start docker
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;开机启动&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;systemctl enable docker
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;验证安装是否成功&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker version
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如下存在Client和Server则成功&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;X:%5Cclassworks%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%5Cdockerversion.png&#34; alt=&#34;dockerversion&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;2.Docker常用命令&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker 运行容器命令
+docker ps
+ 
+docker 所有容器命令
+docker ps -a
+ 
+docker 删除容器命令
+docker rm 容器id
+ 
+docker 镜像查看命令
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;3.利用Tomcat部署静态网页&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;拉取Tomcat&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker pull tomcat
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;启动容器，验证Tomcat服务&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker run -p 8080:8080 tomcat
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;访问&lt;/p&gt;
+&lt;p&gt;服务器外网IP:8080即可&lt;/p&gt;
+&lt;p&gt;如果不行，看是否能ping通或者是服务器端口是否开放&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将静态页面拷贝到docker中tomcat的webapps下，建议挂载&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;将Tomcat启动，进入docker中查看命令：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker exec -it 容器id /bin/bash //容器ID可通过 docker ps命令查询
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;挂载静态文件&lt;/p&gt;
+&lt;p&gt;首先将静态资源文件夹上传至云服务器，例如我的上传至了/root下，即SongMove文件夹。下面这条命令即是将静态资源目录映射到容器的/ROOT下&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker run -d -v /root/SongMove/:/usr/local/tomcat/webapps/ROOT/ -p 8080:8080 tomcat:latest
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;4.服务器IP:8080访问即可&lt;/p&gt;
+">CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://qzlu-cyber.github.io/Keasar_Blog/post/han-shu-shang/"" data-c="
