@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qzlu-cyber.github.io/Keasar_Blog</id>
     <title>Keasar`Blog</title>
-    <updated>2020-06-04T05:51:50.700Z</updated>
+    <updated>2020-06-04T05:54:41.525Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qzlu-cyber.github.io/Keasar_Blog"/>
     <link rel="self" href="https://qzlu-cyber.github.io/Keasar_Blog/atom.xml"/>
@@ -160,8 +160,7 @@
 <ol>
 <li>
 <h4 id="xdsl技术用数字技术对现有的模拟电话用户线进行改造使它能够承载宽带业务">xDSL技术：用数字技术对现有的模拟电话用户线进行改造，使它能够承载宽带业务。</h4>
-<pre><code> 其中，0-4kHz低端频谱留给传统电话使用，高端频谱留给用户上网使用。几种类型:ADSL/HDSL/SDSL/VDSL
-</code></pre>
+<p>其中，0-4kHz低端频谱留给传统电话使用，高端频谱留给用户上网使用。几种类型:ADSL/HDSL/SDSL/VDSL</p>
 <ul>
 <li>ADSL技术：非对称数字用户线。ADSL把上行和下行带宽做成不对称的。上行指从用户到ISP,下行指从ISP到用户。用户线两端是调制解调器(DMT).<br>
 DMT调制技术采用频分复用。40kHz-1.1MHz的高端频谱划分许多子信道，25个用于上行，249个用于下行。每个信道占据4kHz带宽。ADSL不能保证固定的数据率。</li>
