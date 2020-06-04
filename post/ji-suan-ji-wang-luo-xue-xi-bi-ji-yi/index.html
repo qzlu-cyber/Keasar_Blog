@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>计算机网络学习笔记（一） | Keasar`Blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1591249428570">
+<link rel="shortcut icon" href="/favicon.ico?v=1591249733957">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -240,8 +240,25 @@
 <ul>
 <li><a href="#%E4%BA%92%E8%81%94%E7%BD%91%E6%A6%82%E8%BF%B0">互联网概述</a></li>
 <li><a href="#isp">ISP</a></li>
-<li><a href="#%E4%BA%92%E8%81%94%E7%BD%91%E7%9A%84%E7%BB%84%E6%88%90">互联网的组成</a></li>
-<li><a href="#%E6%97%B6%E5%BB%B6">时延</a></li>
+<li><a href="#%E4%BA%92%E8%81%94%E7%BD%91%E7%9A%84%E7%BB%84%E6%88%90">互联网的组成</a>
+<ul>
+<li><a href="#%E4%B8%A4%E5%A4%A7%E5%9D%97">两大块</a></li>
+<li><a href="#%E4%B8%BB%E6%9C%BA%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F">主机间的通信方式</a></li>
+<li><a href="#%E4%BA%92%E8%81%94%E7%BD%91%E6%A0%B8%E5%BF%83%E9%83%A8%E5%88%86">互联网核心部分</a></li>
+<li><a href="#%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2">电路交换</a></li>
+<li><a href="#%E6%8A%A5%E6%96%87%E4%BA%A4%E6%8D%A2">报文交换</a></li>
+<li><a href="#%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2">分组交换</a></li>
+</ul>
+</li>
+<li><a href="#%E6%97%B6%E5%BB%B6">时延</a>
+<ul>
+<li><a href="#%E5%8F%91%E9%80%81%E6%97%B6%E5%BB%B6">发送时延</a></li>
+<li><a href="#%E4%BC%A0%E6%92%AD%E6%97%B6%E5%BB%B6">传播时延</a></li>
+<li><a href="#%E5%A4%84%E7%90%86%E6%97%B6%E5%BB%B6">处理时延</a></li>
+<li><a href="#%E6%8E%92%E9%98%9F%E6%97%B6%E5%BB%B6">排队时延</a></li>
+<li><a href="#%E6%97%B6%E5%BB%B6%E5%B8%A6%E5%AE%BD%E7%A7%AF">时延带宽积</a></li>
+</ul>
+</li>
 <li><a href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">计算机网络体系结构</a></li>
 </ul>
 </li>
@@ -577,7 +594,7 @@
 <h3 id="互联网的组成">互联网的组成</h3>
 <ol>
 <li>
-<p>两大块</p>
+<h4 id="两大块">两大块</h4>
 <ul>
 <li>边缘部分：所有连接在互联网上的<strong>主机</strong>（又被称为端系统），用户可以直接使用。用来进行通信和资源共享等。</li>
 <li>核心部分：由大量的网络和连接这些网络的<strong>路由器</strong>组成，用来为边缘部分的主机提供服务。</li>
@@ -587,20 +604,20 @@
 <figure data-type="image" tabindex="3"><img src="https://s1.ax1x.com/2020/06/04/twIkbn.png" alt="twIkbn.png" loading="lazy"></figure>
 <ol start="2">
 <li>
-<p>主机间的通信方式</p>
+<h4 id="主机间的通信方式">主机间的通信方式</h4>
 <ul>
 <li>客户-服务器方式（C/S）：客户即是服务请求方，服务器是服务提供方。</li>
 <li>对等连接方式（P2P）：不区分客户和服务器。</li>
 </ul>
 </li>
 <li>
-<p>互联网核心部分</p>
+<h4 id="互联网核心部分">互联网核心部分</h4>
 <ul>
 <li>路由器在核心部分起到特殊作用，任务是转发收到的分组，完成分组交换。</li>
 </ul>
 <ol>
 <li>
-<p>电路交换</p>
+<h4 id="电路交换">电路交换</h4>
 <ul>
 <li>
 <p>交换过程必须经过建立连接（占用信道资源）--  通话（一直占用信道资源）--  释放连接（归还通信资源）。</p>
@@ -611,13 +628,13 @@
 </ul>
 </li>
 <li>
-<p>报文交换</p>
+<h4 id="报文交换">报文交换</h4>
 <ul>
 <li>报文交换用于邮局通信系统，邮局接收到一份报文之后，先存储下来，然后把相同目的地的报文一起转发到下一个目的地，这个过程就是存储转发过程。</li>
 </ul>
 </li>
 <li>
-<p>分组交换</p>
+<h4 id="分组交换">分组交换</h4>
 </li>
 </ol>
 <ul>
@@ -630,28 +647,28 @@
 <p><strong>总时延 = 发送时延 + 传播时延 + 处理时延 + 排队时延</strong></p>
 <ol>
 <li>
-<p>发送时延</p>
+<h4 id="发送时延">发送时延</h4>
 <p>主机或路由器发送数据帧所需要的时间。</p>
 <figure data-type="image" tabindex="5"><img src="https://s1.ax1x.com/2020/06/04/twomdI.png" alt="twomdI.png" loading="lazy"></figure>
 <p>其中 l 表示数据帧的长度，v 表示发送速率。</p>
 </li>
 <li>
-<p>传播时延</p>
+<h4 id="传播时延">传播时延</h4>
 <p>电磁波在信道中传播一定的距离需要花费的时间，电磁波传播速度接近光速。</p>
 <figure data-type="image" tabindex="6"><img src="https://s1.ax1x.com/2020/06/04/twTkt0.png" alt="twTkt0.png" loading="lazy"></figure>
 <p>其中 l 表示信道长度，v 表示电磁波在信道上的传播速率。</p>
 </li>
 <li>
-<p>处理时延</p>
+<h4 id="处理时延">处理时延</h4>
 <p>主机或路由器收到分组时进行处理所需要的时间，例如分析首部，从分组中提取数据部分等。</p>
 </li>
 <li>
-<p>排队时延</p>
+<h4 id="排队时延">排队时延</h4>
 <p>分组在路由器的输入队列和输出队列中排队等待的时间，取决于网络当前的通信量。</p>
 <figure data-type="image" tabindex="7"><img src="https://s1.ax1x.com/2020/06/04/twT6gS.png" alt="twT6gS.png" loading="lazy"></figure>
 </li>
 <li>
-<p>时延带宽积</p>
+<h4 id="时延带宽积">时延带宽积</h4>
 <p>时延带宽积 = 传播时延 x 带宽</p>
 <p>链路的时延带宽积被称为以比特为单位的链路长度。</p>
 </li>
@@ -1773,7 +1790,7 @@
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/"" data-c="
-          &lt;p&gt;😉😉😉&lt;a href=&#34;%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89&#34;&gt;https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/&lt;/a&gt;&lt;/p&gt;
+          &lt;p&gt;😉😉😉&lt;a href=&#34;https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/&#34;&gt;计算机网络学习笔记（一）&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;物理层特性&#34;&gt;物理层特性&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;机械特性&lt;/strong&gt;&lt;/li&gt;
@@ -1800,7 +1817,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;信道&lt;/p&gt;
+&lt;h4 id=&#34;信道&#34;&gt;信道&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;按照通信双方信息交互的方式分为：&lt;strong&gt;单工通信&lt;/strong&gt;、&lt;strong&gt;半双工通信&lt;/strong&gt;、&lt;strong&gt;全双工通信&lt;/strong&gt;。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;曼切斯特编码产生的信号频率比不归零制高。不归零制没有自同步能力，曼切斯特编码具有自同步能力。&lt;/strong&gt;&lt;/li&gt;
@@ -1827,7 +1844,7 @@
 &lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;信道极限容量&lt;/p&gt;
+&lt;h4 id=&#34;信道极限容量&#34;&gt;信道极限容量&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;码元传输的速率越高，或者信号传输的距离越远，或噪声干扰越大，或传输媒体质量越差，在接收端的波形失真就越严重。&lt;/p&gt;
@@ -1857,7 +1874,7 @@
 &lt;h3 id=&#34;信道复用技术&#34;&gt;信道复用技术&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;频分、时分、统计时分复用&lt;/p&gt;
+&lt;h4 id=&#34;频分-时分-统计时分复用&#34;&gt;频分、时分、统计时分复用&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;频分复用&lt;/strong&gt;FDM：所有用户在同样的时间占用不同的带宽资源。&lt;/p&gt;
@@ -1876,7 +1893,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;波分复用&lt;/p&gt;
+&lt;h4 id=&#34;波分复用&#34;&gt;波分复用&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;波分复用&lt;/strong&gt;WDM：即光的频分复用。&lt;/li&gt;
 &lt;/ul&gt;
@@ -1886,7 +1903,7 @@
 &lt;p&gt;经过复用器合波后，速率达到8 x 2.5Gbit/s = 20Gbit/s。&lt;/p&gt;
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;
-&lt;p&gt;码分复用&lt;/p&gt;
+&lt;h4 id=&#34;码分复用&#34;&gt;码分复用&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;码分复用&lt;/strong&gt;CDM：即&lt;strong&gt;码分多址CDMA&lt;/strong&gt;，每一个用户可以在同样的时间使用同样的频带进行通信。&lt;/p&gt;
@@ -1907,8 +1924,9 @@
 &lt;h3 id=&#34;宽带接入技术&#34;&gt;宽带接入技术&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;xDSL技术：用数字技术对现有的模拟电话用户线进行改造，使它能够承载宽带业务。&lt;br&gt;
-其中，0-4kHz低端频谱留给传统电话使用，高端频谱留给用户上网使用。几种类型:ADSL/HDSL/SDSL/VDSL&lt;/p&gt;
+&lt;h4 id=&#34;xdsl技术用数字技术对现有的模拟电话用户线进行改造使它能够承载宽带业务&#34;&gt;xDSL技术：用数字技术对现有的模拟电话用户线进行改造，使它能够承载宽带业务。&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt; 其中，0-4kHz低端频谱留给传统电话使用，高端频谱留给用户上网使用。几种类型:ADSL/HDSL/SDSL/VDSL
+&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;ADSL技术：非对称数字用户线。ADSL把上行和下行带宽做成不对称的。上行指从用户到ISP,下行指从ISP到用户。用户线两端是调制解调器(DMT).&lt;br&gt;
 DMT调制技术采用频分复用。40kHz-1.1MHz的高端频谱划分许多子信道，25个用于上行，249个用于下行。每个信道占据4kHz带宽。ADSL不能保证固定的数据率。&lt;/li&gt;
@@ -1937,7 +1955,7 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;FTTx技术（光纤到…）&lt;/p&gt;
+&lt;h4 id=&#34;fttx技术光纤到&#34;&gt;FTTx技术（光纤到…）&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;光纤到户FTTH：即将光纤一直铺设到用户家庭。&lt;/li&gt;
 &lt;li&gt;光纤到大楼FTTB：支持大中型企业、大公司高速率宽带业务需求，比FTTH经济。&lt;/li&gt;
@@ -1968,7 +1986,7 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
 &lt;h3 id=&#34;互联网的组成&#34;&gt;互联网的组成&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;两大块&lt;/p&gt;
+&lt;h4 id=&#34;两大块&#34;&gt;两大块&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;边缘部分：所有连接在互联网上的&lt;strong&gt;主机&lt;/strong&gt;（又被称为端系统），用户可以直接使用。用来进行通信和资源共享等。&lt;/li&gt;
 &lt;li&gt;核心部分：由大量的网络和连接这些网络的&lt;strong&gt;路由器&lt;/strong&gt;组成，用来为边缘部分的主机提供服务。&lt;/li&gt;
@@ -1978,20 +1996,20 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
 &lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/twIkbn.png&#34; alt=&#34;twIkbn.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;
-&lt;p&gt;主机间的通信方式&lt;/p&gt;
+&lt;h4 id=&#34;主机间的通信方式&#34;&gt;主机间的通信方式&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;客户-服务器方式（C/S）：客户即是服务请求方，服务器是服务提供方。&lt;/li&gt;
 &lt;li&gt;对等连接方式（P2P）：不区分客户和服务器。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;互联网核心部分&lt;/p&gt;
+&lt;h4 id=&#34;互联网核心部分&#34;&gt;互联网核心部分&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;路由器在核心部分起到特殊作用，任务是转发收到的分组，完成分组交换。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;电路交换&lt;/p&gt;
+&lt;h4 id=&#34;电路交换&#34;&gt;电路交换&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;交换过程必须经过建立连接（占用信道资源）--  通话（一直占用信道资源）--  释放连接（归还通信资源）。&lt;/p&gt;
@@ -2002,13 +2020,13 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;报文交换&lt;/p&gt;
+&lt;h4 id=&#34;报文交换&#34;&gt;报文交换&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;报文交换用于邮局通信系统，邮局接收到一份报文之后，先存储下来，然后把相同目的地的报文一起转发到下一个目的地，这个过程就是存储转发过程。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;分组交换&lt;/p&gt;
+&lt;h4 id=&#34;分组交换&#34;&gt;分组交换&lt;/h4&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;ul&gt;
@@ -2021,28 +2039,28 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
 &lt;p&gt;&lt;strong&gt;总时延 = 发送时延 + 传播时延 + 处理时延 + 排队时延&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;发送时延&lt;/p&gt;
+&lt;h4 id=&#34;发送时延&#34;&gt;发送时延&lt;/h4&gt;
 &lt;p&gt;主机或路由器发送数据帧所需要的时间。&lt;/p&gt;
 &lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/twomdI.png&#34; alt=&#34;twomdI.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
 &lt;p&gt;其中 l 表示数据帧的长度，v 表示发送速率。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;传播时延&lt;/p&gt;
+&lt;h4 id=&#34;传播时延&#34;&gt;传播时延&lt;/h4&gt;
 &lt;p&gt;电磁波在信道中传播一定的距离需要花费的时间，电磁波传播速度接近光速。&lt;/p&gt;
 &lt;figure data-type=&#34;image&#34; tabindex=&#34;6&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/twTkt0.png&#34; alt=&#34;twTkt0.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
 &lt;p&gt;其中 l 表示信道长度，v 表示电磁波在信道上的传播速率。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;处理时延&lt;/p&gt;
+&lt;h4 id=&#34;处理时延&#34;&gt;处理时延&lt;/h4&gt;
 &lt;p&gt;主机或路由器收到分组时进行处理所需要的时间，例如分析首部，从分组中提取数据部分等。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;排队时延&lt;/p&gt;
+&lt;h4 id=&#34;排队时延&#34;&gt;排队时延&lt;/h4&gt;
 &lt;p&gt;分组在路由器的输入队列和输出队列中排队等待的时间，取决于网络当前的通信量。&lt;/p&gt;
 &lt;figure data-type=&#34;image&#34; tabindex=&#34;7&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/twT6gS.png&#34; alt=&#34;twT6gS.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;时延带宽积&lt;/p&gt;
+&lt;h4 id=&#34;时延带宽积&#34;&gt;时延带宽积&lt;/h4&gt;
 &lt;p&gt;时延带宽积 = 传播时延 x 带宽&lt;/p&gt;
 &lt;p&gt;链路的时延带宽积被称为以比特为单位的链路长度。&lt;/p&gt;
 &lt;/li&gt;

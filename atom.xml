@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qzlu-cyber.github.io/Keasar_Blog</id>
     <title>Keasar`Blog</title>
-    <updated>2020-06-04T05:43:51.092Z</updated>
+    <updated>2020-06-04T05:48:57.680Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qzlu-cyber.github.io/Keasar_Blog"/>
     <link rel="self" href="https://qzlu-cyber.github.io/Keasar_Blog/atom.xml"/>
@@ -16,7 +16,7 @@
         <link href="https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">
         </link>
         <updated>2020-06-04T04:31:50.000Z</updated>
-        <summary type="html"><![CDATA[<p>😉😉😉<a href="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89">https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/</a></p>
+        <summary type="html"><![CDATA[<p>😉😉😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）</a></p>
 <h3 id="物理层特性">物理层特性</h3>
 <ul>
 <li><strong>机械特性</strong></li>
@@ -25,7 +25,7 @@
 <li><strong>规程特性</strong></li>
 </ul>
 ]]></summary>
-        <content type="html"><![CDATA[<p>😉😉😉<a href="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89">https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/</a></p>
+        <content type="html"><![CDATA[<p>😉😉😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）</a></p>
 <h3 id="物理层特性">物理层特性</h3>
 <ul>
 <li><strong>机械特性</strong></li>
@@ -52,7 +52,7 @@
 </ul>
 </li>
 <li>
-<p>信道</p>
+<h4 id="信道">信道</h4>
 <ul>
 <li>按照通信双方信息交互的方式分为：<strong>单工通信</strong>、<strong>半双工通信</strong>、<strong>全双工通信</strong>。</li>
 <li><strong>曼切斯特编码产生的信号频率比不归零制高。不归零制没有自同步能力，曼切斯特编码具有自同步能力。</strong></li>
@@ -79,7 +79,7 @@
 </blockquote>
 </li>
 <li>
-<p>信道极限容量</p>
+<h4 id="信道极限容量">信道极限容量</h4>
 <ul>
 <li>
 <p>码元传输的速率越高，或者信号传输的距离越远，或噪声干扰越大，或传输媒体质量越差，在接收端的波形失真就越严重。</p>
@@ -109,7 +109,7 @@
 <h3 id="信道复用技术">信道复用技术</h3>
 <ol>
 <li>
-<p>频分、时分、统计时分复用</p>
+<h4 id="频分-时分-统计时分复用">频分、时分、统计时分复用</h4>
 <ul>
 <li>
 <p><strong>频分复用</strong>FDM：所有用户在同样的时间占用不同的带宽资源。</p>
@@ -128,7 +128,7 @@
 </ul>
 </li>
 <li>
-<p>波分复用</p>
+<h4 id="波分复用">波分复用</h4>
 <ul>
 <li><strong>波分复用</strong>WDM：即光的频分复用。</li>
 </ul>
@@ -138,7 +138,7 @@
 <p>经过复用器合波后，速率达到8 x 2.5Gbit/s = 20Gbit/s。</p>
 <ol start="3">
 <li>
-<p>码分复用</p>
+<h4 id="码分复用">码分复用</h4>
 <ul>
 <li>
 <p><strong>码分复用</strong>CDM：即<strong>码分多址CDMA</strong>，每一个用户可以在同样的时间使用同样的频带进行通信。</p>
@@ -159,8 +159,9 @@
 <h3 id="宽带接入技术">宽带接入技术</h3>
 <ol>
 <li>
-<p>xDSL技术：用数字技术对现有的模拟电话用户线进行改造，使它能够承载宽带业务。<br>
-其中，0-4kHz低端频谱留给传统电话使用，高端频谱留给用户上网使用。几种类型:ADSL/HDSL/SDSL/VDSL</p>
+<h4 id="xdsl技术用数字技术对现有的模拟电话用户线进行改造使它能够承载宽带业务">xDSL技术：用数字技术对现有的模拟电话用户线进行改造，使它能够承载宽带业务。</h4>
+<pre><code> 其中，0-4kHz低端频谱留给传统电话使用，高端频谱留给用户上网使用。几种类型:ADSL/HDSL/SDSL/VDSL
+</code></pre>
 <ul>
 <li>ADSL技术：非对称数字用户线。ADSL把上行和下行带宽做成不对称的。上行指从用户到ISP,下行指从ISP到用户。用户线两端是调制解调器(DMT).<br>
 DMT调制技术采用频分复用。40kHz-1.1MHz的高端频谱划分许多子信道，25个用于上行，249个用于下行。每个信道占据4kHz带宽。ADSL不能保证固定的数据率。</li>
@@ -189,7 +190,7 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
 </ul>
 </li>
 <li>
-<p>FTTx技术（光纤到…）</p>
+<h4 id="fttx技术光纤到">FTTx技术（光纤到…）</h4>
 <ul>
 <li>光纤到户FTTH：即将光纤一直铺设到用户家庭。</li>
 <li>光纤到大楼FTTB：支持大中型企业、大公司高速率宽带业务需求，比FTTH经济。</li>
@@ -230,7 +231,7 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
 <h3 id="互联网的组成">互联网的组成</h3>
 <ol>
 <li>
-<p>两大块</p>
+<h4 id="两大块">两大块</h4>
 <ul>
 <li>边缘部分：所有连接在互联网上的<strong>主机</strong>（又被称为端系统），用户可以直接使用。用来进行通信和资源共享等。</li>
 <li>核心部分：由大量的网络和连接这些网络的<strong>路由器</strong>组成，用来为边缘部分的主机提供服务。</li>
@@ -240,20 +241,20 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
 <figure data-type="image" tabindex="3"><img src="https://s1.ax1x.com/2020/06/04/twIkbn.png" alt="twIkbn.png" loading="lazy"></figure>
 <ol start="2">
 <li>
-<p>主机间的通信方式</p>
+<h4 id="主机间的通信方式">主机间的通信方式</h4>
 <ul>
 <li>客户-服务器方式（C/S）：客户即是服务请求方，服务器是服务提供方。</li>
 <li>对等连接方式（P2P）：不区分客户和服务器。</li>
 </ul>
 </li>
 <li>
-<p>互联网核心部分</p>
+<h4 id="互联网核心部分">互联网核心部分</h4>
 <ul>
 <li>路由器在核心部分起到特殊作用，任务是转发收到的分组，完成分组交换。</li>
 </ul>
 <ol>
 <li>
-<p>电路交换</p>
+<h4 id="电路交换">电路交换</h4>
 <ul>
 <li>
 <p>交换过程必须经过建立连接（占用信道资源）--  通话（一直占用信道资源）--  释放连接（归还通信资源）。</p>
@@ -264,13 +265,13 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
 </ul>
 </li>
 <li>
-<p>报文交换</p>
+<h4 id="报文交换">报文交换</h4>
 <ul>
 <li>报文交换用于邮局通信系统，邮局接收到一份报文之后，先存储下来，然后把相同目的地的报文一起转发到下一个目的地，这个过程就是存储转发过程。</li>
 </ul>
 </li>
 <li>
-<p>分组交换</p>
+<h4 id="分组交换">分组交换</h4>
 </li>
 </ol>
 <ul>
@@ -283,28 +284,28 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
 <p><strong>总时延 = 发送时延 + 传播时延 + 处理时延 + 排队时延</strong></p>
 <ol>
 <li>
-<p>发送时延</p>
+<h4 id="发送时延">发送时延</h4>
 <p>主机或路由器发送数据帧所需要的时间。</p>
 <figure data-type="image" tabindex="5"><img src="https://s1.ax1x.com/2020/06/04/twomdI.png" alt="twomdI.png" loading="lazy"></figure>
 <p>其中 l 表示数据帧的长度，v 表示发送速率。</p>
 </li>
 <li>
-<p>传播时延</p>
+<h4 id="传播时延">传播时延</h4>
 <p>电磁波在信道中传播一定的距离需要花费的时间，电磁波传播速度接近光速。</p>
 <figure data-type="image" tabindex="6"><img src="https://s1.ax1x.com/2020/06/04/twTkt0.png" alt="twTkt0.png" loading="lazy"></figure>
 <p>其中 l 表示信道长度，v 表示电磁波在信道上的传播速率。</p>
 </li>
 <li>
-<p>处理时延</p>
+<h4 id="处理时延">处理时延</h4>
 <p>主机或路由器收到分组时进行处理所需要的时间，例如分析首部，从分组中提取数据部分等。</p>
 </li>
 <li>
-<p>排队时延</p>
+<h4 id="排队时延">排队时延</h4>
 <p>分组在路由器的输入队列和输出队列中排队等待的时间，取决于网络当前的通信量。</p>
 <figure data-type="image" tabindex="7"><img src="https://s1.ax1x.com/2020/06/04/twT6gS.png" alt="twT6gS.png" loading="lazy"></figure>
 </li>
 <li>
-<p>时延带宽积</p>
+<h4 id="时延带宽积">时延带宽积</h4>
 <p>时延带宽积 = 传播时延 x 带宽</p>
 <p>链路的时延带宽积被称为以比特为单位的链路长度。</p>
 </li>
