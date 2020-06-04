@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qzlu-cyber.github.io/Keasar_Blog</id>
     <title>Keasar`Blog</title>
-    <updated>2020-06-04T03:12:29.589Z</updated>
+    <updated>2020-06-04T05:02:43.296Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qzlu-cyber.github.io/Keasar_Blog"/>
     <link rel="self" href="https://qzlu-cyber.github.io/Keasar_Blog/atom.xml"/>
@@ -10,6 +10,180 @@
     <logo>https://qzlu-cyber.github.io/Keasar_Blog/images/avatar.png</logo>
     <icon>https://qzlu-cyber.github.io/Keasar_Blog/favicon.ico</icon>
     <rights>All rights reserved 2020, Keasar`Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[计算机网络学习笔记（二）]]></title>
+        <id>https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/</id>
+        <link href="https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">
+        </link>
+        <updated>2020-06-04T04:31:50.000Z</updated>
+        <summary type="html"><![CDATA[<p>😉😉😉### <a href="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89">https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/</a></p>
+<h3 id="21-物理层特性">2.1 物理层特性</h3>
+<ul>
+<li><strong>机械特性</strong></li>
+<li><strong>电气特性</strong></li>
+<li><strong>功能特性</strong></li>
+<li><strong>规程特性</strong></li>
+</ul>
+]]></summary>
+        <content type="html"><![CDATA[<p>😉😉😉### <a href="%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89">https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/</a></p>
+<h3 id="21-物理层特性">2.1 物理层特性</h3>
+<ul>
+<li><strong>机械特性</strong></li>
+<li><strong>电气特性</strong></li>
+<li><strong>功能特性</strong></li>
+<li><strong>规程特性</strong></li>
+</ul>
+<!-- more -->
+<h3 id="22-数据通信基础知识">2.2 数据通信基础知识</h3>
+<h4 id="221-数据通信系统模型">2.2.1 数据通信系统模型</h4>
+<h4 id="数据通信系统三部分源系统发送端-传输系统-目的系统接收端">数据通信系统三部分：<strong>源系统(发送端)、传输系统、目的系统(接收端)</strong></h4>
+<figure data-type="image" tabindex="1"><img src="https://s1.ax1x.com/2020/06/04/twjDlq.png" alt="twjDlq.png" loading="lazy"></figure>
+<ul>
+<li>
+<p><strong>模拟信号</strong>：连续信号，表示消息的参数取值是连续的。</p>
+</li>
+<li>
+<p><strong>数字信号</strong>：离散信号，表示消息的参数取值是离散的。</p>
+</li>
+</ul>
+<h4 id="222-信道">2.2.2 信道</h4>
+<ul>
+<li>按照通信双方信息交互的方式分为：<strong>单工通信</strong>、<strong>半双工通信</strong>、<strong>全双工通信</strong>。</li>
+<li><strong>曼切斯特编码产生的信号频率比不归零制高。不归零制没有自同步能力，曼切斯特编码具有自同步能力。</strong></li>
+<li>基带信号：来自信源的信号.计算机输出的代表各种文字或图像文件的数据信号都属于基带信号。包含有较多低频成分，需要进行调制。<br>
+调制分为：
+<ul>
+<li>基带调制：对基带信号波形进行变换，仍然是基带信号</li>
+<li>带通调制：经过载波进行调制，把基带信号的频率范围搬移到较高的频段以便在信道中传输。经过载波调制后的信号称为带通信号。基本的带通调制方法有：
+<ul>
+<li>调幅AM：载波的振幅随基带数字信号而变化。</li>
+<li>调频FM：载波的频率随基带数字信号而变化。</li>
+<li>调相PM：载波的初始相位随基带数字信号而变化。</li>
+<li>正交振幅调制QAM：多元制的振幅相位混合调制方法，信息传输速率更高。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>调制解调原因</li>
+</ul>
+<blockquote>
+<p>无线电通信系统：通过空间辐射方式传送信号。<br>
+电磁波理论可知：天线尺寸为被辐射信号波长的十分之一或更大些，信号才能有效的被辐射。<br>
+对于语音信号：天线尺寸需要在几十公里以上，因此需要调制(语音信号的频率范围为300~3400Hz)。<br>
+调制过程：将信号频谱搬移到任何所需的较高频率范围，这就容易以电磁波形式辐射出去。<br>
+如果不进行调制，而是把被传送的信号直接辐射出去，那么各电台所发出的信号频率就会相同，他们混在一起，收信者将无法选择所要接收的信号。<br>
+调制作用的实质：把各种信号的频谱搬移，使它们互不重叠地占据不同的频率范围，即信号分别托付于不同频率的载波上，接收机可以分离出所需要的频率的信号，不致相互干扰。（实现了多路复用）</p>
+</blockquote>
+<h4 id="223-信道极限容量">2.2.3 信道极限容量</h4>
+<ul>
+<li>
+<p>码元传输的速率越高，或者信号传输的距离越远，或噪声干扰越大，或传输媒体质量越差，在接收端的波形失真就越严重。</p>
+</li>
+<li>
+<p>限制码元在信道上的传输速率的因素有：</p>
+<ol>
+<li>信道能够通过的频率范围<br>
+奈氏准则：在任何信道中，码元传输的速率是由上限的，传输速率超过此上限，就会出现严重的码间串扰的问题，使接收端对码元的判决成为不可能。</li>
+<li>信噪比：信号的平均功率和噪声的平均功率之比(S/N)单位dB<br>
+信噪比(dB)=10log10(S/N)(dB)<br>
+信道的极限信息传输速率C=Wlog2(1+S/N) (b/s)</li>
+</ol>
+<p>可以看出：<strong>信道的带宽或信道中的信噪比越大，信息的极限传输速率就越高。</strong></p>
+</li>
+<li>
+<p>提高信息的传输速率：尽可能的让每一个码元携带更多信息量。</p>
+</li>
+</ul>
+<h3 id="23-物理层下的传输媒体">2.3 物理层下的传输媒体</h3>
+<ul>
+<li>导向传输媒体：固体媒体(铜线或光纤)。双绞线、同轴电缆、光纤。</li>
+<li>非导向传输媒体：指利用无线电波在自由空间传播。</li>
+</ul>
+<h3 id="24-信道复用技术">2.4 信道复用技术</h3>
+<h4 id="241-频分-时分-统计时分复用">2.4.1 频分、时分、统计时分复用</h4>
+<ul>
+<li><strong>频分复用</strong>FDM：所有用户在同样的时间占用不同的带宽资源。</li>
+</ul>
+<figure data-type="image" tabindex="2"><img src="https://s1.ax1x.com/2020/06/04/t0FCDA.png" alt="t0FCDA.png" loading="lazy"></figure>
+<ul>
+<li>
+<p><strong>时分复用</strong>TDM：所有用户在不同的时间占用同样的频带宽度。</p>
+<figure data-type="image" tabindex="3"><img src="https://s1.ax1x.com/2020/06/04/t0Fegg.png" alt="t0Fegg.png" loading="lazy"></figure>
+<p>TDM有时会造成信道利用率不高：</p>
+<img src="https://s1.ax1x.com/2020/06/04/t0eoin.png" alt="t0eoin.png" border="0" />
+</li>
+<li>
+<p><strong>统计时分复用</strong>STDM：TDM的改进，提高信道利用率。</p>
+<div align="center"><img src="https://s1.ax1x.com/2020/06/04/t0e2M8.png" alt="t0e2M8.png" border="0" /></div>
+</li>
+</ul>
+<h4 id="242-波分复用">2.4.2 波分复用</h4>
+<ul>
+<li>
+<p><strong>波分复用</strong>WDM：即光的频分复用。</p>
+<div align="center"><img src="https://s1.ax1x.com/2020/06/04/t0FUKJ.png" alt="t0FUKJ.png" border="0" /></div>
+<p>经过复用器合波后，速率达到8 x 2.5Gbit/s = 20Gbit/s。</p>
+</li>
+</ul>
+<h4 id="243-码分复用">2.4.3 码分复用</h4>
+<ul>
+<li>
+<p><strong>码分复用</strong>CDM：即<strong>码分多址CDMA</strong>，每一个用户可以在同样的时间使用同样的频带进行通信。</p>
+<p>为每个用户分配 m bit 的码片，并且所有的码片<strong>正交</strong>，对于任意两个码片 <em>S</em> (S站的码片向量) 和 <em>T</em> (T站的码片向量) 有</p>
+<figure data-type="image" tabindex="4"><img src="https://s1.ax1x.com/2020/06/04/t0k1Ld.png" alt="t0k1Ld.png" loading="lazy"></figure>
+<p>为了方便，取 m=8，设码片 <em>S</em> 为 00011011。在拥有该码片的用户<strong>发送比特 1 时就发送该码片，发送比特 0 时就发送该码片的反码</strong> 11100100。</p>
+<p>在计算时将 00011011 记作 (-1 -1 -1 +1 +1 -1 +1 +1)，可以得到</p>
+<figure data-type="image" tabindex="5"><img src="https://s1.ax1x.com/2020/06/04/t0kUW8.png" alt="t0kUW8.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://s1.ax1x.com/2020/06/04/t0k0yQ.png" alt="t0k0yQ.png" loading="lazy"></figure>
+<p>其中 <em>S</em>' 为 <em>S</em> 的反码。</p>
+<p><strong>任何一个码片向量和该码片向量自己的规格化内积都是1。</strong></p>
+<p>利用上面的式子我们知道，当接收端使用码片 <em>S</em> 对接收到的数据进行内积运算时，<strong>结果为 0 的是其它用户发送的数据，结果为 1 的是用户发送的比特 1，结果为 -1 的是用户发送的比特 0。</strong></p>
+<p>码分复用需要发送的数据量为原先的 m 倍。</p>
+</li>
+</ul>
+<h3 id="25-宽带接入技术">2.5 宽带接入技术</h3>
+<ul>
+<li>
+<p>xDSL技术：用数字技术对现有的模拟电话用户线进行改造，使它能够承载宽带业务。<br>
+其中，0-4kHz低端频谱留给传统电话使用，高端频谱留给用户上网使用。几种类型:ADSL/HDSL/SDSL/VDSL</p>
+<ul>
+<li>ADSL技术：非对称数字用户线。ADSL把上行和下行带宽做成不对称的。上行指从用户到ISP,下行指从ISP到用户。用户线两端是调制解调器(DMT).<br>
+DMT调制技术采用频分复用。40kHz-1.1MHz的高端频谱划分许多子信道，25个用于上行，249个用于下行。每个信道占据4kHz带宽。ADSL不能保证固定的数据率。</li>
+<li>基于ADSL的接入网组成：
+<ul>
+<li>数字用户线接入复用器DSLAM（包含许多ADSL调制解调器，记为ATU-C和ATU-R）</li>
+<li>用户线</li>
+<li>用户家的设施</li>
+<li>总结：ADSL是借助于在用户线两端安装ADSL调制解调器(即ATU-R和ATU-C)对数字信号进行调制，使得调制后的数字信号的频谱适合在原来的用线上传输。</li>
+</ul>
+</li>
+<li>光纤同轴混合网(HFC网)<br>
+HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种居民带宽接入网。
+<ul>
+<li>功能：传送CATV、电话业务、数据和其他宽带交互型业务。</li>
+<li>特点：
+<ol>
+<li>HFC网的主干线路采用光纤</li>
+<li>HFC网采用结点体系结构：从头端到各个光纤结点用模拟光纤连接，构成星型网。</li>
+<li>HFC网具有比CATV网更宽的频谱，且具有双向传输功能</li>
+<li>每个家庭要安装一个用户接口盒，其提供三种连接：使用同轴电缆连接到机顶盒再连接到用户的电视机；使用双绞线连接到用户的电话机；使用电缆调制解调器连接到用户的计算机。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>FTTx技术（光纤到…）</p>
+<ul>
+<li>光纤到户FTTH：即将光纤一直铺设到用户家庭。</li>
+<li>光纤到大楼FTTB：支持大中型企业、大公司高速率宽带业务需求，比FTTH经济。</li>
+<li>光纤到路边FTTC：比较流行。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[计算机网络学习笔记（一）]]></title>
         <id>https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/</id>
@@ -104,8 +278,8 @@
 <p>链路的时延带宽积被称为以比特为单位的链路长度。</p>
 </li>
 </ol>
-<h3 id="135-计算机网络体系结构">1.3.5 计算机网络体系结构</h3>
-<p>​															[<img src="https://s1.ax1x.com/2020/06/04/tw7hse.png" alt="tw7hse.png" loading="lazy"></p>
+<h3 id="15-计算机网络体系结构">1.5 计算机网络体系结构</h3>
+<p>​															<img src="https://s1.ax1x.com/2020/06/04/tw7hse.png" alt="tw7hse.png" loading="lazy"></p>
 <ol>
 <li>
 <p><strong>应用层</strong>：为特定应用程序提供数据传输服务，例如 HTTP、DNS 等。<strong>数据单位为报文</strong>。</p>
