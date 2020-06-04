@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Keasar`Blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1591250078487">
+<link rel="shortcut icon" href="/favicon.ico?v=1591272114980">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -188,7 +188,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">5</span>
+        <span class="site-item-stat-count">6</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -239,12 +239,27 @@
       
       
       
+      <a href="https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              06-04
+              <small>计算机网络学习笔记（三）--  数据链路层</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
       <a href="https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">
         <div class="motion-warpper">
           <div class="tag-post-node">
             <h1>
               06-04
-              <small>计算机网络学习笔记（二）</small>
+              <small>计算机网络学习笔记（二）--  物理层</small>
             </h1>
           </div>
         </div>
@@ -259,7 +274,7 @@
           <div class="tag-post-node">
             <h1>
               06-04
-              <small>计算机网络学习笔记（一）</small>
+              <small>计算机网络学习笔记（一）--  计算机网络概述</small>
             </h1>
           </div>
         </div>
@@ -1032,9 +1047,282 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/"" data-c="
+          &lt;p&gt;😀&lt;a href=&#34;https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/&#34;&gt;计算机网络学习笔记（一）--  计算机网络概述&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;😃&lt;a href=&#34;https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/&#34;&gt;计算机网络学习笔记（二）--  物理层&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;😄数据链路层使用的信道有两种类型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;点对点信道&lt;/li&gt;
+&lt;li&gt;广播信道&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- more --&gt;
+&lt;h3 id=&#34;使用点对点信道的数据链路层&#34;&gt;使用点对点信道的数据链路层&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;数据链路和帧&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;链路&lt;/strong&gt; ：从一个结点到相邻结点的一段物理线路。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;数据链路&lt;/strong&gt; ：把实现这些协议的硬件和软件加载链路上。&lt;br&gt;
+现在最常用的方法是使用适配器（即网卡）来实现这些协议的硬件和软件。一般的适配器都包括了数据链路层和物理层这两层的功能。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;帧&lt;/strong&gt;：点对点信道的数据链路层的协议数据单元。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/t05kPf.png&#34; alt=&#34;t05kPf.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;点对点信道通信时的主要步骤&lt;/strong&gt;：
+&lt;ol&gt;
+&lt;li&gt;结点 A 的数据链路层把网络层交下来的 IP 数据报添加首部和尾部封装成帧。&lt;/li&gt;
+&lt;li&gt;结点 A 把封装好的帧发送给结点 B 的数据链路层。&lt;/li&gt;
+&lt;li&gt;若结点 B 的数据链路层收到的帧无差错，则从收到的帧中提取出 IP 数据报交给上面的网络层；否则丢弃这个帧。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数据链路层三个基本问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;封装成帧&lt;/p&gt;
+&lt;p&gt;就是在一段数据的前后分别&lt;strong&gt;添加首部&lt;/strong&gt;（帧开始符 SOH 01）和&lt;strong&gt;尾部&lt;/strong&gt;（帧结束符 EOT 04），然后就构成了一个&lt;strong&gt;帧&lt;/strong&gt;。（数据部分 &amp;lt;= 长度限制 MTU）首部和尾部的一个重要作用就是进行帧定界。&lt;br&gt;
+&lt;strong&gt;帧定界是分组交换的必然要求&lt;/strong&gt;。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/t0IK6e.png&#34; alt=&#34;t0IK6e.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/t0IJtP.png&#34; alt=&#34;t0IJtP.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;透明传输&lt;/p&gt;
+&lt;p&gt;为了达到透明传输（即传输的数据部分不会因为包含SOH和EOT而出错），在数据中出现控制字符“SOH”或“EOT”的前面插入一个转义字符“ESC”(十六进制1B)&lt;br&gt;
+&lt;strong&gt;透明传输避免消息符号与帧定界符号相混淆&lt;/strong&gt;。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/t0IxHA.png&#34; alt=&#34;t0IxHA.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;差错检测&lt;/p&gt;
+&lt;p&gt;现实通信链路中比特在传输中会产生差错，传输错误的比特占比称为&lt;strong&gt;误码率BER&lt;/strong&gt;，为了保证可靠性，通常通过&lt;strong&gt;循环冗余检验CRC&lt;/strong&gt;来做差错检测。&lt;br&gt;
+&lt;strong&gt;差错检测防止无效数据帧浪费后续路由上的传输和处理资源&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;循环冗余检验CRC&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;​		在发送端将数据分组，每组 &lt;em&gt;k&lt;/em&gt; bit，在待传送数据 &lt;em&gt;M&lt;/em&gt; (&lt;em&gt;k&lt;/em&gt; bit) 后添加 &lt;em&gt;n&lt;/em&gt; 位冗余码，构成一个帧发送出去，因此一共发送 &lt;em&gt;k+n&lt;/em&gt; bit。&lt;/p&gt;
+&lt;p&gt;​		利用&lt;strong&gt;模二运算&lt;/strong&gt;（不进位，不借位）计算 &lt;em&gt;2^n x M / P&lt;/em&gt;, 即在待传送数据 &lt;em&gt;M&lt;/em&gt; 后加 n 个0作为被除数，除以商定好的除数 &lt;em&gt;P&lt;/em&gt;（比 n 多一位），得到的&lt;/p&gt;
+&lt;p&gt;余数 &lt;em&gt;R&lt;/em&gt; （比 &lt;em&gt;n&lt;/em&gt; 少一位）即为冗余码，将其拼接到数据 &lt;em&gt;M&lt;/em&gt; 后发送出去。为了进行检错而添加的冗余码常称为帧检验序列 &lt;em&gt;FCS&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;​		在接收端把接收到的数据以帧为单位进行 CRC 检验：把收到的每一个帧都除以同样的 除数 &lt;em&gt;P&lt;/em&gt;（模二运算），然后检查得到的余数 &lt;em&gt;R&lt;/em&gt; 如果在传输过程中&lt;strong&gt;无差错，那么经过 CRC 检验后得出的余数肯定是0&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;​		若 &lt;em&gt;M&lt;/em&gt; = 101001(即&lt;em&gt;k&lt;/em&gt; = 6)，除数 &lt;em&gt;P&lt;/em&gt; = 1101, 还可表示为 &lt;em&gt;P(X) = X^3 + X^2 + 1&lt;/em&gt;，此时被除数 &lt;em&gt;2^n x M&lt;/em&gt; 为101001000除以 &lt;em&gt;P&lt;/em&gt; 的余数 &lt;em&gt;R&lt;/em&gt; 为001。因此加上 &lt;em&gt;FCS&lt;/em&gt; 后发送的帧是 101001001。接收端被除数即为 101001001，除以除数 &lt;em&gt;P&lt;/em&gt; 得到余数 &lt;em&gt;R&lt;/em&gt;。若 &lt;em&gt;R&lt;/em&gt; = 0，帧无错，接受；若 &lt;em&gt;R&lt;/em&gt; ≠ 0，帧出错(无法判断哪一位出错)，丢弃。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在数据链 路层使用 CRC 检验，能够实现无比特差错的传输，但这还不是可靠传输。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;对于通信质量良好的有线传输链路，不要求数据链路层向上提供可靠传输的服务。改正差错的任务就由上层协议（例如，运输层的 TCP 协议）来完成。 对于通信质量较差的无线传输链路，数据链路层协议使用确认和重传机制，数据链路层向上提供可靠传输的服务。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;点对点协议-ppp&#34;&gt;点对点协议 PPP&lt;/h3&gt;
+&lt;h5 id=&#34;ppp-协议就是用户-计算机和-isp-进行通信时所使用的数据链路层协议&#34;&gt;PPP 协议就是用户 计算机和 ISP 进行通信时所使用的数据链路层协议。&lt;/h5&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/tBaXtI.png&#34; alt=&#34;tBaXtI.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;!-- more --&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;在 TCP/IP 协议族中，可靠传输由运输层的 TCP 协议负责，因此数据链路层的 PPP 议不需要进行纠错，不需要设置序号，也不需要进行流量控制。 PPP 协议不支待多点线路 （即一个主站轮流和链路上的多个从站进行通信），而&lt;strong&gt;只支持点对点的链路通信&lt;/strong&gt;。此外， PPP 协议&lt;strong&gt;只支持全双工链路&lt;/strong&gt;。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;PPP 协议的组成&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一个将 IP 数据报封装到串行链路的方法。&lt;/li&gt;
+&lt;li&gt;链路控制协议 LCP (Link Control Protocol)，用来建立、测试、配置数据链路连接。&lt;/li&gt;
+&lt;li&gt;网络控制协议 NCP (Network Control Protocol)，用来支持不同的网络层协议。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PPP 协议帧格式&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;6&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/tBPn9U.png&#34; alt=&#34;tBPn9U.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;若出现连续两个标志字段，就表示这是一个空帧，应当丢弃。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;首部中的标志字段F(Flag)，规定为0x7E(符号0x表示它后面的字符是用十六进制表示的)。十六进制的7E的二进制表示是01111110)，标志字段表示一个帧的开始或结束。&lt;/li&gt;
+&lt;li&gt;首部中的地址字段A规定为0xFF(即11111111)，没有携带PPP协议帧的信息。&lt;/li&gt;
+&lt;li&gt;首部中的控制字段C规定为0x03(即00000011)，没有携带PPP协议帧的信息。&lt;/li&gt;
+&lt;li&gt;首部中的2字节的协议字段：&lt;br&gt;
+(1) 当协议字段为0x0021时，PPP帧的信息字段就是IP数据报。&lt;br&gt;
+(2) 当协议字段为0xC021时，PPP帧的信息字段就是PPP链路控制协议LCP的数据。&lt;br&gt;
+(3) 当协议字段为0x8021时，PPP帧的信息字段就是网络层的控制数据。&lt;/li&gt;
+&lt;li&gt;信息部分不超过1500字节。&lt;/li&gt;
+&lt;li&gt;尾部中的第一个字段(2个字节)是使用CRC的帧检验序列FCS。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;透明传输的实现方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当信息字段中出现和标志字段一样的比特(0x7E)组合时，就必须采取一些措施使这种形式上和标志字段一样的比特组合不出现在信息字段中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;字节填充——PPP使用异步传输&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当 PPP 用在异步传输时，就使用一种特殊的字符填充法：将每一个 0x7E字节变为(0x7D, 0x5E)，0x7D转变成为(0x7D, 0x5D)。ASCII 码的控制字符（即数值小于 0x20 的字符），则在前面要加入0x7D，同时将该字符的编码加以改变。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;零比特填充——PPP使用同步传输&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;只要发现有5个连续的1，则立即填入一个0。接收端把5个连续的1后的0比特删除。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PPP 协议工作状态&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;链路静止  --  建立物理层  --  链路建立  --  PC发LCP  --  NCP分配IP地址  --  链路打开，网络层建立。（释放时倒过来）&lt;/strong&gt;&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;7&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/tBFzh6.png&#34; alt=&#34;tBFzh6.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;使用广播信道的数据链路层&#34;&gt;使用广播信道的数据链路层&lt;/h3&gt;
+&lt;h5 id=&#34;广播信道可以进行一对多的通信局域网具有广播功能局域网上的主机可共享连接在局-域网上的各种硬件和软件资源&#34;&gt;广播信道可以进行一对多的通信，局域网具有广播功能，局域网上的主机可共享连接在局 域网上的各种硬件和软件资源。&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;局域网的数据链路层（局域网的数据链路层被拆分为了两个子层）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;逻辑链路控制LLC子层&lt;/strong&gt;：与传输媒体无关。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;媒体接入控制MAC子层&lt;/strong&gt;：与接入到传输媒体有关的内容都放在 MAC 子层，和局域网都对 LLC 子层来说是透明的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;适配器（网卡）的作用&lt;/p&gt;
+&lt;p&gt;包含了***数据链路层***及***物理层***这两个层次的功能。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;8&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/tBAyLQ.png&#34; alt=&#34;tBAyLQ.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CSMA/CD 协议&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;仅当数据帧中的目的地址与适配器 ROM 中存放的硬件地址(MAC 地址)一致时，该适配器才能接收这个数据帧。适配器对不是发送给自己的数据帧就丢弃。&lt;/p&gt;
+&lt;p&gt;以太网采用 CSMA/CD协议(&lt;em&gt;&lt;strong&gt;载波监听多点接入／碰撞检测&lt;/strong&gt;&lt;/em&gt;) 的方式来协调总线上各计算机的工作。具有两个特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;提供的服务是尽最大努力的交付，即不可靠的交付。&lt;/li&gt;
+&lt;li&gt;双向交替通信（半双工）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;csmacd协议的要点&#34;&gt;CSMA/CD协议的要点：&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;**“多点接入”**就是计算机以多点接入（动态媒体接入控制）的方式连接在一根总线上。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;**“载波监听”**就是”检测信道”，不管在发送前，还是在发送中，每个站都必须不停地检测信道。在发送前检测信道，是为了获得发送权。在发送中检测信道，是为了及时发现有 没有其他站的发送和本站发送的碰撞。即碰撞检测。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;**“碰撞检测”**就是“边发送边监听”，即适配器边发送数据边检测信道上的信号电压的变化情况。当一个站检测到的信号电压摆动值超过一定的门限值时，就认为总线上至少有两个站同时在发送数据，表明产生了碰撞，就要立即停止发送，免得继续浪费网络资源，然后等待一段随机时间后再次发送。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;把总线上的单程端到端传播时延记为 &lt;em&gt;τ&lt;/em&gt; ，A 发送数据后，最迟要经过 &lt;em&gt;2τ&lt;/em&gt; 才能知道自己发送的数据和其他站发送的数据有没有发生碰撞。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;9&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/tBZtZ4.png&#34; alt=&#34;tBZtZ4.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;电磁波在 1km 电缆的传播时延约为 &lt;em&gt;5µs&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;以太网的端到端往返时间 &lt;em&gt;2τ&lt;/em&gt; 称为&lt;em&gt;&lt;strong&gt;争用期***，又叫&lt;/strong&gt;碰撞窗口&lt;/em&gt;* 。&lt;strong&gt;经过争用期这 段时间还没有检测到碰撞，才能肯定这次发送不会发生碰撞。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;以太网使用&lt;strong&gt;截断二进制指数退避算法&lt;/strong&gt;来确定碰撞后&lt;strong&gt;重传&lt;/strong&gt;的时机。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;协议规定了基本退避时间为争用期 &lt;em&gt;2τ&lt;/em&gt;, 具体的争用期时间是 &lt;em&gt;&lt;strong&gt;51.2 µs&lt;/strong&gt;&lt;/em&gt; 。对于 10 Mbit/s 以太网，在争用期内可发送 512 bit, 即 64字节。也可以说争用期是 512 比特时间。可以直接使用&lt;strong&gt;比特&lt;/strong&gt;作为争用期的单位。争用期是 512bit, 即争用期是发送 512bit 所需的时间。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;从 &lt;em&gt;[0,1, …，（2k -1)]&lt;/em&gt; 中随机取出一个数，记为 &lt;em&gt;r&lt;/em&gt; 。重传应推后的时间就是 &lt;em&gt;&lt;strong&gt;r 倍的争用期&lt;/strong&gt;&lt;/em&gt;。&lt;/p&gt;
+&lt;div align=&#34;center&#34;&gt;k=Min［重传次数， 10]&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;当重传达 16 次仍不能成功时（这表明同时打算发送数据的站太多，以致连续发生冲突），则丢弃该帧，并向高层报告。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最短帧长 64 字节，即 512 bit 。如果要发送的数据非常少，那么必须加入一些填充字节，使帧长不小于 64 字节。&lt;strong&gt;凡长度小于 64 字节的帧都是由于冲突而异常中止的无效帧&lt;/strong&gt;。只要收到了这种无效帧，就应当立即将其丢弃。&lt;/p&gt;
+&lt;h5 id=&#34;强化碰撞&#34;&gt;强化碰撞：&lt;/h5&gt;
+&lt;p&gt;​		当发送数据的站一旦发现发生了碰撞时，除了立即停止发送数据外，还要再继续发送 32 比特或 48 比特的&lt;em&gt;人为干扰信号&lt;/em&gt;，以便让所有用户都知道现在已经发生了碰撞。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;10&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/tBnhWR.png&#34; alt=&#34;tBnhWR.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;​		总线被占用的时间是 &lt;em&gt;TB+ TJ + τ&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;规定帧间最小间隔为 9.6 µs&lt;/strong&gt;, 相当于 96 比特时间。这样做是为了使刚刚收到数据帧的站的接收缓存来得及清理，做好接收下一帧的准备。&lt;/p&gt;
+&lt;h5 id=&#34;总结&#34;&gt;总结：&lt;/h5&gt;
+&lt;div align=&#34;center&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/tBuw7D.md.png&#34; alt=&#34;tBuw7D.png&#34; border=&#34;0&#34; /&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h5 id=&#34;以太网的信道利用率&#34;&gt;以太网的信道利用率&lt;/h5&gt;
+&lt;p&gt;&lt;em&gt;a&lt;/em&gt; 是以太网单程端到端时延 &lt;em&gt;2τ&lt;/em&gt; 与帧的发送时间 &lt;em&gt;To&lt;/em&gt; 之比：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;11&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/tBMVs0.png&#34; alt=&#34;tBMVs0.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;当 a -&amp;gt; 0 时表示只要一发生碰撞，就立即可以检测出来，并立即停止发送，因而信道资源被浪费的时间非常非常少。反之，参数 &lt;em&gt;a&lt;/em&gt; 越大，表明争用期所占的比例越大，使得信道利用率明显降低。当数据率一定时，以太网的连线的长度受到限制（否则 &lt;em&gt;τ&lt;/em&gt; 的数值 会太大），同时以太网的帧长不能太短（否则 &lt;em&gt;τ&lt;/em&gt; 的值会太小，使 &lt;em&gt;To&lt;/em&gt; 值太大）。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;12&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/tBQccR.png&#34; alt=&#34;tBQccR.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;只有当参数 &lt;em&gt;a&lt;/em&gt; 远小于 1 才能得到尽可能高的极限信道利用率。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;以太网的mac层&#34;&gt;以太网的MAC层&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;MAC地址&lt;br&gt;
+&lt;strong&gt;MAC地址&lt;/strong&gt;又叫做硬件地址或物理地址，实际上就是适配器地址或适配器标识符EUI-48。高位24位：注册管理机构 RA，组织唯一标识符 OUI，低位24位：由厂家自行指派，称为扩展标识符。&lt;/p&gt;
+&lt;p&gt;路由器如果同时连接到两个网络上，那么它就需要两个适配器和两个硬件地址。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MAC帧的格式&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;13&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/tBGEQJ.png&#34; alt=&#34;tBGEQJ.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;以太网V2的MAC帧由五个字段组成。前两个字段分别为6字长的目标地址和源地址字段。第三个字段是2字节的类型字段，用来标志上一层使用的是什么协议，以便把收到的MAC帧的数据上交给上一层的这个协议。后面数据字段46~1500字节，帧检验序列FCS字段4个字节（使用 CRC 检验）。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;接收方可以很容易地通过发送方网络适配器的接口上的电压是否变化找到以太网帧的结束位置&lt;/em&gt;。在这个位置往前数 4 字节 (FCS 字段长度是 4 字节），就能确定数据字段的结束位置。因此MAC帧首部中不需要帧长度字段。&lt;/p&gt;
+&lt;p&gt;当数据字段的长度小千 46 字节时， MAC 子层就会在数据字段的后面加入一个整数字节的&lt;em&gt;填充字段&lt;/em&gt;，以保证以太网的 MAC 帧长不小于 64 字节。&lt;/p&gt;
+&lt;p&gt;为了接收端迅速实现位同步，从 MAC 子层向下传到物理层时还要在帧的前面插入8字节（由硬件生成），它由两个字段构成。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一个字段是 个字节的前同步码 (1 交替码），它的作用是“实现位同步”（比特同步）。&lt;/li&gt;
+&lt;li&gt;第二个字段是帧开始定界符，定义为 10101011 。它的前六位的作用和前同步码一样，最后的两个连续1的就是告诉接收端适配器： “MAC 帧的信息马上就要来了，请适配器注意接收&#39;。MAC 帧的 FCS 字段的检验范围不包括前同步码和帧开始定界符。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;无效的 MAC 帧：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;帧的长度不是整数个字节；&lt;/li&gt;
+&lt;li&gt;用收到的帧检验序列 FCS 查出有差错；&lt;/li&gt;
+&lt;li&gt;收到的帧的 MAC 客户数据字段的长度不在 46 ~ 1500 字节之间。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;对于检查出的无效 MAC 帧就简单地丢弃。以太网不负责重传丢弃的帧。&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;扩展的以太网&#34;&gt;扩展的以太网&lt;/h3&gt;
+&lt;h5 id=&#34;扩展的以太网在网络层看来仍然是一个网络&#34;&gt;扩展的以太网在网络层看来仍然是一个网络。&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在物理层扩展以太网&lt;/p&gt;
+&lt;p&gt;扩展主机和集线器之间的距离的一种简单方法就是使用光纤（通常是一对光纤）和一对光纤调制解调器。&lt;/p&gt;
+&lt;p&gt;光纤调制解调器的作用就是进行&lt;em&gt;电信号和光信号的转换&lt;/em&gt;。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;14&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/tBYkr9.png&#34; alt=&#34;tBYkr9.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;优点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;跨网络通信。&lt;/li&gt;
+&lt;li&gt;扩大了以太网覆盖的地理范围。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;缺点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;扩大了碰撞域。&lt;/li&gt;
+&lt;li&gt;不同的局域网使用不同的以太网技术（如数据率不同），那么就不可能用集线器将它们互连起来（速率向下兼容）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在数据链路层扩展以太网&lt;/p&gt;
+&lt;h5 id=&#34;网桥自学习算法&#34;&gt;网桥（自学习算法）&lt;/h5&gt;
+&lt;h5 id=&#34;以太网交换机第二层交换机-即多接口网桥强调这种交换机工作在数据链路层&#34;&gt;以太网交换机（第二层交换机 ），即多接口网桥，强调这种交换机工作在数据链路层。&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;特点&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;全双工方式通信。&lt;/li&gt;
+&lt;li&gt;并行。&lt;/li&gt;
+&lt;li&gt;相互通信的主机都是独占传输媒体，无碰撞地传输数据。&lt;/li&gt;
+&lt;li&gt;接口还有存储器，能在输出端口繁忙时把到来的帧进行缓存。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;自学习功能&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;15&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/tBt5p8.png&#34; alt=&#34;tBt5p8.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;​		A 先向 B 发送一帧，从接口 1 进入到交换机。交换机收到帧后，先查找交换表，没有查到应从哪个接口转发这个帧（在 MAC 地址这一列中，找不到目的地址为 B 的项目）。然后，交换机把这个帧的源地址 A 和接口 1 写入交换表中并向除接口,以外的所有接口广播这个帧。C 和 D 丢弃该帧，因为目的地址不对。只有 B 才收下这个目的地址正确的帧。此即为&lt;strong&gt;过滤&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;​		以后不管从哪一个接口收到帧，只要其目的地 址是 A, 就应当把收到的帧从接口 1 转发出去。&lt;/p&gt;
+&lt;p&gt;​		B 向 A 发送帧时，交换机把这个帧的源地址 B 和接口 3 写入交换表中，此时不再广播，因为交换表中已经存在 A 的地址。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚拟局域网VLAN&lt;/p&gt;
+&lt;p&gt;每一个 VLAN 的帧都有一个明确的标识符，指明发送这个帧的计算机属于哪一个 VLAN，而与物理位置无关。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;16&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/tBUZan.png&#34; alt=&#34;tBUZan.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;VLAN 标记的前两个字节总是设置为 0x8100 （即二进制的 10000001 00000000) ，称为 IEEE 802.1Q 标记类型。&lt;/p&gt;
+&lt;p&gt;VLAN 标识符 VID(VLANID) ，它唯一地标志了这个以太网帧属于哪一个 VLAN。&lt;/p&gt;
+&lt;p&gt;由于用于 VLAN 的以太网帧的首部增加了 4 个字节，因此以太网的最大帧长从原来的 1518 字节 (1500 字节的数据加上 18 字节的首部）变为 1522 字节。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;高速以太网&#34;&gt;高速以太网&lt;/h3&gt;
+&lt;p&gt;此部分转载自CSDN，&lt;a href=&#34;%5Bhttps://blog.csdn.net/KnightOnHourse/article/details/80198611?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522159127115919725219954270%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;amp;request_id=159127115919725219954270&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-2-80198611.ecpm_v1_rank_ctr_v1&amp;amp;utm_term=%E9%AB%98%E9%80%9F%E4%BB%A5%E5%A4%AA%E7%BD%91%5D(https://blog.csdn.net/KnightOnHourse/article/details/80198611?ops_request_misc=%7B%22request%5Fid%22%3A%22159127115919725219954270%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&amp;amp;request_id=159127115919725219954270&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-2-80198611.ecpm_v1_rank_ctr_v1&amp;amp;utm_term=%E9%AB%98%E9%80%9F%E4%BB%A5%E5%A4%AA%E7%BD%91)&#34;&gt;原文地址&lt;/a&gt;（如侵删）&lt;/p&gt;
+&lt;div class=&#34;htmledit_views prism-atom-one-light&#34; id=&#34;content_views&#34;&gt;
+                                            &lt;div class=&#34;blogpost-body&#34;&gt;&lt;p&gt;&lt;strong&gt;1. 100M以太网&lt;/strong&gt;&lt;/p&gt;&lt;p align=&#34;center&#34;&gt;快速以太网（100M）标准&lt;/p&gt;&lt;div align=&#34;center&#34;&gt;&lt;div class=&#34;table-box&#34;&gt;&lt;table border=&#34;1&#34; cellpadding=&#34;0&#34; cellspacing=&#34;0&#34;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td valign=&#34;top&#34; width=&#34;95&#34;&gt;&lt;p align=&#34;center&#34;&gt;名称&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;81&#34;&gt;&lt;p align=&#34;center&#34;&gt;传输介质&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;130&#34;&gt;&lt;p align=&#34;center&#34;&gt;网段最大长度&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;360&#34;&gt;&lt;p align=&#34;center&#34;&gt;特点&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td valign=&#34;top&#34; width=&#34;95&#34;&gt;&lt;p align=&#34;center&#34;&gt;100BASE-TX&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;81&#34;&gt;&lt;p align=&#34;center&#34;&gt;铜缆&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;130&#34;&gt;&lt;p align=&#34;center&#34;&gt;100m&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;360&#34;&gt;&lt;p align=&#34;left&#34;&gt;两对UTP5类线或屏蔽双绞线&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td valign=&#34;top&#34; width=&#34;95&#34;&gt;&lt;p align=&#34;center&#34;&gt;100BASE-T4&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;81&#34;&gt;&lt;p align=&#34;center&#34;&gt;铜缆&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;130&#34;&gt;&lt;p align=&#34;center&#34;&gt;100m&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;360&#34;&gt;&lt;p align=&#34;left&#34;&gt;四对UTP3类线或5类线&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td valign=&#34;top&#34; width=&#34;95&#34;&gt;&lt;p align=&#34;center&#34;&gt;100BASE-FX&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;81&#34;&gt;&lt;p align=&#34;center&#34;&gt;光纤&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;130&#34;&gt;&lt;p align=&#34;center&#34;&gt;2000m&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;360&#34;&gt;&lt;p align=&#34;left&#34;&gt;两根光纤，发送和接收各用一根，全双工，长距离&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;（1）100BASE-T是在双绞线上传送100Mb/s基带信号的星型拓扑的以太网，仍使用IEEE802.3的CSMA/CD协议，它又称为快速以太网（FastEthernet）&lt;/p&gt;&lt;p&gt;（2）使用交换机组建的100BASE-T以太网，可在全双工方式下工作而无冲突发生。因此，&lt;span style=&#34;color:#ff00ff;&#34;&gt;&lt;strong&gt;CSMA/CD协议对全双工方式工作的快速以太网是不起作用的&lt;/strong&gt;&lt;/span&gt;。&lt;span style=&#34;color:#ff0000;&#34;&gt;&lt;strong&gt;因为其帧格式和以太网一样&lt;/strong&gt;&lt;/span&gt;，所以依然称&lt;span style=&#34;color:#ff0000;&#34;&gt;&lt;strong&gt;交换机组成的网络为以太网&lt;/strong&gt;&lt;/span&gt;。&lt;/p&gt;&lt;p&gt;（3）以太网的最短帧与带宽和链路长度有关。&lt;span style=&#34;color:#ff0000;&#34;&gt;&lt;strong&gt;100M以太网&lt;/strong&gt;&lt;/span&gt;比10M以太网速率提高10位，要想和10M以太网兼容，就要确保最短帧也是64字节，那就将电缆最大长度由1000m降到&lt;span style=&#34;color:#0000ff;&#34;&gt;&lt;strong&gt;100m&lt;/strong&gt;&lt;/span&gt;，因此以太网的争用期依然是51.2μs，最短帧依然是64字节。&lt;/p&gt;&lt;p&gt;&lt;strong&gt;2. 吉比特以太网&lt;/strong&gt;&lt;/p&gt;&lt;p align=&#34;center&#34;&gt;吉比特以太网（1000M）标准&lt;/p&gt;&lt;div align=&#34;center&#34;&gt;&lt;div class=&#34;table-box&#34;&gt;&lt;table border=&#34;1&#34; cellpadding=&#34;0&#34; cellspacing=&#34;0&#34;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td valign=&#34;top&#34; width=&#34;95&#34;&gt;&lt;p align=&#34;center&#34;&gt;名称&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;81&#34;&gt;&lt;p align=&#34;center&#34;&gt;传输介质&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;130&#34;&gt;&lt;p align=&#34;center&#34;&gt;网段最大长度&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;360&#34;&gt;&lt;p align=&#34;center&#34;&gt;特点&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td valign=&#34;top&#34; width=&#34;95&#34;&gt;&lt;p align=&#34;center&#34;&gt;1000BASE-SX&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;81&#34;&gt;&lt;p align=&#34;center&#34;&gt;光缆&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;130&#34;&gt;&lt;p align=&#34;center&#34;&gt;550m&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;360&#34;&gt;&lt;p align=&#34;left&#34;&gt;多模光纤（10和62.5μm）&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td valign=&#34;top&#34; width=&#34;95&#34;&gt;&lt;p align=&#34;center&#34;&gt;1000BASE-LX&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;81&#34;&gt;&lt;p align=&#34;center&#34;&gt;光缆&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;130&#34;&gt;&lt;p align=&#34;center&#34;&gt;5000m&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;360&#34;&gt;&lt;p align=&#34;left&#34;&gt;单模光纤（10μm）、多模光纤（50和62.5μm）&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td valign=&#34;top&#34; width=&#34;95&#34;&gt;&lt;p align=&#34;center&#34;&gt;1000BASE-CX&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;81&#34;&gt;&lt;p align=&#34;center&#34;&gt;铜线&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;130&#34;&gt;&lt;p align=&#34;center&#34;&gt;25m&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;360&#34;&gt;&lt;p align=&#34;left&#34;&gt;使用两对屏蔽双绞线电缆STP&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td valign=&#34;top&#34; width=&#34;95&#34;&gt;&lt;p align=&#34;center&#34;&gt;1000BASE-T&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;81&#34;&gt;&lt;p align=&#34;center&#34;&gt;铜线&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;130&#34;&gt;&lt;p align=&#34;center&#34;&gt;100m&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;360&#34;&gt;&lt;p align=&#34;left&#34;&gt;使用四对UTP5类线&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;（1）吉比特（1000M）以太网的特点&lt;/p&gt;&lt;p&gt;　　①允许在1Gb/s下&lt;span style=&#34;color:#0000ff;&#34;&gt;&lt;strong&gt;全双工和半双工&lt;/strong&gt;&lt;/span&gt;两种方式下工作。&lt;/p&gt;&lt;p&gt;　　②使用IEEE802.3协议规定的帧格式&lt;/p&gt;&lt;p&gt;　　③在&lt;span style=&#34;color:#ff0000;&#34;&gt;&lt;strong&gt;半双工方式下使用CSMA/CD协议&lt;/strong&gt;（&lt;strong&gt;全双工方式不需要使用CSMA/CD协议&lt;/strong&gt;）&lt;/span&gt;&lt;/p&gt;&lt;p&gt;　　④与10BASE-T和100BASE-T技术向后兼容。&lt;/p&gt;&lt;p&gt;（2）“载波延伸”&lt;/p&gt;&lt;p align=&#34;center&#34;&gt;&lt;img src=&#34;https://images2015.cnblogs.com/blog/772759/201706/772759-20170610200251293-205136001.png&#34; alt=&#34;&#34; height=&#34;235&#34; width=&#34;658&#34;&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;　　①吉比特以太网工作&lt;span style=&#34;color:#ff0000;&#34;&gt;&lt;strong&gt;在半双工时&lt;/strong&gt;&lt;/span&gt;，就必须进行碰撞检测。数据速率提高了，要想和10M以太网兼容，就要确保最短帧也是64字节，这只能减少最大电缆长度，&lt;span style=&#34;color:#0000ff;&#34;&gt;&lt;strong&gt;以太网最大电缆就要缩短到10m&lt;/strong&gt;&lt;/span&gt;，短到几乎没有实用价值。&lt;/p&gt;&lt;p&gt;　　②吉比特以太网&lt;span style=&#34;color:#ff0000;&#34;&gt;&lt;strong&gt;为了增加最大传输距离&lt;/strong&gt;，&lt;strong&gt;将最短帧由64字节增加到512字节&lt;/strong&gt;&lt;/span&gt;。&lt;/p&gt;&lt;p&gt;　　③如果数据帧不超过512字节，则在&lt;span style=&#34;color:#ff00ff;&#34;&gt;&lt;strong&gt;FCS域后面添加“载波延伸”域&lt;/strong&gt;&lt;/span&gt;，当主机发送完短数据帧后，继续发送载波延伸信号，冲突信号传回来时，发送端就能感知到了。&lt;/p&gt;&lt;p&gt;（3）分组突发&lt;/p&gt;&lt;p align=&#34;center&#34;&gt;&lt;img src=&#34;https://images2015.cnblogs.com/blog/772759/201706/772759-20170610200305403-444680035.png&#34; alt=&#34;&#34; height=&#34;251&#34; width=&#34;756&#34;&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;　　①如果发送的数据帧都是小于64字节的&lt;span style=&#34;color:#ff0000;&#34;&gt;&lt;strong&gt;短报文&lt;/strong&gt;&lt;/span&gt;时，那么&lt;span style=&#34;color:#ff00ff;&#34;&gt;&lt;strong&gt;链路的利用率就会很低&lt;/strong&gt;&lt;/span&gt;，因为“载波延伸”域占用了大量的带宽。于是，千兆以太网引入了“分组突发”机制来改善这个问题。&lt;/p&gt;&lt;p&gt;　　②当很多短帧要发送时，&lt;span style=&#34;color:#ff0000;&#34;&gt;&lt;strong&gt;第一个短帧采用“载波延伸”方法进行填充&lt;/strong&gt;&lt;/span&gt;，&lt;strong&gt;&lt;span style=&#34;color:#0000ff;&#34;&gt;后面的一些短帧可以一个接一个发送&lt;/span&gt;，&lt;span style=&#34;color:#ff0000;&#34;&gt;它们之间只要留必要的帧间最小间隔即可&lt;/span&gt;&lt;/strong&gt;。这样就形成一串分组突发，直到达到1500字节或稍多一些为止。从而提高链路的利用率。&lt;/p&gt;&lt;p&gt;　　③“载波延伸”和“分组突发”&lt;span style=&#34;color:#0000ff;&#34;&gt;&lt;strong&gt;仅用于千兆以太网的半双工模式&lt;/strong&gt;&lt;/span&gt;；而全双工模式不需要使用CSMA/CD协议，也就不需要这两个特性。&lt;/p&gt;&lt;p&gt;&lt;strong&gt;3. 10吉比特以太网&lt;/strong&gt;&lt;/p&gt;&lt;p align=&#34;center&#34;&gt;万兆以太网标准&lt;/p&gt;&lt;div align=&#34;center&#34;&gt;&lt;div class=&#34;table-box&#34;&gt;&lt;table border=&#34;1&#34; cellpadding=&#34;0&#34; cellspacing=&#34;0&#34;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td valign=&#34;top&#34; width=&#34;101&#34;&gt;&lt;p align=&#34;center&#34;&gt;名称&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;81&#34;&gt;&lt;p align=&#34;center&#34;&gt;传输介质&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;129&#34;&gt;&lt;p align=&#34;center&#34;&gt;网段最大长度&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;220&#34;&gt;&lt;p align=&#34;center&#34;&gt;特点&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td valign=&#34;top&#34; width=&#34;101&#34;&gt;&lt;p align=&#34;center&#34;&gt;10GBASE-SR&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;81&#34;&gt;&lt;p align=&#34;center&#34;&gt;光缆&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;129&#34;&gt;&lt;p align=&#34;center&#34;&gt;300m&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;220&#34;&gt;&lt;p align=&#34;left&#34;&gt;多模光纤（0.85μm）&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td valign=&#34;top&#34; width=&#34;101&#34;&gt;&lt;p align=&#34;center&#34;&gt;10GBASE-LR&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;81&#34;&gt;&lt;p align=&#34;center&#34;&gt;光缆&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;129&#34;&gt;&lt;p align=&#34;center&#34;&gt;10km&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;220&#34;&gt;&lt;p align=&#34;left&#34;&gt;单模光纤（1.3μm）&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td valign=&#34;top&#34; width=&#34;101&#34;&gt;&lt;p align=&#34;center&#34;&gt;10GBASE-ER&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;81&#34;&gt;&lt;p align=&#34;center&#34;&gt;光缆&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;129&#34;&gt;&lt;p align=&#34;center&#34;&gt;40m&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;220&#34;&gt;&lt;p align=&#34;left&#34;&gt;单模光纤（1.3μm）&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td valign=&#34;top&#34; width=&#34;101&#34;&gt;&lt;p&gt;10GBASE-CX4&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;81&#34;&gt;&lt;p align=&#34;center&#34;&gt;铜线&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;129&#34;&gt;&lt;p align=&#34;center&#34;&gt;15m&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;220&#34;&gt;&lt;p align=&#34;left&#34;&gt;使用四对双芯同轴电缆&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td valign=&#34;top&#34; width=&#34;101&#34;&gt;&lt;p align=&#34;center&#34;&gt;10GBASE-T&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;81&#34;&gt;&lt;p align=&#34;center&#34;&gt;铜线&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;129&#34;&gt;&lt;p align=&#34;center&#34;&gt;100m&lt;/p&gt;&lt;/td&gt;&lt;td valign=&#34;top&#34; width=&#34;220&#34;&gt;&lt;p align=&#34;left&#34;&gt;使用4对6A类的UTP双绞线&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;（1）10GE的帧格式与10Mb/s、100Mb/s和1Gb/s以太网的帧格式完全相同。10GE还保留了802.3标准规定的了以太网最小和最长帧长。&lt;/p&gt;&lt;p&gt;（2）由于数据率很高，10GE不再使用铜线而只使用光纤作为传输媒体。它使用长距离（40km）的光收发器与单模光纤接口，以便能够工作在广域网和城域网的范围。&lt;/p&gt;&lt;p&gt;（3）10GE只工作在全双工模式，因此不存在争用问题，也不使用CSMA/CD协议。这就使用10GE的传输距离不再受碰撞检测的限制而大大提高了&lt;/p&gt;&lt;/div&gt;                                    &lt;/div&gt;">计算机网络学习笔记（三）--  数据链路层</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/"" data-c="
-          &lt;p&gt;😉😉😉&lt;a href=&#34;https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/&#34;&gt;计算机网络学习笔记（一）&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;物理层特性&#34;&gt;物理层特性&lt;/h3&gt;
+          &lt;p&gt;😉&lt;a href=&#34;https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/&#34;&gt;计算机网络学习笔记（一）&lt;/a&gt;&lt;br&gt;
+😉&lt;a href=&#34;https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san/&#34;&gt;计算机网络学习笔记（三）--  数据链路层&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;😉### 物理层特性&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;机械特性&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;电气特性&lt;/strong&gt;&lt;/li&gt;
@@ -1205,13 +1493,14 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-">计算机网络学习笔记（二）</a>
+">计算机网络学习笔记（二）--  物理层</a>
       </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/"" data-c="
-          &lt;p&gt;👻👻👻&lt;/p&gt;
-&lt;h3 id=&#34;互联网概述&#34;&gt;互联网概述&lt;/h3&gt;
+          &lt;p&gt;👻&lt;a href=&#34;https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/&#34;&gt;计算机网络学习笔记（二）--  物理层&lt;/a&gt;&lt;br&gt;
+👻&lt;a href=&#34;https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san/&#34;&gt;计算机网络学习笔记（三）--  数据链路层&lt;/a&gt;&lt;br&gt;
+👻### 互联网概述&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;计算机网络由若干&lt;strong&gt;结点&lt;/strong&gt;和连接这些结点的&lt;strong&gt;链路&lt;/strong&gt;组成。计算机、集线器、交换机、路由器都可以是结点。&lt;/li&gt;
 &lt;li&gt;网络与网络之间通过&lt;strong&gt;路由器&lt;/strong&gt;连接成互联网。&lt;/li&gt;
@@ -1336,7 +1625,7 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
 &lt;div align=&#34;center&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/twXlrT.png&#34; alt=&#34;twXlrT.png&#34; border=&#34;0&#34; /&gt;&lt;/div&gt;
 &lt;p&gt;TCP/IP 协议族是一种沙漏形状，中间小两边大，IP 协议在其中占用举足轻重的地位。&lt;/p&gt;
   &lt;div align=&#34;center&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/06/04/twqzee.png&#34; alt=&#34;twqzee.png&#34; border=&#34;0&#34; /&gt;&lt;/div&gt;
-">计算机网络学习笔记（一）</a>
+">计算机网络学习笔记（一）--  计算机网络概述</a>
       </div>
       
       <div class="item">
