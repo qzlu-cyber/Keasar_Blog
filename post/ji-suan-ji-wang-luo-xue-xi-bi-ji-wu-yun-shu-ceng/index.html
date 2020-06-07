@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>Keasar`Blog</title>
+<title>👹计算机网络学习笔记（五）--  运输层 | Keasar`Blog</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1591502232134">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,6 +38,8 @@
 
 
 
+  <meta name="description" content="👹计算机网络学习笔记（五）--  运输层" />
+  <meta name="keywords" content="计算机网络" />
 </head>
 
 <body>
@@ -174,10 +176,26 @@
   <div class="main-continer">
     
     <div
-      class="section-layout bg-color mist">
+      class="section-layout mist bg-color">
       <div class="section-layout-wrapper">
-        <div id="sidebarMeta" class="sidebar">
-    
+        
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper  right-motion" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active language" data-lan="index">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item language" data-lan="preview">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body mist" id="sidebar_body">
+        
+          
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper ">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -210,82 +228,781 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper  no_compress"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#1-%E8%BF%90%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE%E6%A6%82%E8%BF%B0">1. 运输层协议概述</a></li>
+<li><a href="#2-%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%8D%8F%E8%AE%AE-udp">2. 用户数据报协议 UDP</a></li>
+<li><a href="#3-%E4%BC%A0%E8%BE%93%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE-tcp-%E6%A6%82%E8%BF%B0">3. 传输控制协议 TCP 概述</a></li>
+<li><a href="#4-%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86">4. 可靠传输的工作原理</a></li>
+<li><a href="#5-tcp-%E6%8A%A5%E6%96%87%E6%AE%B5%E7%9A%84%E9%A6%96%E9%83%A8%E6%A0%BC%E5%BC%8F">5. TCP 报文段的首部格式</a></li>
+<li><a href="#6-tcp-%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E7%9A%84%E5%AE%9E%E7%8E%B0">6. TCP 可靠传输的实现</a></li>
+<li><a href="#7-tcp-%E7%9A%84%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6">7. TCP 的流量控制</a></li>
+<li><a href="#8-tcp-%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6">8. TCP 的拥塞控制</a></li>
+<li><a href="#9-tcp-%E7%9A%84%E8%BF%90%E8%BE%93%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86">9. TCP 的运输连接管理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
 </div>
+
 <script>
-  let sidebarMeta = document.querySelector('#sidebarMeta');
-  let scheme = 'mist';
-  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
-  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
-    document.addEventListener('scroll', function(e) {
-      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
-        sidebarWrapper.classList.add('home-sidebar-fixed')
-      } else {
-        sidebarWrapper.classList.remove('home-sidebar-fixed')
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
       }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
     });
   }
-  </script>
-        <div class="section-box tag-line box-shadow-wrapper">
-          <section class="section tags-section posts-expand bg-color">
-            <div class="padding-wrapper">
-  <div class="tag-timeline-box">
-    <div class="tag-timeline-wrapper">
-      <div class="tag-timeline-title">
-        <h2>
-          Linux
-          <small class="language" data-lan="tag">标签</small>
-        </h2>
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
+          
+        
       </div>
+    </div>
+  
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+        <div class="section-box box-shadow-wrapper">
+          <div class="section bg-color post post-page">
+            <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">
+      👹计算机网络学习笔记（五）--  运输层
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span>2020-06-07</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">分类于</span>
       
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <a href="https://qzlu-cyber.github.io/Keasar_Blog/post/centos76-an-zhuang-docker-bing-zai-docker-zhong-li-yong-tomcat-bu-shu-jing-tai-wang-ye/">
-        <div class="motion-warpper">
-          <div class="tag-post-node">
-            <h1>
-              06-03
-              <small>CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页</small>
-            </h1>
-          </div>
-        </div>
+      <a href="https://qzlu-cyber.github.io/Keasar_Blog/tag/huZmcNfOq/">
+        <span>计算机网络</span>
       </a>
       
       
+    </span>
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>14<span class="language" data-lan="minute">分钟</span></span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>3722<span class="pc-show language" data-lan="words">字数</span></span>
+    </span>
+    
+    
+    
+    <span id="/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/" data-flag-title="👹计算机网络学习笔记（五）--  运输层" class="meta-item pc-show leancloud_visitors">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-eye"></i>
+      <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
+    </span>
+    
+  </div>
+</header>
+            <div class="post-body next-md-body" id="post_body">
+              <p>😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
+😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
+😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san/">计算机网络学习笔记（三）--  数据链路层</a><br>
+😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si/">计算机网络学习笔记（四）--  网络层</a></p>
+<h3 id="1-运输层协议概述">1. 运输层协议概述</h3>
+<!-- more -->
+<ol>
+<li>
+<p>进程之间的通信</p>
+<ul>
+<li>向它上面的应用层提供通信服务。</li>
+<li>面向通信部分的最高层。</li>
+<li>用户功能中的最低层。</li>
+</ul>
+<p>通信的真正端点井不是主机而是主机中的进程。</p>
+<figure data-type="image" tabindex="1"><img src="https://s1.ax1x.com/2020/06/07/tgtV54.png" alt="tgtV54.png" loading="lazy"></figure>
+</li>
+<li>
+<p>运输层的两个主要协议</p>
+<ul>
+<li>
+<p><strong>用户数据报协议 UDP</strong> (User Datagram Protocol)</p>
+</li>
+<li>
+<p><strong>传输控制协议 TCP</strong> (Transmission Control Protocol)</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="2"><img src="https://s1.ax1x.com/2020/06/07/tgN9Fe.png" alt="tgN9Fe.png" loading="lazy"></figure>
+</li>
+<li>
+<p>运输层的端口</p>
+<ul>
+<li>
+<p>识别各应用层进程；</p>
+</li>
+<li>
+<p>只具有本地意义；</p>
+</li>
+</ul>
+<p><strong>端口范围：（0 - 65535）</strong></p>
+<p><strong>①熟知端口号（0~1023）</strong></p>
+<p><strong>②登记（或注册）端口号（1024~49151）</strong></p>
+<p><strong>③客户（或动态、短暂）端口号（49152~65535）</strong></p>
+</li>
+<li>
+<p>套接字socket</p>
+<p><strong>套接字 socket = (IP 地址：端口号）</strong></p>
+</li>
+</ol>
+<h3 id="2-用户数据报协议-udp">2. 用户数据报协议 UDP</h3>
+<ul>
+<li>
+<p>特点</p>
+<p>① 无连接；（减少开销和发送时延）</p>
+<p>③ 尽最大努力交付；</p>
+<p>④ 面向报文；（对报文不分拆，不合并）</p>
+<p>⑤ 没有拥塞控制；</p>
+<p>⑥ 支持一对一，一对多，多对一，多对多的交互通信；</p>
+<p>⑦ 首部开销小。（8个字节）</p>
+<p>⑧无编号；</p>
+</li>
+<li>
+<p>UDP首部格式</p>
+<p>有 8 个字节 ，由 4 个字段组成，每个字段的长度都是 2 个字节。</p>
+<figure data-type="image" tabindex="3"><img src="https://s1.ax1x.com/2020/06/07/tgNLtg.png" alt="tgNLtg.png" loading="lazy"></figure>
+<p>(1) <strong>源端口</strong>：源端口号。在需要对方回信时选用。不需要时可用全 0。</p>
+<p>(2) <strong>目的端口</strong>：目的端口号。这在终点交付报文时必须使用。</p>
+<p>(3) <strong>长度</strong>：UDP用户数据报的长度，其最小值是 8 （仅有首部）。</p>
+<p>(4) <strong>检验和</strong>：检测 UDP 用户数据报在传输中是否有错。有错就丢弃。</p>
+<figure data-type="image" tabindex="4"><img src="https://s1.ax1x.com/2020/06/07/tgUE9J.png" alt="tgUE9J.png" loading="lazy"></figure>
+<p>如果接收方 UDP 发现收到的报文中的目的端口号不正确，就丢弃该报文，并由网 ICMP 发送“端口不可达”差错报文给发送方。</p>
+<p>UDP 的通信是无连接的，虽然使用了端口号但不需要使用套接字。</p>
+</li>
+<li>
+<p>UDP 计算检验和</p>
+<p>把首部和数据部分一起都检验，IP数据报是只检验首部</p>
+<figure data-type="image" tabindex="5"><img src="https://s1.ax1x.com/2020/06/07/tgUhUU.png" alt="tgUhUU.png" loading="lazy"></figure>
+<p>16 位的字视为 1 字节。若数据部分不是偶数个字节，则要填入一个全零字节（但此字节不发送）。</p>
+</li>
+</ul>
+<h3 id="3-传输控制协议-tcp-概述">3. 传输控制协议 TCP 概述</h3>
+<ul>
+<li>
+<p>特点</p>
+<p>① 面向连接的服务；</p>
+<p>② 面向字节流；（无结构的字节流）</p>
+<p>③ 全双工通信；（发送、接收缓存）</p>
+<p>④ 复用和分用；（发送—复用，接收—分用）</p>
+<p>⑤ 进程到进程的通信；（点对点，每个进程都需要一个连接）</p>
+<p>⑥ 可靠的服务。（无差错，不丢失，不重复，按序到达）</p>
+</li>
+<li>
+<p>TCP 连接</p>
+<p>TCP 之间的通信必须要在两个套接字之间建立连接。</p>
+<p><strong>TCP 连接：：＝ {socket, socket2} = { (IP1: port,), (IP2: port2) }</strong></p>
+</li>
+</ul>
+<h3 id="4-可靠传输的工作原理">4. 可靠传输的工作原理</h3>
+<ol>
+<li>
+<p>停止等待协议</p>
+<ol>
+<li>
+<p>无差错情况和出现差错</p>
+<figure data-type="image" tabindex="6"><img src="https://s1.ax1x.com/2020/06/07/tga0qx.png" alt="tga0qx.png" loading="lazy"></figure>
+<p>A 向 B 发送，B 收到后向 A 发送确认报文，A 发送下一条报文。若超过一段时间 A 没有收到确认报文就重传该报文。</p>
+<p>A 在发送完一个分组后，必须暂时保留已发送的分组的副本，收到确认后才能销毁。</p>
+<p>分组和确认分组都必须进行编号。</p>
+<p>超时计时器设置的重传时间应当比数据在分组传输的平均往返时间更长一些。</p>
+</li>
+<li>
+<p>确认丢失和确认迟到</p>
+<figure data-type="image" tabindex="7"><img src="https://s1.ax1x.com/2020/06/07/tgdZex.png" alt="tgdZex.png" loading="lazy"></figure>
+</li>
+<li>
+<p>信道利用率</p>
+<figure data-type="image" tabindex="8"><img src="https://s1.ax1x.com/2020/06/07/tgdMfe.png" alt="tgdMfe.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="https://s1.ax1x.com/2020/06/07/tgd1ld.png" alt="tgd1ld.png" loading="lazy"></figure>
+<p>当使用流水线传输时，就要使用<strong>连续 ARQ 协议</strong>和<strong>滑动窗口协议</strong>。</p>
+</li>
+</ol>
+</li>
+<li>
+<p>连续 ARQ 协议</p>
+<p>发送窗口，累积确认（对按序到达的最后一个分组发送确认）。</p>
+<figure data-type="image" tabindex="10"><img src="https://s1.ax1x.com/2020/06/07/tg0jOA.png" alt="tg0jOA.png" loading="lazy"></figure>
+<p><strong>对按序到达的最后一个分组发送确认</strong>，这就表示：到这个分组为止的所有分组都已正确收到了。</p>
+<p>优点：简单易实现；缺点：Go-back-N，即首尾收到，中间报文段丢失，则要重传丢失报文后的所有报文。</p>
+</li>
+</ol>
+<h3 id="5-tcp-报文段的首部格式">5. TCP 报文段的首部格式</h3>
+<img src="https://s1.ax1x.com/2020/06/07/tgBmT0.png" alt="tgBmT0.png" style="zoom:80%;" />
+<p>​	最小长度是 20 字节，后面有 4n 字节是根据需要而增加的选项 (n 是整数)，最大长度 60 字节。</p>
+<ul>
+<li>
+<p>源端口和目的端口：各占 2 个字节，分别写入源端口号和目的端口号。</p>
+</li>
+<li>
+<p>序号：4 字节，使用 mod 2^32 运算。</p>
+</li>
+<li>
+<p>确认号：4 字节，是期望收到对方下一个报文段的第一个数据字节的序号。</p>
+<blockquote>
+<p>若确认号＝ N, 则表明：到序号 N-1 为止的所有数据都已正确收到。</p>
+</blockquote>
+</li>
+<li>
+<p>数据偏移：占 4 位，即首部长度。</p>
+</li>
+<li>
+<p>保留：占 6 位，保留为今后使用，目前置为 0。</p>
+</li>
+<li>
+<p>紧急 URG：URG = 1 时，表明紧急指针字段有效，相当于优先级高的数据，要尽快传送。</p>
+</li>
+<li>
+<p>确认 ACK：仅当 ACK = 1 时确认号字段才有效。当 ACK = 0 时，确认号无效。在TCP连接建立后所有传送的报文段都必须把 ACK 置 1。</p>
+</li>
+<li>
+<p>推送 PSH：PSH = 1 时，立即收到响应，不必等缓存满了之后再向上交付。</p>
+</li>
+<li>
+<p>复位 RST：RST = 1 时，表明 TCP 连接中出现严重差错，必须释放连接，然后再重新建立运输连接。还用来拒绝一个非法的报文段或拒绝打开一个连接。</p>
+</li>
+<li>
+<p>同步 SYN：在连接建立时用来同步序号，连接请求和连接接受。当 SYN = 1 ACK = 0 时，表明这是一个连接请求报文段。对方若同意建立连接，则应在响应的报文段中使 SYN = 1 ACK = 1 。</p>
+</li>
+<li>
+<p>终止 FIN：用来释放一个连接。当 FIN = 1 时，表明此报文段的发送方的数据已发送完毕，并要求释放运输连接。</p>
+</li>
+<li>
+<p>窗口：2 字节，指的是发送本报文段的一方的<strong>接收窗口</strong>（而不是自己的发送窗口)，窗口值作为接收方让发送方设置其发送窗口的依据。</p>
+<blockquote>
+<p>窗口字段明确指出了现在允许对方发送的数据量。窗口值经常在动态变化着。</p>
+</blockquote>
+</li>
+<li>
+<p>检验和：2 字节。检验和字段检验的范围包括首部和数据这两部分，与UDP检验方法相同。</p>
+</li>
+<li>
+<p>紧急指针：2 字节。紧急指针仅在 URG = 1 时才有意义，它指向最后一字节的紧急数据。即使窗口为零时也可发送紧急数据。</p>
+</li>
+<li>
+<p>选项：长度可变，最长可达 40 字节。</p>
+<blockquote>
+<ol>
+<li>最大报文段长度 MSS 选项: TCP数据报数据部分长度。</li>
+<li>时间戳选项：10 字节，其中最主要的字段是时间戳值字段 (4 字节）和时间戳回送回答字段 (4 字节): 用来计算往返时间 RTT，用于处理 TCP 序号超过 2^32 的情况。</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h3 id="6-tcp-可靠传输的实现">6. TCP 可靠传输的实现</h3>
+<ol>
+<li>
+<p>以字节为单位的滑动窗口</p>
+<figure data-type="image" tabindex="11"><img src="https://s1.ax1x.com/2020/06/07/tgsukt.png" alt="tgsukt.png" loading="lazy"></figure>
+<p>小于 P1 的是已发送并已收到确认的部分，而大于 P3 的是不允许发送的部分。</p>
+<p>P3 - P1 = A 的发送窗口</p>
+<p>P2 - P1 ＝已发送但尚未收到确认的字节数</p>
+<p>P3 - P2 = 允许发送但当前尚未发送的字节数（又称为可用窗口或有效窗口）</p>
+<p>B 未按序收到，A 从31号重传，B收到后把接收窗口向前移动 3 个序号。A 在继续发送完序号 42 ~ 53 的数据后，指针 P2 向前移动和 P3 重合。</p>
+<figure data-type="image" tabindex="12"><img src="https://s1.ax1x.com/2020/06/07/tgsv38.png" alt="tgsv38.png" loading="lazy"></figure>
+</li>
+<li>
+<p>超时重传时间的选择</p>
+<p>每当第一次测量到 RTT 样本时，  RTTs 值就取为所测量到的 RTT 样本 值。但以后每测量到一个新的 RTT 样本，就按下式重新计算一次  RTTs</p>
+<blockquote>
+<p>新的 RTTs = (1 - α) x (旧的 RTTs) + α x (新的 RTT 样本)</p>
+</blockquote>
+<p>RTO (超时重传时间) = RTTs + 4 x RTTD (RTT 的偏差的加权平均值)</p>
+<blockquote>
+<p>新的 RTT0 = (1- β) x (旧的 RTTD)＋ β x | RTTs－新的 RTT 样本 |</p>
+</blockquote>
+</li>
+<li>
+<p>选择确认 SACK</p>
+<p>首部选项加上允许 SACK 选项。</p>
+<figure data-type="image" tabindex="13"><img src="https://s1.ax1x.com/2020/06/07/tg66F1.png" alt="tg66F1.png" loading="lazy"></figure>
+</li>
+</ol>
+<h3 id="7-tcp-的流量控制">7. TCP 的流量控制</h3>
+<p>流量控制就是让发送方的发送速率不要太快，要让接收方来得及接收。</p>
+<ol>
+<li>
+<p>利用滑动窗口实现流量控制</p>
+<figure data-type="image" tabindex="14"><img src="https://s1.ax1x.com/2020/06/07/tg6bfP.png" alt="tg6bfP.png" loading="lazy"></figure>
+<p>发送方的发送窗口不能超过接收方给出的接受窗口的数值；</p>
+<p>设置持续计时器来防止窗口由零变为非零导致的僵局。</p>
+</li>
+<li>
+<p>传输的效率（三种机制）</p>
+<p>① 维持一个等于MSS的变量来控制缓存。</p>
+<p>② 发送方的推送push操作。</p>
+<p>③ 计时器期限到了就将缓存数据装入报文段。</p>
+</li>
+</ol>
+<h3 id="8-tcp-的拥塞控制">8. TCP 的拥塞控制</h3>
+<p>​	拥塞控制是全局的控制，以网络能够承受现有的网络负荷为前提；流量控制是端口的控制。</p>
+<ol>
+<li>
+<p>TCP 的拥塞控制方法</p>
+<ul>
+<li>
+<p>慢开始和拥塞避免</p>
+<p><strong>发送方让自己的发送窗口等于拥塞窗口。</strong></p>
+<p><strong>判断网络拥塞的依据就是出现了超时。</strong></p>
+<p>慢开始：以 MSS 作为发送窗口大小的初始值（拥塞窗口)，每经过一个传输轮次（从发送到确认)，cwnd就加倍；慢开始门限作为慢开始和拥塞避免的转换点；</p>
+<p>拥塞避免：每一个RTT，cwnd只加 1, (线性增长，加法增大)；</p>
+<p>出现拥塞时，慢开始门限设置为当前窗口值的一半(乘法减小)，cwnd设为1；</p>
+<figure data-type="image" tabindex="15"><img src="https://s1.ax1x.com/2020/06/07/tg2pR0.png" alt="tg2pR0.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="16"><img src="https://s1.ax1x.com/2020/06/07/tg2nRx.png" alt="tg2nRx.png" loading="lazy"></figure>
+</li>
+<li>
+<p>快重传和快恢复</p>
+<p>快重传：收到三个重复确认立即发送未被确认的报文段；</p>
+<p>快恢复：乘法减小后执行加法增大；</p>
+<figure data-type="image" tabindex="17"><img src="https://s1.ax1x.com/2020/06/07/tgRxg0.png" alt="tgRxg0.png" loading="lazy"></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>TCP 拥塞控制流程图</p>
+<figure data-type="image" tabindex="18"><img src="https://s1.ax1x.com/2020/06/07/tgWCbF.png" alt="tgWCbF.png" loading="lazy"></figure>
+</li>
+</ol>
+<h3 id="9-tcp-的运输连接管理">9. TCP 的运输连接管理</h3>
+<p><strong>运输连接有三个阶段，即：连接建立、数据传送和连接释放。</strong></p>
+<p>TCP 连接的建立采用客户服务器方式。</p>
+<ol>
+<li>
+<p>TCP 的连接建立</p>
+<figure data-type="image" tabindex="19"><img src="https://s1.ax1x.com/2020/06/07/tgWwVg.png" alt="tgWwVg.png" loading="lazy"></figure>
+<ul>
+<li>
+<p>第一次握手</p>
+<p>客户端向服务端发送连接请求报文段。该报文段的头部中 SYN = 1，ACK = 0，seq = x。请求发送后，客户端便进入***SYN-SENT*** 状态。</p>
+<ul>
+<li>
+<p>SYN = 1，ACK = 0 表示该报文段为连接请求报文。</p>
+</li>
+<li>
+<p>x 为本次TCP通信的字节流的初始序号。TCP规定：SYN = 1 的报文段不能有数据部分，但要消耗掉一个序号。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>第二次握手</p>
+<p>服务端收到连接请求报文段后，如果同意连接，则会发送一个应答：SYN = 1，ACK = 1，seq=y，ack=x+1。该应答发送完成后便进入***SYN-RCVD*** 状态。</p>
+<ul>
+<li>SYN = 1，ACK = 1 表示该报文段为连接同意的应答报文。</li>
+<li>seq = y 表示服务端作为发送者时，发送字节流的初始序号。</li>
+<li>ack = x + 1 表示服务端希望下一个数据报发送序号从x+1开始的字节。</li>
+</ul>
+</li>
+<li>
+<p>第三次握手</p>
+<p>当客户端收到连接同意的应答后，还要向服务端发送一个确认报文段，表示：服务端发来的连接同意应答已经成功收到。该报文段的头部为：<em><strong>ACK=1，seq=x+1，ack=y+1</strong></em>。</p>
+<ul>
+<li>客户端发完这个报文段后便进入ESTABLISHED状态，服务端收到这个应答后也进入ESTABLISHED状态，此时连接的建立完成！</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>为什么连接建立需要三次握手，而不是两次握手？</strong></p>
+<p>背景：A首先发送一个连接请求，但是该请求在网络节点上滞留了，没有收到确认。于是A重传了一次请求，并且收到了B的确认，于是连接建立，数据传输完成后，释放连接。</p>
+<p>① 假定A发出的第一个请求报文段并没有丢失，而是在某些网络节点上滞留，本来是一个失效的请求，但B收到后误认为是A再次发出一个新请求，于是向A发送确认，同意建立连接。</p>
+<p>② 假定采用两次握手，那么只要B发出确认，则新的连接就建立了。由于A并没有发出请求，因此不理会B的确认，也不会向B发送数据，但B却以为新的连接已经建立，并一直等待A的数据，B的许多资源就这样白白浪费了。</p>
+<p>③ 假定采用三次握手，则B发出确认，但A因为并没有发请求，所以不理会B的确认，B没有收到A的确认，则连接建立失败，B知道连接建立失败。会回收资源。</p>
+<p>④ 极端的情况可能由于Client用户端多次重新发送请求数据而导致Server端最后建立了N多个响应在等待，因而造成极大的资源浪费！所以，“三次握手”很有必要。</p>
+</blockquote>
+<ol start="2">
+<li>
+<p>TCP 的连接释放</p>
+<figure data-type="image" tabindex="20"><img src="https://s1.ax1x.com/2020/06/07/tg5isx.png" alt="tg5isx.png" loading="lazy"></figure>
+<ul>
+<li>
+<p>第一次挥手<br>
+若A认为数据发送完成，则它需要向B发送连接释放请求。该请求只有报文头，头中携带的主要参数为：FIN = 1，seq = u。此时，A将进入FIN-WAIT-1状态。</p>
+<ul>
+<li>FIN = 1 表示该报文段是一个连接释放请求。</li>
+<li>seq = u，u - 1 是A向B发送的最后一个字节的序号。</li>
+</ul>
+</li>
+<li>
+<p>第二次挥手<br>
+B收到连接释放请求后，会通知相应的应用程序，告诉它A向B这个方向的连接已经释放。此时B进入 CLOSE-WAIT 状态，并向A发送连接释放的应答，其报文头包含：ACK = 1，seq = v，ack = u + 1。A收到该应答，进入 FIN-WAIT-2 状态，等待B发送连接释放请求。</p>
+<ul>
+<li>ACK = 1：除TCP连接请求报文段以外，TCP通信过程中所有数据报的 ACK 都为1，表示应答。</li>
+<li>seq = v，v - 1 是B向A发送的最后一个字节的序号。</li>
+<li>ack = u + 1 表示希望收到从第 u+1 个字节开始的报文段，并且已经成功接收了前 u 个字节。</li>
+</ul>
+<p>第二次挥手完成后，A到B方向的连接已经释放，B不会再接收数据，A也不会再发送数据。但B到A方向的连接仍然存在，B可以继续向A发送数据。</p>
+</li>
+<li>
+<p>第三次挥手<br>
+当B向A发完所有数据后，向A发送连接释放请求，请求头：FIN = 1，ACK = 1，seq = w，ack = u+1。B便进入 LAST-ACK 状态。</p>
+</li>
+<li>
+<p>第四次挥手<br>
+A收到释放请求后，向B发送确认应答，此时A进入TIME-WAIT 状态。该状态会持续 2MSL 时间，若该时间段内没有B的重发请求的话，就进入CLOSED状态，撤销TCB。当B收到确认应答后，也便进入CLOSED状态，撤销TCB。</p>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>为什么挥手是四次，而握手时三次？</strong></p>
+<p>握手时 ACK 和 SYN 可以放在一个报文里发送，但是关闭连接时，当收到对方的 FIN 报文，你未必完成所有数据，所以可能发送 ACK 确认收到 FIN，然后发送 FIN 表示关闭连接。</p>
+</blockquote>
+
+            </div>
+            
+            
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong class="language" data-lan="author">本文作者：</strong>
+      Keasar
+    </li>
+    <li class="post-copyright-link">
+      <strong class="language" data-lan="link">本文链接：</strong>
+      <a href="https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/" title="👹计算机网络学习笔记（五）--  运输层">https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong class="language" data-lan="copyright">版权声明： </strong>
+      本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+      <a href="https://qzlu-cyber.github.io/Keasar_Blog/tag/huZmcNfOq/"># 计算机网络</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
       
+    </div>
+    <div class="nav-next">
       
-      
-      
-      
-      
-      
-      
-      
-      
+        <a class="nav-pc-next" title="🤖计算机网络学习笔记（四）--  网络层" href="https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">🤖计算机网络学习笔记（四）--  网络层</a>
+        <a class="nav-mobile-next" title="🤖计算机网络学习笔记（四）--  网络层" href="https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>
 </div>
-          </section>
+            
+            
+  <script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: '00K414IJmQeBNc9fa3hhlowu-gzGzoHsz',
+    appKey: 'G1WPh4BmIzV6HJM048mAhCPO',
+    avatar: '',
+    placeholder: '请留下您宝贵的评论：',
+    pageSize: '',
+    lang: 'zh-cn',
+    enableQQ: true,
+    visitor: 'true' === 'true',
+    highlight: 'true' === 'true',
+    avatarForce: 'true' === 'false',
+  });
+</script>
+
+          </div>
         </div>
       </div>
     </div>
@@ -1014,6 +1731,253 @@
   }
 
 </script>
+    <div class="light-box" id="light_box"></div>
+<script>
+  let imgs = document.querySelectorAll('.post-body img');
+  let lightBox = document.querySelector('#light_box');
+  lightBox.addEventListener('mousedown', (e) => {
+    e.preventDefault()
+  })
+  lightBox.addEventListener('mousewheel', (e) => {
+    e.preventDefault()
+  })
+  let width = window.innerWidth * 0.8;
+  lightBox.onclick = () => {
+    let img = lightBox.querySelector('img');
+    lightBox.style = '';
+    img && img.remove();
+  }
+  imgs.forEach(item => {
+    item.onclick = function (e) {
+      let lightImg = document.createElement('img');
+      lightImg.src = this.src;
+      lightBox.style = `height: 100%; opacity: 1; background-color: rgba(0, 0, 0, 0.5);cursor: zoom-out;`;
+      lightImg.style = `width: ${width}px; border: 1px solid #fff; border-radius: 2px;`;
+      lightImg.onclick = function () {
+        lightBox.style = '';
+        this.remove();
+      }
+      lightBox.append(lightImg);
+    }
+  })
+</script>
+    <div class="reward-mask" style="display: none;">
+  <div class="reward-relative">
+    <span class="close" aria-hidden="true">x</span>
+    <div class="reward-body">
+      <h2>感谢您的支持，我会继续努力的!</h2>
+      <div class="reward-img-box">
+        <div style="position: relative; width: 140px; height: 140px;">
+          
+          
+          
+        </div>
+      </div>
+      <p class="reward-word">扫码打赏，你说多少就多少</p>
+      <p class="reward-tip">打开微信扫一扫，即可进行扫码打赏哦</p>
+    </div>
+    <div class="bottom">
+      
+      
+    </div>
+  </div>
+</div>
+<style>
+  .reward-mask {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #00000054;
+  }
+
+  .reward-relative {
+    position: relative;
+    width: 480px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #fff;
+    top: 50%;
+    margin-top: -205px;
+  }
+
+  .reward-relative .close {
+    position: absolute;
+    right: 10px;
+    font-weight: normal;
+    font-size: 16px;
+    color: #929292;
+  }
+
+  .reward-body {
+    padding: 40px 20px 20px;
+  }
+
+  .bottom {
+    display: flex;
+  }
+
+  .reward-btn {
+    text-align: center;
+  }
+
+  .reward-btn-text {
+    display: inline-block;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    background-color: #ff9734;
+    color: #FFF;
+    margin-top: 20px;
+  }
+
+  .pay-text {
+    margin-top: 10px;
+    padding: 10px;
+    flex: 1;
+    transition: all .2s linear;
+  }
+
+  .pay-text:hover {
+    background-color: #a5a5a536;
+  }
+
+  .reward-body h2 {
+    padding-top: 10px;
+    text-align: center;
+    color: #a3a3a3;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0 20px;
+  }
+
+  .reward-body h2:after,
+  .reward-body h2:before {
+    font-family: Arial, Helvetica, sans-serif;
+    background: 0 0;
+    width: 0;
+    height: 0;
+    font-style: normal;
+    color: #eee;
+    font-size: 80px;
+    position: absolute;
+    top: 20px;
+  }
+
+  .reward-body h2:before {
+    content: '\201c';
+    left: 50px;
+  }
+
+  .reward-body h2:after {
+    content: '\201d';
+    right: 80px;
+  }
+
+  .reward-img-box {
+    display: inline-block;
+    padding: 10px;
+    border: 6px solid #ea5f00;
+    margin: 0 auto;
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .reward-img {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .reward-relative {
+      height: 100%;
+      top: 0px;
+      margin-top: 0;
+      width: auto;
+    }
+
+    .reward-relative .bottom {
+      flex-direction: column;
+    }
+
+    .reward-relative .pay-text {
+      width: 80%;
+      margin: 5px auto;
+      border: 1px solid silver;
+      padding: 6px;
+      border-radius: 4px;
+    }
+
+    .reward-body h2:after {
+      right: 40px;
+    }
+
+    .reward-body h2:after,
+    .reward-body h2:before {
+      font-size: 60px;
+    }
+
+    .reward-body h2:before {
+      left: 20px;
+    }
+  }
+</style>
+<script>
+  !function () {
+    var mask = document.querySelector('.reward-mask');
+    let close = document.querySelector('.reward-relative .close');
+    let rewardBtn = document.querySelector('.reward-btn');
+
+    let zfb = document.querySelector('#zfb'),
+      wx = document.querySelector('#wx'),
+      zfbBtn = document.querySelector('#zfbBtn'),
+      wxBtn = document.querySelector('#wxBtn');
+
+    if (zfbBtn && wxBtn) {
+      zfbBtn.addEventListener('click', () => {
+        window.Velocity(zfb, 'transition.slideLeftIn', {
+          duration: 400
+        });
+        window.Velocity(wx, 'transition.slideRightOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+
+      wxBtn.addEventListener('click', () => {
+        window.Velocity(wx, 'transition.slideRightIn', {
+          duration: 400
+        });
+        window.Velocity(zfb, 'transition.slideLeftOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+    }
+
+    rewardBtn.addEventListener('click', (e) => {
+      window.Velocity(mask, 'transition.slideDownIn', {
+        duration: 400
+      })
+    });
+
+    close.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.Velocity(mask, 'transition.slideUpOut', {
+        duration: 400
+      })
+    })
+  }()
+</script>
+
   </div>
 </body>
 
@@ -3352,7 +4316,6 @@ num = 100
 
 
 <script src="/media/js/mouse/peace.js"></script>
-
 
 
 </html>
