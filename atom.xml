@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qzlu-cyber.github.io/Keasar_Blog</id>
     <title>Keasar`Blog</title>
-    <updated>2020-06-07T03:57:14.348Z</updated>
+    <updated>2020-06-08T00:58:25.920Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qzlu-cyber.github.io/Keasar_Blog"/>
     <link rel="self" href="https://qzlu-cyber.github.io/Keasar_Blog/atom.xml"/>
@@ -18,14 +18,14 @@
         <updated>2020-06-07T01:34:01.000Z</updated>
         <summary type="html"><![CDATA[<p>😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
 😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
-😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san/">计算机网络学习笔记（三）--  数据链路层</a><br>
-😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si/">计算机网络学习笔记（四）--  网络层</a></p>
+😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
+😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a></p>
 <h3 id="1-运输层协议概述">1. 运输层协议概述</h3>
 ]]></summary>
         <content type="html"><![CDATA[<p>😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
 😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
-😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san/">计算机网络学习笔记（三）--  数据链路层</a><br>
-😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si/">计算机网络学习笔记（四）--  网络层</a></p>
+😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
+😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a></p>
 <h3 id="1-运输层协议概述">1. 运输层协议概述</h3>
 <!-- more -->
 <ol>
@@ -383,8 +383,8 @@ A收到释放请求后，向B发送确认应答，此时A进入TIME-WAIT 状态�
         <updated>2020-06-05T10:20:48.000Z</updated>
         <summary type="html"><![CDATA[<p>😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
 😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
-😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san/">计算机网络学习笔记（三）--  数据链路层</a><br>
-😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu/">计算机网络学习笔记（五）--  运输层</a></p>
+😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
+😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
 <h3 id="1-网络层提供的两种服务">1. 网络层提供的两种服务</h3>
 <ol>
 <li><strong>虚电路服务</strong></li>
@@ -393,8 +393,8 @@ A收到释放请求后，向B发送确认应答，此时A进入TIME-WAIT 状态�
 ]]></summary>
         <content type="html"><![CDATA[<p>😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
 😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
-😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san/">计算机网络学习笔记（三）--  数据链路层</a><br>
-😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu/">计算机网络学习笔记（五）--  运输层</a></p>
+😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
+😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
 <h3 id="1-网络层提供的两种服务">1. 网络层提供的两种服务</h3>
 <ol>
 <li><strong>虚电路服务</strong></li>
@@ -930,8 +930,8 @@ A收到释放请求后，向B发送确认应答，此时A进入TIME-WAIT 状态�
         <updated>2020-06-04T11:53:32.000Z</updated>
         <summary type="html"><![CDATA[<p>😀<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
 😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
-😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si/">计算机网络学习笔记（四）--  网络层</a><br>
-😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu/">计算机网络学习笔记（五）--  运输层</a></p>
+😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a><br>
+😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
 <p>数据链路层使用的信道有两种类型：</p>
 <ul>
 <li>点对点信道</li>
@@ -940,8 +940,8 @@ A收到释放请求后，向B发送确认应答，此时A进入TIME-WAIT 状态�
 ]]></summary>
         <content type="html"><![CDATA[<p>😀<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
 😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
-😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si/">计算机网络学习笔记（四）--  网络层</a><br>
-😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu/">计算机网络学习笔记（五）--  运输层</a></p>
+😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a><br>
+😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
 <p>数据链路层使用的信道有两种类型：</p>
 <ul>
 <li>点对点信道</li>
@@ -1215,10 +1215,10 @@ A收到释放请求后，向B发送确认应答，此时A进入TIME-WAIT 状态�
         <link href="https://qzlu-cyber.github.io/Keasar_Blog/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">
         </link>
         <updated>2020-06-04T04:31:50.000Z</updated>
-        <summary type="html"><![CDATA[<p>😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）</a><br>
-😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san/">计算机网络学习笔记（三）--  数据链路层</a><br>
-😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si/">计算机网络学习笔记（四）--  物理层</a><br>
-😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu/">计算机网络学习笔记（五）--  运输层</a></p>
+        <summary type="html"><![CDATA[<p>😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
+😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
+😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a><br>
+😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
 <h3 id="1-物理层特性">1. 物理层特性</h3>
 <ul>
 <li><strong>机械特性</strong></li>
@@ -1227,10 +1227,10 @@ A收到释放请求后，向B发送确认应答，此时A进入TIME-WAIT 状态�
 <li><strong>规程特性</strong></li>
 </ul>
 ]]></summary>
-        <content type="html"><![CDATA[<p>😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）</a><br>
-😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san/">计算机网络学习笔记（三）--  数据链路层</a><br>
-😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si/">计算机网络学习笔记（四）--  物理层</a><br>
-😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu/">计算机网络学习笔记（五）--  运输层</a></p>
+        <content type="html"><![CDATA[<p>😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
+😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
+😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a><br>
+😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
 <h3 id="1-物理层特性">1. 物理层特性</h3>
 <ul>
 <li><strong>机械特性</strong></li>
@@ -1411,9 +1411,9 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
         </link>
         <updated>2020-06-04T03:06:42.000Z</updated>
         <summary type="html"><![CDATA[<p>👻<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
-👻<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san/">计算机网络学习笔记（三）--  数据链路层</a><br>
-👻<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si/">计算机网络学习笔记（四）--  网络层</a><br>
-👻<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu/">计算机网络学习笔记（五）--  运输层</a></p>
+👻<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
+👻<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a><br>
+👻<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
 <h3 id="1-互联网概述">1. 互联网概述</h3>
 <ul>
 <li>计算机网络由若干<strong>结点</strong>和连接这些结点的<strong>链路</strong>组成。计算机、集线器、交换机、路由器都可以是结点。</li>
@@ -1421,9 +1421,9 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
 </ul>
 ]]></summary>
         <content type="html"><![CDATA[<p>👻<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
-👻<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san/">计算机网络学习笔记（三）--  数据链路层</a><br>
-👻<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si/">计算机网络学习笔记（四）--  网络层</a><br>
-👻<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu/">计算机网络学习笔记（五）--  运输层</a></p>
+👻<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
+👻<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a><br>
+👻<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
 <h3 id="1-互联网概述">1. 互联网概述</h3>
 <ul>
 <li>计算机网络由若干<strong>结点</strong>和连接这些结点的<strong>链路</strong>组成。计算机、集线器、交换机、路由器都可以是结点。</li>
