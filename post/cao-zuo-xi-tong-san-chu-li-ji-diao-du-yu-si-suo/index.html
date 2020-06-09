@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>关于 | Keasar`Blog</title>
+<title>🤗操作系统（三）--  处理机调度与死锁 | Keasar`Blog</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1591676667963">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,8 +38,8 @@
 
 
 
-  <meta name="description" content="关于" />
-  <meta name="keywords" content="" />
+  <meta name="description" content="🤗操作系统（三）--  处理机调度与死锁" />
+  <meta name="keywords" content="操作系统" />
 </head>
 
 <body>
@@ -237,10 +237,18 @@
     <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
+<li>
+<ul>
+<li><a href="#1-%E5%A4%84%E7%90%86%E6%9C%BA%E8%B0%83%E5%BA%A6%E7%9A%84%E5%B1%82%E6%AC%A1%E5%92%8C%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95%E7%9A%84%E7%9B%AE%E6%A0%87">1. 处理机调度的层次和调度算法的目标</a></li>
+<li><a href="#2-%E4%BD%9C%E4%B8%9A%E4%B8%8E%E4%BD%9C%E4%B8%9A%E8%B0%83%E5%BA%A6">2. 作业与作业调度</a></li>
+<li><a href="#3-%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6">3. 进程调度</a></li>
+<li><a href="#4-%E5%AE%9E%E6%97%B6%E8%B0%83%E5%BA%A6">4. 实时调度</a></li>
+<li><a href="#5-%E6%AD%BB%E9%94%81%E6%A6%82%E8%BF%B0">5. 死锁概述</a></li>
+<li><a href="#6-%E9%A2%84%E9%98%B2%E6%AD%BB%E9%94%81">6. 预防死锁</a></li>
+<li><a href="#7-%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81">7. 避免死锁</a></li>
+<li><a href="#8-%E6%AD%BB%E9%94%81%E7%9A%84%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%A7%A3%E9%99%A4">8. 死锁的检测与解除</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -508,8 +516,8 @@
           <div class="section bg-color post post-page">
             <header class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://keasar.com.cn/post/about/">
-      关于
+    <a class="post-title-link" href="https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/">
+      🤗操作系统（三）--  处理机调度与死锁
     </a>
   </h1>
   <div class="post-meta">
@@ -517,23 +525,36 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span>2019-01-25</span>
+      <span>2020-06-09</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">分类于</span>
+      
+      
+      <a href="https://keasar.com.cn/tag/Rh2TeXWVX/">
+        <span>操作系统</span>
+      </a>
+      
+      
+    </span>
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
+      <span>10<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>31<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>2877<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
     
-    <span id="/post/about/" data-flag-title="关于" class="meta-item pc-show leancloud_visitors">
+    <span id="/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/" data-flag-title="🤗操作系统（三）--  处理机调度与死锁" class="meta-item pc-show leancloud_visitors">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-eye"></i>
       <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
@@ -542,16 +563,375 @@
   </div>
 </header>
             <div class="post-body next-md-body" id="post_body">
-              <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
+              <p>🤗<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-yi-yin-lun/">操作系统学习笔记（一）--  引论</a><br>
+🤗<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-er-jin-cheng-de-miao-shu-yu-kong-zhi/">操作系统学习笔记（二）--  引论</a></p>
+<h3 id="1-处理机调度的层次和调度算法的目标">1. 处理机调度的层次和调度算法的目标</h3>
+<ol>
+<li>
+<p>处理机调度的层次</p>
+<ul>
+<li>高级调度：对象是作业，将处于后备队列的作业调入到内存。</li>
+<li>中级调度：即内存调度，旨在提高内存利用率和系统吞吐量，将暂时不能运行/能运行的进程调出/入内存。</li>
+<li>低级调度：对象是进程，决定就绪队列中哪个进程获得处理机，运行频率最高。</li>
+</ul>
+</li>
+<li>
+<p>调度算法的目标</p>
+<ul>
+<li>
+<p>共同目标</p>
+<ul>
+<li>
+<p>资源利用率，即尽可能使所有资源都处于忙碌状态</p>
+<figure data-type="image" tabindex="1"><img src="https://s1.ax1x.com/2020/06/09/t4UP3T.png" alt="t4UP3T.png" loading="lazy"></figure>
+</li>
+<li>
+<p>公平性</p>
+</li>
+<li>
+<p>平衡性</p>
+</li>
+<li>
+<p>策略强制执行</p>
+</li>
+</ul>
+</li>
+<li>
+<p>批处理系统目标</p>
+<ul>
+<li>平均周转时间短</li>
+<li>系统吞吐量高</li>
+<li>处理机利用率高</li>
+</ul>
+</li>
+<li>
+<p>分时系统的目标</p>
+<ul>
+<li>响应时间快</li>
+<li>均衡性</li>
+</ul>
+</li>
+<li>
+<p>实时系统的目标</p>
+<ul>
+<li>截止时间的保证</li>
+<li>可预测性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-作业与作业调度">2. 作业与作业调度</h3>
+<ol>
+<li>
+<p>批处理系统中的作业</p>
+<ul>
+<li>作业：包含通常的程序和数据即作业说明书。</li>
+<li>作业步：各个作业间相互独立，每个加工步骤成为一个作业步。</li>
+<li>作业控制块(JCB)：作业进入系统时建立JCB，保存了对作业进行管理和调度所需的全部信息。</li>
+<li>三种状态和三个阶段
+<ul>
+<li>收容阶段(后备状态)</li>
+<li>运行阶段(运行状态)</li>
+<li>完成阶段(完成状态)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>作业调度</p>
+<ul>
+<li>
+<p>先来先服务(FCFS)调度算法：可用于作业、进程调度，系统按照作业到达的先后次序进行调度。</p>
+</li>
+<li>
+<p>短作业优先(SJF)调度算法：可用于作业、进程调度，作业越短优先级越高。</p>
+<ul>
+<li>优点：能有效地降低作业的平均等待时间，提高系统吞吐量。</li>
+<li>缺点：需要预知作业运行时间；对长作业不利；无法实现交互；未考虑作业优先性。</li>
+</ul>
+</li>
+<li>
+<p>高优先权优先调度算法</p>
+<ul>
+<li>
+<p>优先级调度算法(PSA)的类型</p>
+<ul>
+<li>非抢占式优先权算法：主要用于批处理系统中；也可用于某些对实时性要求不严的实时系统中。</li>
+<li>抢占式优先权调度算法：常用于要求比较严格的实时系统中，以及对性能要求较高的批处理和分时系统中。</li>
+</ul>
+</li>
+<li>
+<p>优先权的类型<br>
+① 静态优先权：静态优先权是在创建进程时确定的，且在进程的整个运行期间保持不变<br>
+② 动态优先权：动态优先权是指在创建进程时所赋予的优先权，是可以随进程的推进或随其等待时间的增加而改变的，以便获得更好的调度性能。</p>
+</li>
+<li>
+<p>高响应比优先(HRRN)调度算法：既照顾了短作业，又考虑了作业到达的先后次序，不会使长作业长期得不到服务。<br>
+Rp优先级 =（等待时间 + 要求服务时间）/ 要求服务时间 = 响应时间 / 要求服务时间</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-进程调度">3. 进程调度</h3>
+<ol>
+<li>
+<p>进程调度的任务、机制和方式</p>
+<ul>
+<li>
+<p>任务</p>
+<p>① 保存处理及现场信息；</p>
+<p>② 按某种算法选取进程；</p>
+<p>③ 把处理器分配给进程。</p>
+</li>
+<li>
+<p>机制</p>
+<figure data-type="image" tabindex="2"><img src="https://s1.ax1x.com/2020/06/09/t40Ez6.png" alt="t40Ez6.png" loading="lazy"></figure>
+</li>
+<li>
+<p>方式</p>
+<p>① 非抢占方式：进程一旦分配到处理机，就让其一直运行下去，不会因其他条件抢占当前正在运行进程的处理机，直至结束。</p>
+<p>② 抢占方式：暂停某个正在运行的进程，将其处理机分配给另一个进程。遵循三个原则：优先权原则、短进程优先原则、时间片原则。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>轮转调度算法</p>
+<p>主要应用于分时系统。</p>
+<p>让就绪队列上的每个进程每次仅运行一个时间片。如果就绪队列上有 n 个进程，则每个进程每次大约都可获得 1/n 的处理机时间。</p>
+<p>时间片大小的确定：时间片略大于一次典型的交互所需要的时间。</p>
+</li>
+<li>
+<p>多队列调度算法</p>
+<p>将不同类型或性质的进程固定分配在不同的就绪队列，不同的就绪队列采用不同的调度算法。</p>
+</li>
+<li>
+<p>多级反馈队列调度算法</p>
+<p>设置多个就绪队列，每个就绪队列都采用 <em><strong>FCFS</strong></em> 算法，按队列优先级调度。</p>
+<figure data-type="image" tabindex="3"><img src="https://s1.ax1x.com/2020/06/09/t4suct.png" alt="t4suct.png" loading="lazy"></figure>
+<p>若进程在本就绪队列的时间片完成则结束该进程，否则进入下一优先级就绪队列末尾等待执行，以此类推；若进程从阻塞队列被唤醒，则插入到比其本身高一优先级队列的末尾执行。</p>
+</li>
+</ol>
+<h3 id="4-实时调度">4. 实时调度</h3>
+<ol>
+<li>
+<p>实现条件</p>
+<p>① 提供必要的信息<br>
+② 系统处理能力强<br>
+③ 采用抢占式调度机制<br>
+④ 具有快速切换机制</p>
+</li>
+<li>
+<p>分类<br>
+① 非抢占式调度算法</p>
+<ul>
+<li>非抢占式轮转调度算法</li>
+<li>非抢占式优先调度算法</li>
+</ul>
+<p>② 抢占式调度算法</p>
+<ul>
+<li>基于时钟中断的抢占式优先级调度算法</li>
+<li>立即抢占的优先级调度算法</li>
+</ul>
+<figure data-type="image" tabindex="4"><img src="https://s1.ax1x.com/2020/06/09/t4ck7T.png" alt="t4ck7T.png" loading="lazy"></figure>
+</li>
+<li>
+<p>最早截止时间优先(EDF)算法：根据任务的开始截止时间来确定任务的优先级。截止时间愈早，其优先级愈高。具有最早截止时间的任务排在队列的最前面。调度程序在选择任务时，总是选择就绪队列中的第一个任务，为之分配处理机，使之投入运行。</p>
+</li>
+<li>
+<p>最低松弛度优先(LLF)算法：根据任务紧急(或松弛)的程度，来确定任务的优先级。任务的紧急程度愈高，为该任务所赋予的优先级就愈高，以使之优先执行。</p>
+</li>
+</ol>
+<h3 id="5-死锁概述">5. 死锁概述</h3>
+<ol>
+<li>
+<p>资源</p>
+<ul>
+<li>可重用性资源：可供用户重复使用多次的资源；此类资源中的单元只能分配给一个进程使用，不允许多个进程共享；遵循请求资源 -&gt; 使用资源 -&gt; 释放资源的顺序；数目固定，进程既不能创建也不能删除。</li>
+<li>可消耗性资源：临时性资源，由进程在运行期间动态地创建和删除。</li>
+<li>可抢占性资源：某进程得到该资源后，该资源仍可被其他进程或系统抢占，如CPU、主存等。</li>
+<li>不可抢占性资源：某进程得到该资源后，不能将此类资源强制回收，只能等待其主动释放，如打印机等。</li>
+</ul>
+</li>
+<li>
+<p>计算机系统中的死锁</p>
+<ul>
+<li>
+<p>竞争不可抢占性资源引起死锁</p>
+<img src="https://s1.ax1x.com/2020/06/09/t420k8.png" alt="t420k8.png" style="zoom:80%;" />
+</li>
+<li>
+<p>竞争可消耗资源引起死锁</p>
+</li>
+<li>
+<p>进程推进顺序不当引起死锁</p>
+<img src="https://s1.ax1x.com/2020/06/09/t4RS9e.png" alt="t4RS9e.png" style="zoom:80%;" />
+</li>
+</ul>
+</li>
+<li>
+<p>死锁</p>
+<ul>
+<li>
+<p>定义：在多道程序系统中，一组进程中的每一个进程都在无限期地等待另一组进程所占有且永远不会释放的资源。</p>
+</li>
+<li>
+<p>产生的必要条件</p>
+<p>① 互斥条件</p>
+<p>② 请求和保持条件</p>
+<p>③ 不可抢占条件</p>
+<p>④ 循环等待条件</p>
+</li>
+<li>
+<p>处理死锁的方法</p>
+<p>① 预防死锁</p>
+<p>② 避免死锁</p>
+<p>③ 检测死锁</p>
+<p>④ 解除死锁</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="6-预防死锁">6. 预防死锁</h3>
+<ol>
+<li>
+<p>破坏“请求和保持”条件</p>
+<ul>
+<li>
+<p>第一种协议：进程在运行前，必须一次性地申请运行过程中的全部资源。</p>
+<ul>
+<li>优点：简单、易行、安全。</li>
+<li>缺点：资源被严重浪费，严重恶化了资源利用率；使进程经常会发生饥饿现象(某进程所需某资源可能被其他进程长期占用)。</li>
+</ul>
+</li>
+<li>
+<p>第二种协议：获得运行必不可少的资源后立即开始运行，在运行过程中逐步释放已分配的且已用毕的资源再申请所需新资源。</p>
+<ul>
+<li>使进程更快完成任务，提高设备利用率，减少进程发生饥饿的几率。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>破坏“不可抢占”条件</p>
+<p>进程已占有的资源会被暂时地释放，待以后需要时再重新申请。</p>
+<ul>
+<li>代价较高，延长了进程周转时间，增加了系统开销，降低了系统吞吐量。</li>
+</ul>
+</li>
+<li>
+<p>破坏“循环等待”条件</p>
+<p>对系统所有资源类型线性排序，规定每个进程必须按序号递增的顺序请求资源</p>
+<ul>
+<li>优缺点：限制了新类型设备的增加，造成资源浪费，限制用户简单、自主编程。</li>
+</ul>
+</li>
+</ol>
+<h3 id="7-避免死锁">7. 避免死锁</h3>
+<p><strong>避免死锁的实质在于,系统在进行资源分配时,应使系统不进入不安全状态。</strong></p>
+<ol>
+<li>
+<p>安全状态：在系统进行资源分配前计算此次资源分配是否安全，安全则分配，否则令进程等待。</p>
+</li>
+<li>
+<p>利用银行家算法避免死锁</p>
+<ul>
+<li>
+<p>数据结构</p>
+<p>可用 <em>Available</em><br>
+最大需求 <em>Max</em><br>
+已分配 <em>Allocation</em><br>
+还需要 <em>Need</em></p>
+<p><em>Need = Max - Allocation</em></p>
+</li>
+<li>
+<p>银行家算法</p>
+<p>设 Requesti 是进程 Pi 的请求向量，如果 Requesti[ j ] == K，表示进程 Pi 需要 K 个 Rj 类型的资源。当Pi发出资源请求后，系统按下述步骤进行检査</p>
+<p>(1) 如果 Requesti[ j ] ≤ Need[ i, j ]，便转向步骤(2)；否则认为出错，因为它所需要的资源数已超过它所宣布的最大值。<br>
+(2) 如果 Requesti[ j ] ≤ Available[ i ]，便转向步骤(3)；否则，表示尚无足够资源，Pi 须等待。<br>
+(3) 系统试探把资源分配给进程 Pi 并修改下面数据结构中的数值</p>
+<blockquote>
+<p>Available[ j ] = Available[ j ] - Requesti[ j ]</p>
+<p>Allocation[ i, j ] = Allocation[ i, j ] + Requesti[ j ]</p>
+<p>Need[ i, j ] = Need[ i, j ] - Requesti[ j ]</p>
 </blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+<p>(4) 系统执行安全性算法，检查此次资源分配后系统是否处于安全状态。若安全，才正式将资源分配给进程P，以完成本次分配；否则，将本次的试探分配作废，恢复原来的资源分配状态，让进程P等待。</p>
+</li>
+<li>
+<p>安全性算法</p>
+<p>(1) 设置两个向量：①工作向量Work，它表示系统可提供给进程继续运行所需的各类资源数目，它含有 m 个元素，在执行安全性算法开始时，</p>
+<p>Wok = Available；② Finish：它表示系统是否有足够的资源分配给进程，使之运行完成。开始时先做 Finish[ i ] = false；当有足够资源分配给进程时，再令 Finish[ i ] = true。<br>
+(2) 从进程集合中找到一个能满足下述条件的进程 ① Finish[ i ] = false；② Needl[ i, j ] ≤ Work[ j ]；若找到，执行步骤(3)，否则，执行步骤(4)。<br>
+(3) 当进程 P 获得资源后，可顺利执行，直至完成，并释放出分配给它的资源，故应执行</p>
+<blockquote>
+<p>Work[ j ] = Work[ j ] + Allocation[ i, j ]</p>
+<p>Finish[ i ] = true</p>
+<p>go to step 2；</p>
+</blockquote>
+<p>(4) 如果所有进程的 Finish[ⅰ] = true 都满足,则表示系统处于安全状态，否则，系统处于不安全状态。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="8-死锁的检测与解除">8. 死锁的检测与解除</h3>
+<ol>
+<li>
+<p>检测</p>
+<figure data-type="image" tabindex="5"><img src="https://s1.ax1x.com/2020/06/09/t44dJK.png" alt="t44dJK.png" loading="lazy"></figure>
+<p>若能消去图中所有的边，使所有的进程结点都成为孤立结点，则称该图是可完全简化的；若不能通过任何过程使该图完全简化，则称该图是不可完全简化的。</p>
+</li>
+<li>
+<p>死锁的解除</p>
+<ul>
+<li>抢占资源。从一个或多个进程中抢占足够数量的资源,分配给死锁进程,以解除死锁状态。</li>
+<li>终止(或撇消)进程。终止(或撤消)系统中的一个或多个死锁进程,直至打破循环环路,使系统从死锁状态解脱出来。
+<ul>
+<li>终止所有死锁进程</li>
+<li>逐个终止进程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
 
             </div>
             
+            
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong class="language" data-lan="author">本文作者：</strong>
+      Keasar
+    </li>
+    <li class="post-copyright-link">
+      <strong class="language" data-lan="link">本文链接：</strong>
+      <a href="https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/" title="🤗操作系统（三）--  处理机调度与死锁">https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong class="language" data-lan="copyright">版权声明： </strong>
+      本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+      <a href="https://keasar.com.cn/tag/Rh2TeXWVX/"># 操作系统</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="🤠操作系统学习笔记（二）--  进程的描述与控制" href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-er-jin-cheng-de-miao-shu-yu-kong-zhi/">🤠操作系统学习笔记（二）--  进程的描述与控制</a>
+        <a class="nav-mobile-next" title="🤠操作系统学习笔记（二）--  进程的描述与控制" href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-er-jin-cheng-de-miao-shu-yu-kong-zhi/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
+      
+    </div>
+  </div>
+</div>
             
             
   <script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
