@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>👹计算机网络学习笔记（五）--  运输层 | Keasar`Blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1591771001214">
+<link rel="shortcut icon" href="/favicon.ico?v=1592119771663">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -4471,13 +4471,13 @@ A收到释放请求后，向B发送确认应答，此时A进入TIME-WAIT 状态�
 &lt;h5 id=&#34;csmacd协议的要点&#34;&gt;CSMA/CD协议的要点：&lt;/h5&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;**“多点接入”**就是计算机以多点接入（动态媒体接入控制）的方式连接在一根总线上。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;多点接入&lt;/strong&gt;就是计算机以多点接入（动态媒体接入控制）的方式连接在一根总线上。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;**“载波监听”**就是”检测信道”，不管在发送前，还是在发送中，每个站都必须不停地检测信道。在发送前检测信道，是为了获得发送权。在发送中检测信道，是为了及时发现有 没有其他站的发送和本站发送的碰撞。即碰撞检测。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;载波监听&lt;/strong&gt;就是”检测信道”，不管在发送前，还是在发送中，每个站都必须不停地检测信道。在发送前检测信道，是为了获得发送权。在发送中检测信道，是为了及时发现有 没有其他站的发送和本站发送的碰撞。即碰撞检测。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;**“碰撞检测”**就是“边发送边监听”，即适配器边发送数据边检测信道上的信号电压的变化情况。当一个站检测到的信号电压摆动值超过一定的门限值时，就认为总线上至少有两个站同时在发送数据，表明产生了碰撞，就要立即停止发送，免得继续浪费网络资源，然后等待一段随机时间后再次发送。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;碰撞检测&lt;/strong&gt;就是“边发送边监听”，即适配器边发送数据边检测信道上的信号电压的变化情况。当一个站检测到的信号电压摆动值超过一定的门限值时，就认为总线上至少有两个站同时在发送数据，表明产生了碰撞，就要立即停止发送，免得继续浪费网络资源，然后等待一段随机时间后再次发送。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;把总线上的单程端到端传播时延记为 &lt;em&gt;τ&lt;/em&gt; ，A 发送数据后，最迟要经过 &lt;em&gt;2τ&lt;/em&gt; 才能知道自己发送的数据和其他站发送的数据有没有发生碰撞。&lt;/p&gt;
