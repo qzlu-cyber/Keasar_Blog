@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Keasar`Blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1593052047375">
+<link rel="shortcut icon" href="/favicon.ico?v=1593055200252">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -1094,7 +1094,7 @@
   hljs.initHighlightingOnLoad();
   
   // 离开当前页title变化
-  var leaveTitle = '';
+  var leaveTitle = "";
   if (leaveTitle) {
     document.addEventListener('visibilitychange', function () {
       if (document.visibilityState == 'hidden') {
@@ -4804,7 +4804,6 @@ num = 100
       let code = e.currentTarget.querySelector('code');
       var text = code.innerText;
       if (e.srcElement.textContent === '复制成功') {
-        console.log('复制操作频率过高');
         return;
       }
       e.srcElement.textContent = '复制成功';
