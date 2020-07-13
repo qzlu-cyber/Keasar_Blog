@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://keasar.com.cn</id>
     <title>Keasar`Blog</title>
-    <updated>2020-06-25T03:20:02.564Z</updated>
+    <updated>2020-07-13T12:14:04.293Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://keasar.com.cn"/>
     <link rel="self" href="https://keasar.com.cn/atom.xml"/>
@@ -10,6 +10,191 @@
     <logo>https://keasar.com.cn/images/avatar.png</logo>
     <icon>https://keasar.com.cn/favicon.ico</icon>
     <rights>All rights reserved 2020, Keasar`Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[React高级 -- 状态提升]]></title>
+        <id>https://keasar.com.cn/post/react-gao-ji-zhuang-tai-ti-sheng/</id>
+        <link href="https://keasar.com.cn/post/react-gao-ji-zhuang-tai-ti-sheng/">
+        </link>
+        <updated>2020-07-13T12:12:03.000Z</updated>
+        <content type="html"><![CDATA[<p>如果多个组件需要反映相同的变化数据，可将它们提升至最近的父组件，由父组件渲染后再分发个子组件。</p>
+<p>下面是一个汇率转换示例</p>
+<p><code>Money</code>组件渲染出input标签：</p>
+<pre><code class="language-js">import React, { Component } from &quot;react&quot;;
+
+const scaleNames = {
+  R: &quot;RMB&quot;,
+  D: &quot;dollar&quot;,
+};
+
+class Money extends Component {
+  handleChange = (e) =&gt; {
+    this.props.onValueChange(e.target.value);
+  };
+
+  render() {
+    const value = this.props.value;
+    const scale = this.props.scale;
+    return (
+      &lt;fieldset&gt;
+        &lt;legend&gt;请输入{scaleNames[scale]}:&lt;/legend&gt;
+        &lt;input value={value} onChange={this.handleChange} /&gt;
+      &lt;/fieldset&gt;
+    );
+  }
+}
+
+export default Money;
+</code></pre>
+<p><code>Calculator</code>组件我们会把当前输入的 <code>value</code> 和 <code>scale</code> 保存在组件内部的 state 中。这个 state 就是从两个输入框组件中“提升”而来的，并且它将用作两个输入框组件的<strong>共同“数据源”</strong>。这是我们为了渲染两个输入框所需要的所有数据的最小表示。</p>
+<pre><code class="language-js">import React, { Component } from &quot;react&quot;;
+import Money from &quot;./money&quot;;
+import { toRMB, toDollar, tryConvert } from &quot;./transform&quot;;
+
+class Calculator extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: 1, scale: &quot;R&quot; };
+  }
+
+  handleRMBChange = (value) =&gt; {
+    this.setState({ scale: &quot;R&quot;, value });
+  };
+
+  handleDollarChange = (value) =&gt; {
+    this.setState({ scale: &quot;D&quot;, value });
+  };
+
+  onValueChange = () =&gt; {
+    this.setState({
+      value: &quot;&quot;,
+      scale: &quot;&quot;,
+    });
+  };
+
+  render() {
+    const scale = this.state.scale;
+    const value = this.state.value;
+    const RMB = scale === &quot;D&quot; ? tryConvert(value, toRMB) : value;
+    const dollar = scale === &quot;R&quot; ? tryConvert(value, toDollar) : value;
+    return (
+      &lt;div&gt;
+        &lt;Money scale=&quot;R&quot; value={RMB} onValueChange={this.handleRMBChange} /&gt; //人民币
+        &lt;Money
+          scale=&quot;D&quot;
+          value={dollar}
+          onValueChange={this.handleDollarChange}
+        /&gt; //美元
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default Calculator;
+</code></pre>
+<p><code>transform</code>汇率转换组件：</p>
+<pre><code class="language-js">export function toRMB(dollar) {
+  return dollar * 7;
+}
+
+export function toDollar(RMB) {
+  return RMB / 7;
+}
+
+export function tryConvert(value, convert) {
+  const input = parseFloat(value);
+  if (Number.isNaN(input)) {
+    return &quot;&quot;;
+  }
+  const output = convert(input);
+  const rounded = Math.round(output * 1000) / 1000;
+  return rounded.toString();
+}
+</code></pre>
+<p>当对输入框内容进行编辑时会发生些什么:</p>
+<ol>
+<li>React 会调用 DOM 中 <code>&lt;input&gt;</code> 的 <code>onChange</code> 方法。在本实例中，它是 <code>Money</code> 组件的 <code>handleChange</code> 方法。</li>
+<li><code>Money</code> 组件中的 <code>handleChange</code> 方法会调用 <code>this.props.onValueChange()</code>，并传入新输入的值作为参数。其 props 诸如 <code>onValueChange</code> 之类，均由父组件 <code>Calculator</code> 提供。</li>
+<li>起初渲染时，用于人民币输入的子组件 <code>Money</code> 中的 <code>onValueChange</code> 方法与 <code>Calculator</code> 组件中的 <code>handleRMBChange</code> 方法相同，而，用于美元输入的子组件 <code>Money</code> 中的 <code>onValueChange</code> 方法与 <code>Calculator</code> 组件中的 <code>handleDollarChange</code> 方法相同。因此，无论哪个输入框被编辑都会调用 <code>Calculator</code> 组件中对应的方法。</li>
+<li>在这些方法内部，<code>Calculator</code> 组件通过使用新的输入值与当前输入框对应的货币类型来调用 <code>this.setState()</code> 进而请求 React 重新渲染自己本身。</li>
+<li>React 调用 <code>Calculator</code> 组件的 <code>render</code> 方法得到组件的 UI 呈现。汇率转换在这时进行，两个输入框中的数值通过当前输入值和其货币类型来重新计算获得。</li>
+<li>React 使用 <code>Calculator</code> 组件提供的新 props 分别调用两个 <code>Money</code> 子组件的 <code>render</code> 方法来获取子组件的 UI 呈现。</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[React高级 -- 表单]]></title>
+        <id>https://keasar.com.cn/post/react-gao-ji-biao-dan/</id>
+        <link href="https://keasar.com.cn/post/react-gao-ji-biao-dan/">
+        </link>
+        <updated>2020-07-13T12:08:48.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li>
+<p>受控组件</p>
+<p>利用 state 管理 input等标签 的输入内容。内容只能通过 <strong>setState</strong> 改变。</p>
+<pre><code class="language-js">class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  //没有onChange事件会触发警告，导致文本框中的内容无法更改和显示
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('提交的名字: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      &lt;form onSubmit={this.handleSubmit}&gt;
+        &lt;label&gt;
+          名字:
+          &lt;input type=&quot;text&quot; value={this.state.value} onChange={this.handleChange} /&gt;
+        &lt;/label&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;提交&quot; /&gt;
+      &lt;/form&gt;
+    );
+  }
+}
+</code></pre>
+</li>
+<li>
+<p>非受控组件</p>
+<p>建议采用受控组件，但是当你需要编写很多事件处理函数时可以使用非受控组件，即使用 ref 获取到真实的DOM节点。</p>
+<pre><code class="language-js">class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.input = React.createRef(); 
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.input.current.value); //通过current定位到当前DOM节点
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      &lt;form onSubmit={this.handleSubmit}&gt;
+        &lt;label&gt;
+          Name:
+          &lt;input type=&quot;text&quot; ref={this.input} /&gt;
+        &lt;/label&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+      &lt;/form&gt;
+    );
+  }
+}
+</code></pre>
+</li>
+</ol>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[🤗操作系统（三）--  处理机调度与死锁]]></title>
         <id>https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/</id>
@@ -2966,557 +3151,6 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
 <div align="center"><img src="https://s1.ax1x.com/2020/06/04/twXlrT.png" alt="twXlrT.png" border="0" /></div>
 <p>TCP/IP 协议族是一种沙漏形状，中间小两边大，IP 协议在其中占用举足轻重的地位。</p>
   <div align="center"><img src="https://s1.ax1x.com/2020/06/04/twqzee.png" alt="twqzee.png" border="0" /></div>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页]]></title>
-        <id>https://keasar.com.cn/post/centos76-an-zhuang-docker-bing-zai-docker-zhong-li-yong-tomcat-bu-shu-jing-tai-wang-ye/</id>
-        <link href="https://keasar.com.cn/post/centos76-an-zhuang-docker-bing-zai-docker-zhong-li-yong-tomcat-bu-shu-jing-tai-wang-ye/">
-        </link>
-        <updated>2020-06-03T06:40:59.000Z</updated>
-        <summary type="html"><![CDATA[<h3 id="centos76安装docker并在docker中利用tomcat部署静态网页">CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页</h3>
-]]></summary>
-        <content type="html"><![CDATA[<h3 id="centos76安装docker并在docker中利用tomcat部署静态网页">CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页</h3>
-<!-- more -->
-<h4 id="1-安装docker">1. 安装Docker</h4>
-<ul>
-<li>
-<p>更新yum包</p>
-<pre><code>yum update
-</code></pre>
-</li>
-<li>
-<p>查看是否安装过docker</p>
-<pre><code>whereis docker
-</code></pre>
-</li>
-<li>
-<p>如果安装过，则删除之前的版本</p>
-<pre><code>yum remove docker docker-common docker-selinux docker-engine
-</code></pre>
-</li>
-<li>
-<p>设置yum源</p>
-<pre><code>yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-</code></pre>
-</li>
-<li>
-<p>查看docker版本</p>
-<pre><code>yum list docker-ce --showduplicates | sort -r
-</code></pre>
-</li>
-<li>
-<p>安装</p>
-<pre><code>yum install docker-ce 
-</code></pre>
-</li>
-<li>
-<p>启动Docker</p>
-<pre><code>systemctl start docker
-</code></pre>
-</li>
-<li>
-<p>开机启动</p>
-<pre><code>systemctl enable docker
-</code></pre>
-</li>
-<li>
-<p>验证安装是否成功</p>
-<pre><code>docker version
-</code></pre>
-<ul>
-<li>
-<p>如下存在Client和Server则成功</p>
-<figure data-type="image" tabindex="1"><img src="X:%5Cclassworks%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%5Cdockerversion.png" alt="dockerversion" loading="lazy"></figure>
-</li>
-</ul>
-</li>
-</ul>
-<p>2.Docker常用命令</p>
-<pre><code>docker 运行容器命令
-docker ps
- 
-docker 所有容器命令
-docker ps -a
- 
-docker 删除容器命令
-docker rm 容器id
- 
-docker 镜像查看命令
-</code></pre>
-<p>3.利用Tomcat部署静态网页</p>
-<ul>
-<li>
-<p>拉取Tomcat</p>
-<pre><code>docker pull tomcat
-</code></pre>
-</li>
-<li>
-<p>启动容器，验证Tomcat服务</p>
-<pre><code>docker run -p 8080:8080 tomcat
-</code></pre>
-</li>
-<li>
-<p>访问</p>
-<p>服务器外网IP:8080即可</p>
-<p>如果不行，看是否能ping通或者是服务器端口是否开放</p>
-</li>
-<li>
-<p>将静态页面拷贝到docker中tomcat的webapps下，建议挂载</p>
-<ul>
-<li>
-<p>将Tomcat启动，进入docker中查看命令：</p>
-<pre><code>docker exec -it 容器id /bin/bash //容器ID可通过 docker ps命令查询
-</code></pre>
-</li>
-<li>
-<p>挂载静态文件</p>
-<p>首先将静态资源文件夹上传至云服务器，例如我的上传至了/root下，即SongMove文件夹。下面这条命令即是将静态资源目录映射到容器的/ROOT下</p>
-<pre><code>docker run -d -v /root/SongMove/:/usr/local/tomcat/webapps/ROOT/ -p 8080:8080 tomcat:latest
-</code></pre>
-</li>
-</ul>
-</li>
-</ul>
-<p>4.服务器IP:8080访问即可</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[函数（上）]]></title>
-        <id>https://keasar.com.cn/post/han-shu-shang/</id>
-        <link href="https://keasar.com.cn/post/han-shu-shang/">
-        </link>
-        <updated>2020-06-02T13:31:02.000Z</updated>
-        <summary type="html"><![CDATA[<h2 id="函数的概念">函数的概念</h2>
-<ul>
-<li>
-<p>对于 js 来说，函数就是把任意一段代码放在一个 <strong>盒子</strong> 里面</p>
-</li>
-<li>
-<p>在我想要让这段代码执行的时候，直接执行这个 <strong>盒子</strong> 里面的代码就行</p>
-</li>
-</ul>
-]]></summary>
-        <content type="html"><![CDATA[<h2 id="函数的概念">函数的概念</h2>
-<ul>
-<li>
-<p>对于 js 来说，函数就是把任意一段代码放在一个 <strong>盒子</strong> 里面</p>
-</li>
-<li>
-<p>在我想要让这段代码执行的时候，直接执行这个 <strong>盒子</strong> 里面的代码就行</p>
-</li>
-</ul>
-<!-- more -->
-<ul>
-<li>
-<p>先看一段代码</p>
-<pre><code class="language-javascript">// 这个是我们以前写的一段代码
-for (var i = 0; i &lt; 10; i++) {
-  console.log(i)
-}
-
-// 函数，这个 {} 就是那个 “盒子”
-function fn() {
-  // 这个函数我们以前写的代码
-  for (var i = 0; i &lt; 10; i++) {
-    console.log(i)
-  }
-}
-</code></pre>
-</li>
-</ul>
-<h2 id="函数的两个阶段重点">函数的两个阶段（重点）</h2>
-<ul>
-<li>按照我们刚才的说法，两个阶段就是 <strong>放在盒子里面</strong> 和 <strong>让盒子里面的代码执行</strong></li>
-</ul>
-<h3 id="函数定义阶段">函数定义阶段</h3>
-<ul>
-<li>
-<p>定义阶段就是我们把代码 <strong>放在盒子里面</strong></p>
-</li>
-<li>
-<p>我们就要学习怎么 <strong>放进去</strong>，也就是书写一个函数</p>
-</li>
-<li>
-<p>我们有两种定义方式 <strong>声明式</strong> 和 <strong>赋值式</strong></p>
-</li>
-</ul>
-<h4 id="声明式">声明式</h4>
-<ul>
-<li>
-<p>使用 <code>function</code> 这个关键字来声明一个函数</p>
-</li>
-<li>
-<p>语法：</p>
-<pre><code class="language-javascript">function fn() {
-  // 一段代码
-}
-// function: 声明函数的关键字，表示接下来是一个函数了
-// fn: 函数的名字，我们自己定义的（遵循变量名的命名规则和命名规范）
-// (): 必须写，是用来放参数的位置（一会我们再聊）
-// {}: 就是我们用来放一段代码的位置（也就是我们刚才说的 “盒子”）
-</code></pre>
-</li>
-</ul>
-<h4 id="赋值式">赋值式</h4>
-<ul>
-<li>
-<p>其实就是和我们使用 <code>var</code> 关键字是一个道理了</p>
-</li>
-<li>
-<p>首先使用 <code>var</code> 定义一个变量，把一个函数当作值直接赋值给这个变量就可以了</p>
-</li>
-<li>
-<p>语法：</p>
-<pre><code class="language-javascript">var fn = function () {
-  // 一段代码
-}
-// 不需要在 function 后面书写函数的名字了，因为在前面已经有了
-</code></pre>
-</li>
-</ul>
-<h3 id="函数调用阶段">函数调用阶段</h3>
-<ul>
-<li>就是让 <strong>盒子里面</strong> 的代码执行一下</li>
-<li>让函数执行</li>
-<li>两种定义函数的方式不同，但是调用函数的方式都以一样的</li>
-</ul>
-<h4 id="调用一个函数">调用一个函数</h4>
-<ul>
-<li>
-<p>函数调用就是直接写 <code>函数名()</code> 就可以了</p>
-<pre><code class="language-javascript">// 声明式函数
-function fn() {
-  console.log('我是 fn 函数')
-}
-
-// 调用函数
-fn()
-
-// 赋值式函数
-var fn2 = function () {
-  console.log('我是 fn2 函数')
-}
-
-// 调用函数
-fn()
-</code></pre>
-<ul>
-<li>注意： <strong>定义完一个函数以后，如果没有函数调用，那么写在 {} 里面的代码没有意义，只有调用以后才会执行</strong></li>
-</ul>
-</li>
-</ul>
-<h4 id="调用上的区别">调用上的区别</h4>
-<ul>
-<li>
-<p>虽然两种定义方式的调用都是一样的，但是还是有一些区别的</p>
-</li>
-<li>
-<p>声明式函数： 调用可以在 <strong>定义之前或者定义之后</strong></p>
-<pre><code class="language-javascript">// 可以调用
-fn()
-
-// 声明式函数
-function fn() {
-  console.log('我是 fn 函数')
-}
-
-// 可以调用
-fn()
-</code></pre>
-</li>
-<li>
-<p>赋值式函数： 调用只能在 <strong>定义之前</strong></p>
-<pre><code class="language-javascript">// 会报错
-fn()
-
-// 赋值式函数
-var fn = function () {
-  console.log('我是 fn 函数')
-}
-
-// 可以调用
-fn()
-</code></pre>
-</li>
-</ul>
-<h2 id="函数的参数重点">函数的参数（重点）</h2>
-<ul>
-<li>
-<p>我们在定义函数和调用函数的时候都出现过 <code>()</code></p>
-</li>
-<li>
-<p>现在我们就来说一下这个 <code>()</code> 的作用</p>
-</li>
-<li>
-<p>就是用来放参数的位置</p>
-</li>
-<li>
-<p>参数分为两种 <strong>行参</strong> 和 <strong>实参</strong></p>
-<pre><code class="language-javascript">// 声明式
-function fn(行参写在这里) {
-  // 一段代码
-}
-
-fn(实参写在这里)
-
-// 赋值式函数
-var fn = function (行参写在这里) {
-  // 一段代码
-}
-fn(实参写在这里)
-</code></pre>
-</li>
-</ul>
-<h3 id="行参和实参的作用">行参和实参的作用</h3>
-<ol>
-<li>
-<p>行参</p>
-<ul>
-<li>
-<p>就是在函数内部可以使用的变量，在函数外部不能使用</p>
-</li>
-<li>
-<p>每写一个单词，就相当于在函数内部定义了一个可以使用的变量（遵循变量名的命名规则和命名规范）</p>
-</li>
-<li>
-<p>多个单词之间以 <code>,</code> 分隔</p>
-<pre><code class="language-javascript">// 书写一个参数
-function fn(num) {
-  // 在函数内部就可以使用 num 这个变量
-}
-
-var fn1 = function (num) {
-	// 在函数内部就可以使用 num 这个变量
-}
-
-// 书写两个参数
-function fun(num1, num2) {
-  // 在函数内部就可以使用 num1 和 num2 这两个变量
-}
-
-var fun1 = function (num1, num2) {
-  // 在函数内部就可以使用 num1 和 num2 这两个变量
-}
-</code></pre>
-</li>
-<li>
-<p>如果只有行参的话，那么在函数内部使用的值个变量是没有值的，也就是 <code>undefined</code></p>
-</li>
-<li>
-<p><strong>行参的值是在函数调用的时候由实参决定的</strong></p>
-</li>
-</ul>
-</li>
-<li>
-<p>实参</p>
-<ul>
-<li>
-<p>在函数调用的时候给行参赋值的</p>
-</li>
-<li>
-<p>也就是说，在调用的时候是给一个实际的内容的</p>
-<pre><code class="language-javascript">function fn(num) {
-  // 函数内部可以使用 num 
-}
-
-// 这个函数的本次调用，书写的实参是 100
-// 那么本次调用的时候函数内部的 num 就是 100
-fn(100) 
-
-// 这个函数的本次调用，书写的实参是 200
-// 那么本次调用的时候函数内部的 num 就是 200
-fn(200)
-</code></pre>
-</li>
-<li>
-<p><strong>函数内部的行参的值，由函数调用的时候传递的实参决定</strong></p>
-</li>
-<li>
-<p><strong>多个参数的时候，是按照顺序一一对应的</strong></p>
-<pre><code class="language-javascript">function fn(num1, num2) {
-  // 函数内部可以使用 num1 和 num2
-}
-
-// 函数本次调用的时候，书写的参数是 100 和 200
-// 那么本次调用的时候，函数内部的 num1 就是 100，num2 就是 200
-fn(100, 200)
-</code></pre>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="参数个数的关系">参数个数的关系</h3>
-<ol>
-<li>
-<p>行参比实参少</p>
-<ul>
-<li>
-<p>因为是按照顺序一一对应的</p>
-</li>
-<li>
-<p>行参少就会拿不到实参给的值，所以在函数内部就没有办法用到这个值</p>
-<pre><code class="language-javascript">function fn(num1, num2) {
-  // 函数内部可以使用 num1 和 num2
-}
-
-// 本次调用的时候，传递了两个实参，100 200 和 300
-// 100 对应了 num1，200 对应了 num2，300 没有对应的变量
-// 所以在函数内部就没有办法依靠变量来使用 300 这个值
-fn(100, 200, 300)
-</code></pre>
-</li>
-</ul>
-</li>
-<li>
-<p>行参比实参多</p>
-<ul>
-<li>
-<p>因为是按照顺序一一对应的</p>
-</li>
-<li>
-<p>所以多出来的行参就是没有值的，就是 <code>undefined</code></p>
-<pre><code class="language-javascript">function fn(num1, num2, num3) {
-  // 函数内部可以使用 num1 num2 和 num3
-}
-
-// 本次调用的时候，传递了两个实参，100 和 200
-// 就分别对应了 num1 和 num2
-// 而 num3 没有实参和其对应，那么 num3 的值就是 undefined
-fn(100, 200)
-</code></pre>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="函数的return重点">函数的return（重点）</h2>
-<ul>
-<li>return 返回的意思，其实就是给函数一个 <strong>返回值</strong> 和 <strong>终断函数</strong></li>
-</ul>
-<h3 id="终断函数">终断函数</h3>
-<ul>
-<li>
-<p>当我开始执行函数以后，函数内部的代码就会从上到下的依次执行</p>
-</li>
-<li>
-<p>必须要等到函数内的代码执行完毕</p>
-</li>
-<li>
-<p>而 <code>return</code> 关键字就是可以在函数中间的位置停掉，让后面的代码不在继续执行</p>
-<pre><code class="language-javascript">function fn() {
-  console.log(1)
-  console.log(2)
-  console.log(3)
-  
-  // 写了 return 以后，后面的 4 和 5 就不会继续执行了
-  return
-  console.log(4)
-  console.log(5)
-}
-
-// 函数调用
-fn()
-</code></pre>
-</li>
-</ul>
-<h3 id="返回值">返回值</h3>
-<ul>
-<li>
-<p>函数调用本身也是一个表达式，表达式就应该有一个值出现</p>
-</li>
-<li>
-<p>现在的函数执行完毕之后，是不会有结果出现的</p>
-<pre><code class="language-javascript">// 比如 1 + 2 是一个表达式，那么 这个表达式的结果就是 3
-console.log(1 + 2) // 3
-
-function fn() {
-  // 执行代码
-}
-
-// fn() 也是一个表达式，这个表达式就没有结果出现
-console.log(fn()) // undefined
-</code></pre>
-</li>
-<li>
-<p><code>return</code> 关键字就是可以给函数执行完毕一个结果</p>
-<pre><code class="language-javascript">function fn() {
-  // 执行代码
-  return 100
-}
-
-// 此时，fn() 这个表达式执行完毕之后就有结果出现了
-console.log(fn()) // 100
-</code></pre>
-<ul>
-<li>我们可以在函数内部使用 <code>return</code> 关键把任何内容当作这个函数运行后的结果</li>
-</ul>
-</li>
-</ul>
-<h2 id="函数的优点">函数的优点</h2>
-<ul>
-<li>函数就是对一段代码的封装，在我们想调用的时候调用</li>
-<li>函数的几个优点
-<ol>
-<li>封装代码，使代码更加简洁</li>
-<li>复用，在重复功能的时候直接调用就好</li>
-<li>代码执行时机，随时可以在我们想要执行的时候执行</li>
-</ol>
-</li>
-</ul>
-<h2 id="预解析重点">预解析（重点）</h2>
-<ul>
-<li><strong>预解析</strong> 其实就是聊聊 js 代码的编译和执行</li>
-<li>js 是一个解释型语言，就是在代码执行之前，先对代码进行通读和解释，然后在执行代码</li>
-<li>也就是说，我们的 js 代码在运行的时候，会经历两个环节 <strong>解释代码</strong> 和 <strong>执行代码</strong></li>
-</ul>
-<h3 id="解释代码">解释代码</h3>
-<ul>
-<li>
-<p>因为是在所有代码执行之前进行解释，所以叫做 <strong>预解析（预解释）</strong></p>
-</li>
-<li>
-<p>需要解释的内容有两个</p>
-<ul>
-<li>声明式函数
-<ul>
-<li>在内存中先声明有一个变量名是函数名，并且这个名字代表的内容是一个函数</li>
-</ul>
-</li>
-<li><code>var</code> 关键字
-<ul>
-<li>在内存中先声明有一个变量名</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>看下面一段代码</p>
-<pre><code class="language-javascript">fn()
-console.log(num)
-
-function fn() {
-  console.log('我是 fn 函数')
-}
-
-var num = 100
-</code></pre>
-</li>
-<li>
-<p>经过预解析之后可以变形为</p>
-<pre><code class="language-javascript">function fn() {
-  console.log('我是 fn 函数')
-}
-var num
-
-fn()
-console.log(num)
-num = 100
-</code></pre>
-</li>
-<li>
-<p>赋值是函数会按照 <code>var</code> 关键字的规则进行预解析</p>
-</li>
-</ul>
 ]]></content>
     </entry>
 </feed>

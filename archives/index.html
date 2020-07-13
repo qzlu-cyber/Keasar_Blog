@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Keasar`Blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1593055200252">
+<link rel="shortcut icon" href="/favicon.ico?v=1594642442008">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -195,19 +195,19 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">10</span>
+        <span class="site-item-stat-count">12</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="">
-        <span class="site-item-stat-count">4</span>
+        <span class="site-item-stat-count">5</span>
         <span class="site-item-stat-name language" data-lan="category">分类</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="/tags/">
-        <span class="site-item-stat-count">4</span>
+        <span class="site-item-stat-count">5</span>
         <span class="site-item-stat-name language" data-lan="tag">标签</span>
       </a>
     </div>
@@ -255,7 +255,7 @@
   <div class="archive-timeline-box">
     <div class="archive-timeline-title">
       
-        <h2 class="language" data-lan="archives" data-count="10">非常好！目前共计10篇日志，继续努力！</h2>
+        <h2 class="language" data-lan="archives" data-count="12">非常好！目前共计12篇日志，继续努力！</h2>
       
     </div>
     
@@ -265,6 +265,32 @@
           <h2 class="tag-year">2020</h2>
         </div>    
         
+      
+      <a href="https://keasar.com.cn/post/react-gao-ji-zhuang-tai-ti-sheng/">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              07-13
+              <small>React高级 -- 状态提升</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
+      
+      <a href="https://keasar.com.cn/post/react-gao-ji-biao-dan/">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              07-13
+              <small>React高级 -- 表单</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
       
       <a href="https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/">
         <div class="motion-warpper tag-archive-node">
@@ -1177,6 +1203,185 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://keasar.com.cn/post/react-gao-ji-zhuang-tai-ti-sheng/"" data-c="
+          &lt;p&gt;如果多个组件需要反映相同的变化数据，可将它们提升至最近的父组件，由父组件渲染后再分发个子组件。&lt;/p&gt;
+&lt;p&gt;下面是一个汇率转换示例&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Money&lt;/code&gt;组件渲染出input标签：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;import React, { Component } from &amp;quot;react&amp;quot;;
+
+const scaleNames = {
+  R: &amp;quot;RMB&amp;quot;,
+  D: &amp;quot;dollar&amp;quot;,
+};
+
+class Money extends Component {
+  handleChange = (e) =&amp;gt; {
+    this.props.onValueChange(e.target.value);
+  };
+
+  render() {
+    const value = this.props.value;
+    const scale = this.props.scale;
+    return (
+      &amp;lt;fieldset&amp;gt;
+        &amp;lt;legend&amp;gt;请输入{scaleNames[scale]}:&amp;lt;/legend&amp;gt;
+        &amp;lt;input value={value} onChange={this.handleChange} /&amp;gt;
+      &amp;lt;/fieldset&amp;gt;
+    );
+  }
+}
+
+export default Money;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;Calculator&lt;/code&gt;组件我们会把当前输入的 &lt;code&gt;value&lt;/code&gt; 和 &lt;code&gt;scale&lt;/code&gt; 保存在组件内部的 state 中。这个 state 就是从两个输入框组件中“提升”而来的，并且它将用作两个输入框组件的&lt;strong&gt;共同“数据源”&lt;/strong&gt;。这是我们为了渲染两个输入框所需要的所有数据的最小表示。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;import React, { Component } from &amp;quot;react&amp;quot;;
+import Money from &amp;quot;./money&amp;quot;;
+import { toRMB, toDollar, tryConvert } from &amp;quot;./transform&amp;quot;;
+
+class Calculator extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: 1, scale: &amp;quot;R&amp;quot; };
+  }
+
+  handleRMBChange = (value) =&amp;gt; {
+    this.setState({ scale: &amp;quot;R&amp;quot;, value });
+  };
+
+  handleDollarChange = (value) =&amp;gt; {
+    this.setState({ scale: &amp;quot;D&amp;quot;, value });
+  };
+
+  onValueChange = () =&amp;gt; {
+    this.setState({
+      value: &amp;quot;&amp;quot;,
+      scale: &amp;quot;&amp;quot;,
+    });
+  };
+
+  render() {
+    const scale = this.state.scale;
+    const value = this.state.value;
+    const RMB = scale === &amp;quot;D&amp;quot; ? tryConvert(value, toRMB) : value;
+    const dollar = scale === &amp;quot;R&amp;quot; ? tryConvert(value, toDollar) : value;
+    return (
+      &amp;lt;div&amp;gt;
+        &amp;lt;Money scale=&amp;quot;R&amp;quot; value={RMB} onValueChange={this.handleRMBChange} /&amp;gt; //人民币
+        &amp;lt;Money
+          scale=&amp;quot;D&amp;quot;
+          value={dollar}
+          onValueChange={this.handleDollarChange}
+        /&amp;gt; //美元
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+
+export default Calculator;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;transform&lt;/code&gt;汇率转换组件：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;export function toRMB(dollar) {
+  return dollar * 7;
+}
+
+export function toDollar(RMB) {
+  return RMB / 7;
+}
+
+export function tryConvert(value, convert) {
+  const input = parseFloat(value);
+  if (Number.isNaN(input)) {
+    return &amp;quot;&amp;quot;;
+  }
+  const output = convert(input);
+  const rounded = Math.round(output * 1000) / 1000;
+  return rounded.toString();
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;当对输入框内容进行编辑时会发生些什么:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;React 会调用 DOM 中 &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; 的 &lt;code&gt;onChange&lt;/code&gt; 方法。在本实例中，它是 &lt;code&gt;Money&lt;/code&gt; 组件的 &lt;code&gt;handleChange&lt;/code&gt; 方法。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Money&lt;/code&gt; 组件中的 &lt;code&gt;handleChange&lt;/code&gt; 方法会调用 &lt;code&gt;this.props.onValueChange()&lt;/code&gt;，并传入新输入的值作为参数。其 props 诸如 &lt;code&gt;onValueChange&lt;/code&gt; 之类，均由父组件 &lt;code&gt;Calculator&lt;/code&gt; 提供。&lt;/li&gt;
+&lt;li&gt;起初渲染时，用于人民币输入的子组件 &lt;code&gt;Money&lt;/code&gt; 中的 &lt;code&gt;onValueChange&lt;/code&gt; 方法与 &lt;code&gt;Calculator&lt;/code&gt; 组件中的 &lt;code&gt;handleRMBChange&lt;/code&gt; 方法相同，而，用于美元输入的子组件 &lt;code&gt;Money&lt;/code&gt; 中的 &lt;code&gt;onValueChange&lt;/code&gt; 方法与 &lt;code&gt;Calculator&lt;/code&gt; 组件中的 &lt;code&gt;handleDollarChange&lt;/code&gt; 方法相同。因此，无论哪个输入框被编辑都会调用 &lt;code&gt;Calculator&lt;/code&gt; 组件中对应的方法。&lt;/li&gt;
+&lt;li&gt;在这些方法内部，&lt;code&gt;Calculator&lt;/code&gt; 组件通过使用新的输入值与当前输入框对应的货币类型来调用 &lt;code&gt;this.setState()&lt;/code&gt; 进而请求 React 重新渲染自己本身。&lt;/li&gt;
+&lt;li&gt;React 调用 &lt;code&gt;Calculator&lt;/code&gt; 组件的 &lt;code&gt;render&lt;/code&gt; 方法得到组件的 UI 呈现。汇率转换在这时进行，两个输入框中的数值通过当前输入值和其货币类型来重新计算获得。&lt;/li&gt;
+&lt;li&gt;React 使用 &lt;code&gt;Calculator&lt;/code&gt; 组件提供的新 props 分别调用两个 &lt;code&gt;Money&lt;/code&gt; 子组件的 &lt;code&gt;render&lt;/code&gt; 方法来获取子组件的 UI 呈现。&lt;/li&gt;
+&lt;/ol&gt;
+">React高级 -- 状态提升</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://keasar.com.cn/post/react-gao-ji-biao-dan/"" data-c="
+          &lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;受控组件&lt;/p&gt;
+&lt;p&gt;利用 state 管理 input等标签 的输入内容。内容只能通过 &lt;strong&gt;setState&lt;/strong&gt; 改变。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: &#39;&#39;};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  //没有onChange事件会触发警告，导致文本框中的内容无法更改和显示
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert(&#39;提交的名字: &#39; + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      &amp;lt;form onSubmit={this.handleSubmit}&amp;gt;
+        &amp;lt;label&amp;gt;
+          名字:
+          &amp;lt;input type=&amp;quot;text&amp;quot; value={this.state.value} onChange={this.handleChange} /&amp;gt;
+        &amp;lt;/label&amp;gt;
+        &amp;lt;input type=&amp;quot;submit&amp;quot; value=&amp;quot;提交&amp;quot; /&amp;gt;
+      &amp;lt;/form&amp;gt;
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;非受控组件&lt;/p&gt;
+&lt;p&gt;建议采用受控组件，但是当你需要编写很多事件处理函数时可以使用非受控组件，即使用 ref 获取到真实的DOM节点。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.input = React.createRef(); 
+  }
+
+  handleSubmit(event) {
+    alert(&#39;A name was submitted: &#39; + this.input.current.value); //通过current定位到当前DOM节点
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      &amp;lt;form onSubmit={this.handleSubmit}&amp;gt;
+        &amp;lt;label&amp;gt;
+          Name:
+          &amp;lt;input type=&amp;quot;text&amp;quot; ref={this.input} /&amp;gt;
+        &amp;lt;/label&amp;gt;
+        &amp;lt;input type=&amp;quot;submit&amp;quot; value=&amp;quot;Submit&amp;quot; /&amp;gt;
+      &amp;lt;/form&amp;gt;
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+">React高级 -- 表单</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/"" data-c="
