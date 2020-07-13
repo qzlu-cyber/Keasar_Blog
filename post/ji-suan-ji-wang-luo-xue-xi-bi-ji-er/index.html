@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>☠️计算机网络学习笔记（二）--  物理层 | Keasar`Blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1594642442008">
+<link rel="shortcut icon" href="/favicon.ico?v=1594642542146">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -1880,6 +1880,7 @@ HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种�
         <a class="result-title" style="opacity: 0;" href="https://keasar.com.cn/post/react-gao-ji-zhuang-tai-ti-sheng/"" data-c="
           &lt;p&gt;如果多个组件需要反映相同的变化数据，可将它们提升至最近的父组件，由父组件渲染后再分发个子组件。&lt;/p&gt;
 &lt;p&gt;下面是一个汇率转换示例&lt;/p&gt;
+&lt;!-- more --&gt;
 &lt;p&gt;&lt;code&gt;Money&lt;/code&gt;组件渲染出input标签：&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;import React, { Component } from &amp;quot;react&amp;quot;;
 
@@ -1990,6 +1991,9 @@ export function tryConvert(value, convert) {
 &lt;li&gt;
 &lt;p&gt;受控组件&lt;/p&gt;
 &lt;p&gt;利用 state 管理 input等标签 的输入内容。内容只能通过 &lt;strong&gt;setState&lt;/strong&gt; 改变。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;!-- more --&gt;
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;class NameForm extends React.Component {
   constructor(props) {
     super(props);
@@ -2021,7 +2025,7 @@ export function tryConvert(value, convert) {
   }
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
+&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;
 &lt;p&gt;非受控组件&lt;/p&gt;
 &lt;p&gt;建议采用受控组件，但是当你需要编写很多事件处理函数时可以使用非受控组件，即使用 ref 获取到真实的DOM节点。&lt;/p&gt;

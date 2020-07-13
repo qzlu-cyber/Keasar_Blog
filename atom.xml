@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://keasar.com.cn</id>
     <title>Keasar`Blog</title>
-    <updated>2020-07-13T12:14:04.293Z</updated>
+    <updated>2020-07-13T12:15:44.874Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://keasar.com.cn"/>
     <link rel="self" href="https://keasar.com.cn/atom.xml"/>
@@ -16,8 +16,12 @@
         <link href="https://keasar.com.cn/post/react-gao-ji-zhuang-tai-ti-sheng/">
         </link>
         <updated>2020-07-13T12:12:03.000Z</updated>
+        <summary type="html"><![CDATA[<p>如果多个组件需要反映相同的变化数据，可将它们提升至最近的父组件，由父组件渲染后再分发个子组件。</p>
+<p>下面是一个汇率转换示例</p>
+]]></summary>
         <content type="html"><![CDATA[<p>如果多个组件需要反映相同的变化数据，可将它们提升至最近的父组件，由父组件渲染后再分发个子组件。</p>
 <p>下面是一个汇率转换示例</p>
+<!-- more -->
 <p><code>Money</code>组件渲染出input标签：</p>
 <pre><code class="language-js">import React, { Component } from &quot;react&quot;;
 
@@ -127,10 +131,20 @@ export function tryConvert(value, convert) {
         <link href="https://keasar.com.cn/post/react-gao-ji-biao-dan/">
         </link>
         <updated>2020-07-13T12:08:48.000Z</updated>
+        <summary type="html"><![CDATA[<ol>
+<li>
+<p>受控组件</p>
+<p>利用 state 管理 input等标签 的输入内容。内容只能通过 <strong>setState</strong> 改变。</p>
+</li>
+</ol>
+]]></summary>
         <content type="html"><![CDATA[<ol>
 <li>
 <p>受控组件</p>
 <p>利用 state 管理 input等标签 的输入内容。内容只能通过 <strong>setState</strong> 改变。</p>
+</li>
+</ol>
+<!-- more -->
 <pre><code class="language-js">class NameForm extends React.Component {
   constructor(props) {
     super(props);
@@ -162,7 +176,7 @@ export function tryConvert(value, convert) {
   }
 }
 </code></pre>
-</li>
+<ol start="2">
 <li>
 <p>非受控组件</p>
 <p>建议采用受控组件，但是当你需要编写很多事件处理函数时可以使用非受控组件，即使用 ref 获取到真实的DOM节点。</p>
