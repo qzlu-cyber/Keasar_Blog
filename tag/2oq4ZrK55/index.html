@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Keasar`Blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1597999512183">
+<link rel="shortcut icon" href="/favicon.ico?v=1598006041323">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -194,7 +194,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">12</span>
+        <span class="site-item-stat-count">13</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -257,6 +257,8 @@
           <small class="language" data-lan="tag">标签</small>
         </h2>
       </div>
+      
+      
       
       
       
@@ -1088,6 +1090,233 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://keasar.com.cn/post/react-gao-ji-context/"" data-c="
+          &lt;p&gt;在 React 中数据总是单向传递的，如果某个属性许多组件都需要就会使该过程变得极其繁琐，Context 提供了在组件间共享此类数据的方式，而不必显式地通过组件树的逐层传递 props。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h3 id=&#34;什么情况下使用-context&#34;&gt;什么情况下使用 Context&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;当某个（些）属性需要传递的层级很深时&lt;/p&gt;
+&lt;p&gt;考虑下面的例子：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;class App extends Component {
+  state = { count: 1 }
+  render() {
+    return (
+        &amp;lt;div className=&#39;App&#39;&amp;gt;
+          &amp;lt;h1&amp;gt;这是根组件&amp;lt;/h1&amp;gt;
+          &amp;lt;Father count={this.state.count} /&amp;gt;
+        &amp;lt;/div&amp;gt;
+    );
+  }
+}
+
+class Father extends Component {
+  render() {
+    return (
+      &amp;lt;div className=&#39;father&#39;&amp;gt;
+        &amp;lt;h1&amp;gt;这是父组件&amp;lt;/h1&amp;gt;
+        &amp;lt;Son count={this.props.count} /&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+
+class Son extends Component {
+  render() {
+    return (
+      &amp;lt;div className=&#39;son&#39;&amp;gt;
+        &amp;lt;h1&amp;gt;这是子组件&amp;lt;/h1&amp;gt;
+      	&amp;lt;h2&amp;gt;{this.props.count}&amp;lt;/h2&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果 Son 组件需要来自根组件的 count，则需要从 App 组件开始通过props 属性自上而下传递给 Son 组件。使用 context, 我们可以避免通过中间元素传递 props：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;// Context 可以让我们无须明确地传遍每一个组件，就能将值深入传递进组件树。
+// 为当前的 theme 创建一个 context（1为默认值）。
+const countContext = React.createContext(1);
+class App extends Component {
+  state = { count: 1 };
+  render() {
+    return (
+          // 使用一个 Provider 来将当前的 state 传递给以下的组件树。
+    // 无论多深，任何组件都能读取这个值。
+    // 在这个例子中，我们将 state 作为当前的值传递下去。
+      &amp;lt;Provider value={this.state}&amp;gt;
+        &amp;lt;div className=&#39;App&#39;&amp;gt;
+          &amp;lt;h1&amp;gt;这是根组件&amp;lt;/h1&amp;gt;
+          &amp;lt;Father /&amp;gt;
+        &amp;lt;/div&amp;gt;
+      &amp;lt;/Provider&amp;gt;
+    );
+  }
+}
+
+// 中间的组件再也不必指明往下传递了。
+class Father extends Component {
+  render() {
+    return (
+      &amp;lt;div className=&#39;father&#39;&amp;gt;
+        &amp;lt;h1&amp;gt;这是父组件&amp;lt;/h1&amp;gt;
+        &amp;lt;Son /&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+
+class Son extends Component {
+  // 指定 contextType 读取当前的 count context。
+  // React 会往上找到最近的 count Provider，然后使用它的值。
+  // 在这个例子中，当前的 count 值为 1。
+  static contextType = countContext; 
+  render() {
+    return (
+      &amp;lt;div className=&#39;son&#39;&amp;gt;
+        &amp;lt;h1&amp;gt;这是子组件&amp;lt;/h1&amp;gt;
+        &amp;lt;h2&amp;gt;{this.context.count}&amp;lt;/h2&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+  // 也可使用 Consumer 渲染出 context
+  /*
+  render() {
+    const { Consumer } = globalContext;
+    return (
+      &amp;lt;div className=&#39;son&#39;&amp;gt;
+        &amp;lt;h1&amp;gt;这是子组件&amp;lt;/h1&amp;gt;
+        &amp;lt;h2&amp;gt;{this.context.count}&amp;lt;/h2&amp;gt;
+        &amp;lt;Consumer&amp;gt;{(context) =&amp;gt; &amp;lt;h2&amp;gt;{context.count}&amp;lt;/h2&amp;gt;}&amp;lt;/Consumer&amp;gt;
+        &amp;lt;button onClick={this.add}&amp;gt;点我加1&amp;lt;/button&amp;gt;
+        &amp;lt;button onClick={this.minus}&amp;gt;点我减1&amp;lt;/button&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+  */
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如何在 Son 组件中更改 Context 呢？&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;// 导出 context 修改函数
+const actions = (self) =&amp;gt; ({
+  add() {
+    self.setState((preState) =&amp;gt; ({ count: preState.count + 1 }));
+  },
+  minus() {
+    self.setState((preState) =&amp;gt; ({ count: preState.count - 1 }));
+  },
+});
+
+class App extends Component {
+  // 扩展 actions 并传入 this
+  state = { count: InitialContext.count, ...actions(this) };
+  render() {
+    return (
+      &amp;lt;Provider value={this.state}&amp;gt;
+        &amp;lt;div className=&#39;App&#39;&amp;gt;
+          &amp;lt;h1&amp;gt;这是根组件&amp;lt;/h1&amp;gt;
+          &amp;lt;Father /&amp;gt;
+        &amp;lt;/div&amp;gt;
+      &amp;lt;/Provider&amp;gt;
+    );
+  }
+}
+
+class Son extends Component {
+  static contextType = globalContext;
+
+  // 调用在 context 中定义好的加减函数
+  add = () =&amp;gt; {
+    this.context.add();
+  };
+
+  minus = () =&amp;gt; {
+    this.context.minus();
+  };
+
+  render() {
+    return (
+      &amp;lt;div className=&#39;son&#39;&amp;gt;
+        &amp;lt;h1&amp;gt;这是子组件&amp;lt;/h1&amp;gt;
+        &amp;lt;h2&amp;gt;{this.context.count}&amp;lt;/h2&amp;gt;
+        &amp;lt;button onClick={this.add}&amp;gt;点我加1&amp;lt;/button&amp;gt;
+        &amp;lt;button onClick={this.minus}&amp;gt;点我减1&amp;lt;/button&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Context 主要应用场景在于很多不同层级的组件需要访问同样一些的数据。请谨慎使用，因为这会使得组件的复用性变差。如果仅仅是为了避免层层传递属性可以使用&lt;strong&gt;组件组合&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;无亲属关系的组件需要共用的数据&lt;/p&gt;
+&lt;p&gt;考虑下面的例子：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;class App extends Component {
+  render() {
+    return (
+      &amp;lt;div className=&#39;App&#39;&amp;gt;
+        &amp;lt;h1&amp;gt;这是根组件&amp;lt;/h1&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+
+class Test extends Component {
+  render() {
+    return (
+      &amp;lt;div className=&#39;son&#39;&amp;gt;
+        &amp;lt;h1&amp;gt;这是另一个组件&amp;lt;/h1&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;App 组件和 Test 组件既不是父子关系也不是兄弟关系，如果想要将 App组件中的数据传递给 Test 组件可以利用 Context 来实现：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;const countContext = React.createContext(&amp;quot;我是要传递的数据&amp;quot;);
+class App extends Component {
+  render() {
+    return (
+      &amp;lt;div className=&#39;App&#39;&amp;gt;
+        &amp;lt;h1&amp;gt;这是根组件&amp;lt;/h1&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+
+class Test extends Component {
+  static contextType = globalContext;
+
+  render() {
+    return (
+      &amp;lt;div className=&#39;test&#39;&amp;gt;
+        &amp;lt;h1&amp;gt;这是另一个组件&amp;lt;/h1&amp;gt;
+        &amp;lt;h2&amp;gt;{this.context}&amp;lt;/h2&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;注意事项&#34;&gt;注意事项&lt;/h3&gt;
+&lt;p&gt;Context 会使用参考标识（reference identity）来决定何时进行渲染，这里可能会有一些陷阱，当 Provider 的父组件进行重渲染时，可能会在 Consumers 组件中触发意外的渲染。举个例子，当每一次 Provider 重渲染时，以下的代码会重渲染所有下面的 Consumers 组件，因为 &lt;code&gt;value&lt;/code&gt; 属性总是被赋值为新的对象：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;class App extends Component {
+  render() {
+    return (
+      &amp;lt;Provider value={1}&amp;gt;
+        &amp;lt;div className=&#39;App&#39;&amp;gt;
+          &amp;lt;h1&amp;gt;这是根组件&amp;lt;/h1&amp;gt;
+          &amp;lt;Father /&amp;gt;
+        &amp;lt;/div&amp;gt;
+      &amp;lt;/Provider&amp;gt;
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;因此，将 value 状态提升到父节点的 state 中是更好的做法&lt;/p&gt;
+">React 高级 -- Context</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://keasar.com.cn/post/react-gao-ji-zhuang-tai-ti-sheng/"" data-c="
