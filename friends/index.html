@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Keasar`Blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1598006041323">
+<link rel="shortcut icon" href="/favicon.ico?v=1598006293308">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -1134,7 +1134,7 @@ class Son extends Component {
   }
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;如果 Son 组件需要来自根组件的 count，则需要从 App 组件开始通过props 属性自上而下传递给 Son 组件。使用 context, 我们可以避免通过中间元素传递 props：&lt;/p&gt;
+&lt;p&gt;如果 &lt;code&gt;Son&lt;/code&gt; 组件需要来自根组件的 count，则需要从 &lt;code&gt;App&lt;/code&gt; 组件开始通过props 属性自上而下传递给 &lt;code&gt;Son&lt;/code&gt; 组件。使用 context, 我们可以避免通过中间元素传递 props：&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;// Context 可以让我们无须明确地传遍每一个组件，就能将值深入传递进组件树。
 // 为当前的 theme 创建一个 context（1为默认值）。
 const countContext = React.createContext(1);
@@ -1197,7 +1197,7 @@ class Son extends Component {
   */
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;如何在 Son 组件中更改 Context 呢？&lt;/p&gt;
+&lt;p&gt;如何在 &lt;code&gt;Son&lt;/code&gt; 组件中更改 Context 呢？&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;// 导出 context 修改函数
 const actions = (self) =&amp;gt; ({
   add() {
@@ -1272,7 +1272,7 @@ class Test extends Component {
   }
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;App 组件和 Test 组件既不是父子关系也不是兄弟关系，如果想要将 App组件中的数据传递给 Test 组件可以利用 Context 来实现：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;App&lt;/code&gt; 组件和 &lt;code&gt;Test&lt;/code&gt; 组件既不是父子关系也不是兄弟关系，如果想要将 &lt;code&gt;App&lt;/code&gt;组件中的数据传递给 &lt;code&gt;Test&lt;/code&gt; 组件可以利用 Context 来实现：&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;const countContext = React.createContext(&amp;quot;我是要传递的数据&amp;quot;);
 class App extends Component {
   render() {
@@ -1300,7 +1300,7 @@ class Test extends Component {
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;注意事项&#34;&gt;注意事项&lt;/h3&gt;
-&lt;p&gt;Context 会使用参考标识（reference identity）来决定何时进行渲染，这里可能会有一些陷阱，当 Provider 的父组件进行重渲染时，可能会在 Consumers 组件中触发意外的渲染。举个例子，当每一次 Provider 重渲染时，以下的代码会重渲染所有下面的 Consumers 组件，因为 &lt;code&gt;value&lt;/code&gt; 属性总是被赋值为新的对象：&lt;/p&gt;
+&lt;p&gt;Context 会使用参考标识（reference identity）来决定何时进行渲染，这里可能会有一些陷阱，当 &lt;code&gt;Provider&lt;/code&gt; 的父组件进行重渲染时，可能会在 &lt;code&gt;Consumers&lt;/code&gt; 组件中触发意外的渲染。举个例子，当每一次 &lt;code&gt;Provider&lt;/code&gt; 重渲染时，以下的代码会重渲染所有下面的 &lt;code&gt;Consumers&lt;/code&gt; 组件，因为 &lt;code&gt;value&lt;/code&gt; 属性总是被赋值为新的对象：&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;class App extends Component {
   render() {
     return (
@@ -1314,7 +1314,7 @@ class Test extends Component {
   }
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;因此，将 value 状态提升到父节点的 state 中是更好的做法&lt;/p&gt;
+&lt;p&gt;因此，将 &lt;code&gt;value&lt;/code&gt; 状态提升到父节点的 &lt;code&gt;state&lt;/code&gt; 中是更好的做法&lt;/p&gt;
 ">React 高级 -- Context</a>
       </div>
       
