@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>🤗操作系统（三）--  处理机调度与死锁 | Keasar`Blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1597999268506">
+<link rel="shortcut icon" href="/favicon.ico?v=1597999391267">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -534,7 +534,7 @@
 </script>
         <div class="section-box box-shadow-wrapper">
           <div class="section bg-color post post-page">
-            <header class="post-header">
+            <section class="post-header">
   <h1 class="post-title">
     <a class="post-title-link" href="https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/">
       🤗操作系统（三）--  处理机调度与死锁
@@ -545,7 +545,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span>2020-06-09</span>
+      <span class="publish-time" data-t="2020-06-09 12:21:13">2020-06-09</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -581,7 +581,7 @@
     </span>
     
   </div>
-</header>
+</section>
             <div class="post-body next-md-body" id="post_body">
               <p>🤗<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-yi-yin-lun/">操作系统学习笔记（一）--  引论</a><br>
 🤗<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-er-jin-cheng-de-miao-shu-yu-kong-zhi/">操作系统学习笔记（二）--  引论</a></p>
@@ -2005,7 +2005,7 @@ Rp优先级 =（等待时间 + 要求服务时间）/ 要求服务时间 = 响�
   </div>
 </body>
 
-  <div class="search-mask" id="search_mask" style="display: none;">
+<div class="search-mask" id="search_mask" style="display: none;">
   <div class="search-box">
     <div class="search-title">
       <i class="fa fa-search"></i>
@@ -5772,6 +5772,28 @@ num = 100
 
 <input hidden id="copy" />
 <script>
+  !function () {
+    let times = document.querySelectorAll('.publish-time');
+    for (let i = 0; i < times.length; i++) {
+      let date = times[i].dataset.t;
+      let time = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+      if (time < 60) {
+        str = time + '秒之前';
+      } else if (time < 3600) {
+        str = Math.floor(time / 60) + '分钟之前';
+      } else if (time >= 3600 && time < 86400) {
+        str = Math.floor(time / 3600) + '小时之前';
+      } else if (time >= 86400 && time < 259200) {
+        str = Math.floor(time / 86400) + '天之前';
+      } else {
+        str = times[i].textContent;
+      }
+      times[i].textContent = str;
+    }
+  }();
+</script>
+
+<script>
   let language = '';
   if (language !== '') {
     let map = new Map();
@@ -5918,6 +5940,8 @@ num = 100
 
 
 <script src="/media/js/mouse/peace.js"></script>
+
+
 
 
 </html>

@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>React高级 -- 状态提升 | Keasar`Blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1597999268506">
+<link rel="shortcut icon" href="/favicon.ico?v=1597999391267">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -333,7 +333,7 @@
 </script>
         <div class="section-box box-shadow-wrapper">
           <div class="section bg-color post post-page">
-            <header class="post-header">
+            <section class="post-header">
   <h1 class="post-title">
     <a class="post-title-link" href="https://keasar.com.cn/post/react-gao-ji-zhuang-tai-ti-sheng/">
       React高级 -- 状态提升
@@ -344,7 +344,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span>2020-07-13</span>
+      <span class="publish-time" data-t="2020-07-13 20:12:03">2020-07-13</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -380,7 +380,7 @@
     </span>
     
   </div>
-</header>
+</section>
             <div class="post-body next-md-body" id="post_body">
               <p>如果多个组件需要反映相同的变化数据，可将它们提升至最近的父组件，由父组件渲染后再分发个子组件。</p>
 <p>下面是一个汇率转换示例</p>
@@ -1571,7 +1571,7 @@ export function tryConvert(value, convert) {
   </div>
 </body>
 
-  <div class="search-mask" id="search_mask" style="display: none;">
+<div class="search-mask" id="search_mask" style="display: none;">
   <div class="search-box">
     <div class="search-title">
       <i class="fa fa-search"></i>
@@ -5338,6 +5338,28 @@ num = 100
 
 <input hidden id="copy" />
 <script>
+  !function () {
+    let times = document.querySelectorAll('.publish-time');
+    for (let i = 0; i < times.length; i++) {
+      let date = times[i].dataset.t;
+      let time = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+      if (time < 60) {
+        str = time + '秒之前';
+      } else if (time < 3600) {
+        str = Math.floor(time / 60) + '分钟之前';
+      } else if (time >= 3600 && time < 86400) {
+        str = Math.floor(time / 3600) + '小时之前';
+      } else if (time >= 86400 && time < 259200) {
+        str = Math.floor(time / 86400) + '天之前';
+      } else {
+        str = times[i].textContent;
+      }
+      times[i].textContent = str;
+    }
+  }();
+</script>
+
+<script>
   let language = '';
   if (language !== '') {
     let map = new Map();
@@ -5484,6 +5506,8 @@ num = 100
 
 
 <script src="/media/js/mouse/peace.js"></script>
+
+
 
 
 </html>
