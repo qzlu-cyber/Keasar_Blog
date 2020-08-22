@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://keasar.com.cn</id>
     <title>Keasar`Blog</title>
-    <updated>2020-08-22T05:37:05.076Z</updated>
+    <updated>2020-08-22T05:39:09.174Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://keasar.com.cn"/>
     <link rel="self" href="https://keasar.com.cn/atom.xml"/>
@@ -584,17 +584,17 @@ export function tryConvert(value, convert) {
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[🤗操作系统（三）--  处理机调度与死锁]]></title>
+        <title type="html"><![CDATA[操作系统（三）--  处理机调度与死锁]]></title>
         <id>https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/</id>
         <link href="https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/">
         </link>
         <updated>2020-06-09T04:21:13.000Z</updated>
-        <summary type="html"><![CDATA[<p>🤗<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-yi-yin-lun/">操作系统学习笔记（一）--  引论</a><br>
-🤗<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-er-jin-cheng-de-miao-shu-yu-kong-zhi/">操作系统学习笔记（二）--  引论</a></p>
+        <summary type="html"><![CDATA[<p><a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-yi-yin-lun/">操作系统学习笔记（一）--  引论</a><br>
+<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-er-jin-cheng-de-miao-shu-yu-kong-zhi/">操作系统学习笔记（二）--  引论</a></p>
 <h3 id="1-处理机调度的层次和调度算法的目标">1. 处理机调度的层次和调度算法的目标</h3>
 ]]></summary>
-        <content type="html"><![CDATA[<p>🤗<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-yi-yin-lun/">操作系统学习笔记（一）--  引论</a><br>
-🤗<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-er-jin-cheng-de-miao-shu-yu-kong-zhi/">操作系统学习笔记（二）--  引论</a></p>
+        <content type="html"><![CDATA[<p><a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-yi-yin-lun/">操作系统学习笔记（一）--  引论</a><br>
+<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-er-jin-cheng-de-miao-shu-yu-kong-zhi/">操作系统学习笔记（二）--  引论</a></p>
 <h3 id="1-处理机调度的层次和调度算法的目标">1. 处理机调度的层次和调度算法的目标</h3>
 <!-- more -->
 <ol>
@@ -929,17 +929,17 @@ Rp优先级 =（等待时间 + 要求服务时间）/ 要求服务时间 = 响�
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[🤠操作系统学习笔记（二）--  进程的描述与控制]]></title>
+        <title type="html"><![CDATA[操作系统学习笔记（二）--  进程的描述与控制]]></title>
         <id>https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-er-jin-cheng-de-miao-shu-yu-kong-zhi/</id>
         <link href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-er-jin-cheng-de-miao-shu-yu-kong-zhi/">
         </link>
         <updated>2020-06-08T07:29:37.000Z</updated>
-        <summary type="html"><![CDATA[<p>🤠<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-yi-yin-lun/">操作系统学习笔记（一）--  引论</a><br>
-🤠<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/">操作系统学习笔记（三）--  处理机调度与死锁</a><br>
+        <summary type="html"><![CDATA[<p><a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-yi-yin-lun/">操作系统学习笔记（一）--  引论</a><br>
+<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/">操作系统学习笔记（三）--  处理机调度与死锁</a><br>
 <a href="https://imgchr.com/i/tRv9l6"><img src="https://s1.ax1x.com/2020/06/08/tRv9l6.md.png" alt="tRv9l6.md.png" style="zoom:80%;" /></a></p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>🤠<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-yi-yin-lun/">操作系统学习笔记（一）--  引论</a><br>
-🤠<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/">操作系统学习笔记（三）--  处理机调度与死锁</a><br>
+        <content type="html"><![CDATA[<p><a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-yi-yin-lun/">操作系统学习笔记（一）--  引论</a><br>
+<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/">操作系统学习笔记（三）--  处理机调度与死锁</a><br>
 <a href="https://imgchr.com/i/tRv9l6"><img src="https://s1.ax1x.com/2020/06/08/tRv9l6.md.png" alt="tRv9l6.md.png" style="zoom:80%;" /></a></p>
 <!-- more -->
 <h3 id="1-前趋图和程序执行">1. 前趋图和程序执行</h3>
@@ -1806,17 +1806,17 @@ void main()
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[🤡操作系统学习笔记（一）--  引论]]></title>
+        <title type="html"><![CDATA[操作系统学习笔记（一）--  引论]]></title>
         <id>https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-yi-yin-lun/</id>
         <link href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-yi-yin-lun/">
         </link>
         <updated>2020-06-08T02:00:09.000Z</updated>
-        <summary type="html"><![CDATA[<p>🤡<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-er-jin-cheng-de-miao-shu-yu-kong-zhi/">操作系统学习笔记（二）--  引论</a><br>
-🤡<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/">操作系统学习笔记（三）--  处理机调度与死锁</a><br>
+        <summary type="html"><![CDATA[<p><a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-er-jin-cheng-de-miao-shu-yu-kong-zhi/">操作系统学习笔记（二）--  引论</a><br>
+<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/">操作系统学习笔记（三）--  处理机调度与死锁</a><br>
 ​		操作系统(OS)，是配置在计算机硬件的笫 一层软件，其主要作用是管理这些设备，提高它们的利用率和系统的吞吐量，并为用户和应用程序提供一个简单的接口便于用户使用。</p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>🤡<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-er-jin-cheng-de-miao-shu-yu-kong-zhi/">操作系统学习笔记（二）--  引论</a><br>
-🤡<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/">操作系统学习笔记（三）--  处理机调度与死锁</a><br>
+        <content type="html"><![CDATA[<p><a href="https://keasar.com.cn/post/cao-zuo-xi-tong-xue-xi-bi-ji-er-jin-cheng-de-miao-shu-yu-kong-zhi/">操作系统学习笔记（二）--  引论</a><br>
+<a href="https://keasar.com.cn/post/cao-zuo-xi-tong-san-chu-li-ji-diao-du-yu-si-suo/">操作系统学习笔记（三）--  处理机调度与死锁</a><br>
 ​		操作系统(OS)，是配置在计算机硬件的笫 一层软件，其主要作用是管理这些设备，提高它们的利用率和系统的吞吐量，并为用户和应用程序提供一个简单的接口便于用户使用。</p>
 <!-- more -->
 <h3 id="1-操作系统的目标和作用">1. 操作系统的目标和作用</h3>
@@ -2001,21 +2001,21 @@ void main()
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[👹计算机网络学习笔记（五）--  运输层]]></title>
+        <title type="html"><![CDATA[计算机网络学习笔记（五）--  运输层]]></title>
         <id>https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/</id>
         <link href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">
         </link>
         <updated>2020-06-07T01:34:01.000Z</updated>
-        <summary type="html"><![CDATA[<p>😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
-😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
-😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
-😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a></p>
+        <summary type="html"><![CDATA[<p><a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a></p>
 <h3 id="1-运输层协议概述">1. 运输层协议概述</h3>
 ]]></summary>
-        <content type="html"><![CDATA[<p>😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
-😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
-😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
-😑<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a></p>
+        <content type="html"><![CDATA[<p><a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a></p>
 <h3 id="1-运输层协议概述">1. 运输层协议概述</h3>
 <!-- more -->
 <ol>
@@ -2366,25 +2366,25 @@ A收到释放请求后，向B发送确认应答，此时A进入TIME-WAIT 状态�
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[🤖计算机网络学习笔记（四）--  网络层]]></title>
+        <title type="html"><![CDATA[计算机网络学习笔记（四）--  网络层]]></title>
         <id>https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/</id>
         <link href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">
         </link>
         <updated>2020-06-05T10:20:48.000Z</updated>
-        <summary type="html"><![CDATA[<p>😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
-😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
-😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
-😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
+        <summary type="html"><![CDATA[<p><a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
 <h3 id="1-网络层提供的两种服务">1. 网络层提供的两种服务</h3>
 <ol>
 <li><strong>虚电路服务</strong></li>
 <li><strong>数据报服务</strong></li>
 </ol>
 ]]></summary>
-        <content type="html"><![CDATA[<p>😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
-😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
-😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
-😆<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
+        <content type="html"><![CDATA[<p><a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
 <h3 id="1-网络层提供的两种服务">1. 网络层提供的两种服务</h3>
 <ol>
 <li><strong>虚电路服务</strong></li>
@@ -2913,25 +2913,25 @@ A收到释放请求后，向B发送确认应答，此时A进入TIME-WAIT 状态�
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[👾计算机网络学习笔记（三）--  数据链路层]]></title>
+        <title type="html"><![CDATA[计算机网络学习笔记（三）--  数据链路层]]></title>
         <id>https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/</id>
         <link href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">
         </link>
         <updated>2020-06-04T11:53:32.000Z</updated>
-        <summary type="html"><![CDATA[<p>😀<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
-😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
-😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a><br>
-😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
+        <summary type="html"><![CDATA[<p><a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
 <p>数据链路层使用的信道有两种类型：</p>
 <ul>
 <li>点对点信道</li>
 <li>广播信道</li>
 </ul>
 ]]></summary>
-        <content type="html"><![CDATA[<p>😀<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
-😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
-😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a><br>
-😃<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
+        <content type="html"><![CDATA[<p><a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a><br>
+<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
 <p>数据链路层使用的信道有两种类型：</p>
 <ul>
 <li>点对点信道</li>
