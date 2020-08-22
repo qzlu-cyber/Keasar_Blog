@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页 | Keasar`Blog</title>
+<title>JavaScript 网络请求 Fetch | Keasar`Blog</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1598067732408">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -48,8 +48,8 @@
 </script>
 
 
-  <meta name="description" content="CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页" />
-  <meta name="keywords" content="Linux" />
+  <meta name="description" content="JavaScript 网络请求 Fetch" />
+  <meta name="keywords" content="ReactNative,React,JavaScript" />
 </head>
 
 <body>
@@ -259,9 +259,15 @@
 <ul>
 <li>
 <ul>
-<li><a href="#centos76%E5%AE%89%E8%A3%85docker%E5%B9%B6%E5%9C%A8docker%E4%B8%AD%E5%88%A9%E7%94%A8tomcat%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5">CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页</a>
+<li>
 <ul>
-<li><a href="#1-%E5%AE%89%E8%A3%85docker">1. 安装Docker</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95">基本语法</a></li>
+<li><a href="#%E8%AF%B7%E6%B1%82%E9%98%B6%E6%AE%B5">请求阶段</a></li>
+<li><a href="#post-%E8%AF%B7%E6%B1%82"><code>POST</code> 请求</a></li>
+<li><a href="#%E7%94%A8%E6%B3%95%E5%B0%8F%E7%BB%93">用法小结</a></li>
+<li><a href="#%E5%AE%9E%E4%BE%8B">实例</a></li>
+<li><a href="#fetch-%E8%B7%9F%E8%B8%AA%E4%B8%8B%E8%BD%BD%E8%BF%9B%E5%BA%A6"><code>Fetch</code> 跟踪下载进度</a></li>
+<li><a href="#fetch-%E4%B8%AD%E6%AD%A2"><code>fetch</code> 中止</a></li>
 </ul>
 </li>
 </ul>
@@ -533,8 +539,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://keasar.com.cn/post/centos76-an-zhuang-docker-bing-zai-docker-zhong-li-yong-tomcat-bu-shu-jing-tai-wang-ye/">
-      CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页
+    <a class="post-title-link" href="https://keasar.com.cn/post/javascript-wang-luo-qing-qiu-fetch/">
+      JavaScript 网络请求 Fetch
     </a>
   </h1>
   <div class="post-meta">
@@ -542,7 +548,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-06-03 14:40:59">2020-06-03</span>
+      <span class="publish-time" data-t="2020-08-22 11:40:07">2020-08-22</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -551,8 +557,20 @@
       <span class="pc-show language" data-lan="category-in">分类于</span>
       
       
-      <a href="https://keasar.com.cn/tag/WBli5YTXs/">
-        <span>Linux</span>
+      <a href="https://keasar.com.cn/tag/Ulizgur0M/">
+        <span>ReactNative</span>
+      </a>、
+      
+      
+      
+      <a href="https://keasar.com.cn/tag/PiGRmt12r/">
+        <span>React</span>
+      </a>、
+      
+      
+      
+      <a href="https://keasar.com.cn/tag/5OF6wA66L/">
+        <span>JavaScript</span>
       </a>
       
       
@@ -561,17 +579,17 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2<span class="language" data-lan="minute">分钟</span></span>
+      <span>5<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>368<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>1112<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
     
-    <span id="/post/centos76-an-zhuang-docker-bing-zai-docker-zhong-li-yong-tomcat-bu-shu-jing-tai-wang-ye/" data-flag-title="CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页" class="meta-item pc-show leancloud_visitors">
+    <span id="/post/javascript-wang-luo-qing-qiu-fetch/" data-flag-title="JavaScript 网络请求 Fetch" class="meta-item pc-show leancloud_visitors">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-eye"></i>
       <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
@@ -580,109 +598,138 @@
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h3 id="centos76安装docker并在docker中利用tomcat部署静态网页">CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页</h3>
+              <p>JavaScript 可以将网络请求发送到服务器，并在需要时加载新信息。例如在表单提交、从服务器加载数据等都需要使用网络请求。对于来自 JavaScript 的网络请求，有一个总称术语 “AJAX”，有很多方式可以向服务端发送网络请求获取到数据。<code>fetch()</code>是目前比较通用的方法。</p>
 <!-- more -->
-<h4 id="1-安装docker">1. 安装Docker</h4>
-<ul>
-<li>
-<p>更新yum包</p>
-<pre><code>yum update
-</code></pre>
-</li>
-<li>
-<p>查看是否安装过docker</p>
-<pre><code>whereis docker
-</code></pre>
-</li>
-<li>
-<p>如果安装过，则删除之前的版本</p>
-<pre><code>yum remove docker docker-common docker-selinux docker-engine
-</code></pre>
-</li>
-<li>
-<p>设置yum源</p>
-<pre><code>yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-</code></pre>
-</li>
-<li>
-<p>查看docker版本</p>
-<pre><code>yum list docker-ce --showduplicates | sort -r
-</code></pre>
-</li>
-<li>
-<p>安装</p>
-<pre><code>yum install docker-ce 
-</code></pre>
-</li>
-<li>
-<p>启动Docker</p>
-<pre><code>systemctl start docker
-</code></pre>
-</li>
-<li>
-<p>开机启动</p>
-<pre><code>systemctl enable docker
-</code></pre>
-</li>
-<li>
-<p>验证安装是否成功</p>
-<pre><code>docker version
+<h4 id="基本语法">基本语法</h4>
+<pre><code class="language-js">let promise = fetch(url, [options])
 </code></pre>
 <ul>
-<li>
-<p>如下存在Client和Server则成功</p>
-<figure data-type="image" tabindex="1"><img src="X:%5Cclassworks%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%5Cdockerversion.png" alt="dockerversion" loading="lazy"></figure>
-</li>
+<li><code>url</code>：要访问的 <code>url</code>地址</li>
+<li><code>options</code>：可选参数，<code>method</code>、<code>header</code>等，参数为空则发起 <code>GET</code>请求</li>
+<li>返回值为一个 <code>Promise</code> 对象</li>
 </ul>
-</li>
-</ul>
-<p>2.Docker常用命令</p>
-<pre><code>docker 运行容器命令
-docker ps
- 
-docker 所有容器命令
-docker ps -a
- 
-docker 删除容器命令
-docker rm 容器id
- 
-docker 镜像查看命令
-</code></pre>
-<p>3.利用Tomcat部署静态网页</p>
+<h4 id="请求阶段">请求阶段</h4>
+<p>获取到响应通常要经历两个阶段。</p>
+<p>第一阶段：当服务器发送了响应头（response header），<code>fetch</code> 返回的 <code>promise</code> 就使用内建的 <a href="https://fetch.spec.whatwg.org/#response-class">Response</a> class 对象来对响应头进行解析。此时，我们可以通过检查响应头来检查 HTTP 状态来确认网络请求是否成功，这是还没有响应体 <code>response body</code>。</p>
+<p>若<code>fetch</code> 无法建立一个 HTTP 请求，如网络问题，或是请求的网址不存在，那么 <code>promise</code> 就会 <code>reject</code>。异常的 HTTP 状态，例如 404 或 500，不会导致出现 <code>error</code>。</p>
 <ul>
-<li>
-<p>拉取Tomcat</p>
-<pre><code>docker pull tomcat
-</code></pre>
-</li>
-<li>
-<p>启动容器，验证Tomcat服务</p>
-<pre><code>docker run -p 8080:8080 tomcat
-</code></pre>
-</li>
-<li>
-<p>访问</p>
-<p>服务器外网IP:8080即可</p>
-<p>如果不行，看是否能ping通或者是服务器端口是否开放</p>
-</li>
-<li>
-<p>将静态页面拷贝到docker中tomcat的webapps下，建议挂载</p>
+<li><code>response.status</code> -- HTTP 状态码</li>
+<li><code>response.ok</code> -- Boolean，若为 200 - 299 为 <code>true</code></li>
+</ul>
+<p>第二阶段：获取到 <code>response body</code>，<code>Response</code> 提供了多种基于 <code>promise</code> 的方法，来以不同的格式访问 <code>body</code>：</p>
 <ul>
-<li>
-<p>将Tomcat启动，进入docker中查看命令：</p>
-<pre><code>docker exec -it 容器id /bin/bash //容器ID可通过 docker ps命令查询
-</code></pre>
-</li>
-<li>
-<p>挂载静态文件</p>
-<p>首先将静态资源文件夹上传至云服务器，例如我的上传至了/root下，即SongMove文件夹。下面这条命令即是将静态资源目录映射到容器的/ROOT下</p>
-<pre><code>docker run -d -v /root/SongMove/:/usr/local/tomcat/webapps/ROOT/ -p 8080:8080 tomcat:latest
-</code></pre>
-</li>
+<li><strong><code>response.text()</code></strong> —— 读取 response，并以文本形式返回 response</li>
+<li><strong><code>response.json()</code></strong> —— 将 response 解析为 JSON</li>
+<li><strong><code>response.formData()</code></strong> —— 以 <code>FormData</code> 对象的形式返回 response</li>
+<li><strong><code>response.blob()</code></strong> —— 以 <a href="https://zh.javascript.info/blob">Blob</a>（具有类型的二进制数据）形式返回 response</li>
+<li><strong><code>response.arrayBuffer()</code></strong> —— 以 <a href="https://zh.javascript.info/arraybuffer-binary-arrays">ArrayBuffer</a>（低级别的二进制数据）形式返回 response</li>
+<li>另外，<code>response.body</code> 是 <a href="https://streams.spec.whatwg.org/#rs-class">ReadableStream</a> 对象，它允许你逐块读取 body，我们稍后会用一个例子解释它。</li>
 </ul>
-</li>
+<blockquote>
+<p>我们只能选择一种读取 <code>body</code> 的方法。</p>
+<p>如果我们已经使用了 <code>response.text()</code> 方法来获取 <code>response</code>，那么如果再用 <code>response.json()</code>，则不会生效，因为 <code>body</code> 内容已经被处理过了。</p>
+</blockquote>
+<h4 id="post-请求"><code>POST</code> 请求</h4>
+<pre><code class="language-js">let response = await fetch(url, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8'
+  },
+  body: requestBody
+});
+</code></pre>
+<ul>
+<li><code>body</code> -- 请求体，可以是字符串、<code>FormData</code>对象（以 <code>form/multipart</code> 形式发送）、<code>Blob/BufferSource</code>二进制数据等</li>
 </ul>
-<p>4.服务器IP:8080访问即可</p>
+<blockquote>
+<p>如果请求的 <code>body</code> 是字符串，则 <code>Content-Type</code> 会默认设置为 <code>text/plain;charset=UTF-8</code>。但是，当我们要发送 JSON 时，我们会使用 <code>headers</code> 选项来发送 <code>application/json</code>，这是 JSON 编码的数据的正确的 <code>Content-Type</code>。</p>
+</blockquote>
+<h4 id="用法小结">用法小结</h4>
+<p>典型的 <code>fetch</code> 请求由两个 <code>await</code> 调用组成：</p>
+<pre><code class="language-js">let response = await fetch(url, [options]); // 解析 response header
+let result = await response.json(); // 将 body 读取为 json
+</code></pre>
+<p>或者以 <code>promise</code> 形式：</p>
+<pre><code class="language-js">fetch(url, [options])
+  .then(response =&gt; response.json())
+  .then(result =&gt; /* 处理结果 */)
+</code></pre>
+<h4 id="实例">实例</h4>
+<p>从 GitHub 获取用户信息：</p>
+<pre><code class="language-js">  async function getUsers(names) {
+    const response = await fetch(`https://api.github.com/users/${names}`);
+    if (response.ok) {
+    		const result = await response.json();
+    		console.log(result);
+    } else {
+      return null;
+    }
+  }
+  getUsers('qzlu-cyber');
+</code></pre>
+<h4 id="fetch-跟踪下载进度"><code>Fetch</code> 跟踪下载进度</h4>
+<p><code>fetch()</code> 无法跟踪上传进度，但是可以跟踪下载进度。要跟踪下载进度，可以使用 <code>response.body</code> 属性。它是 <code>ReadableStream</code> —— 一个特殊的对象，它可以逐块（chunk）提供 <code>body</code>。</p>
+<pre><code class="language-js">// 代替 response.json() 以及其他方法
+const reader = response.body.getReader();
+
+// 在 body 下载时，一直为无限循环
+while(true) {
+  // 当最后一块下载完成时，done 值为 true，否则为 false
+  // value 是块字节的 Uint8Array
+  const {done, value} = await reader.read();
+
+  if (done) {
+    break;
+  }
+
+  console.log(`Received ${value.length} bytes`)
+}
+</code></pre>
+<h4 id="fetch-中止"><code>fetch</code> 中止</h4>
+<p>JavaScript 有一个特殊的内建对象 <code>AbortController</code>，既可以中止 <code>fetch</code> 也可以中止其他异步任务。</p>
+<p>用法：</p>
+<pre><code class="language-js">let controller = new AbortController();
+</code></pre>
+<p><code>controller</code> 对象具有 <code>abort()</code> 方法和 <code>signal</code>属性。当 <code>abort()</code> 被调用时，<code>abort</code> 事件会在 <code>controller.signal</code> 上触发，同时 <code>controller.signal.aborted</code> 属性变为 <code>true</code>。</p>
+<pre><code class="language-js">let controller = new AbortController();
+fetch(url, {
+  signal: controller.signal // 将 signal 属性传递给 fetch 参数
+}); // fetch 会监听 signal 上的 abort
+
+controller.abort(); // 调用 controller.abort() 来中止
+</code></pre>
+<p>当一个 <code>fetch</code> 被中止，它的 <code>promise</code> 就会以一个 error <code>AbortError</code> 被 reject：</p>
+<pre><code class="language-js">try {
+  let response = await fetch('/article/fetch-abort/demo/hang', {
+    signal: controller.signal
+  });
+} catch(err) {
+  if (err.name == 'AbortError') { // 处理 abort()
+    alert(&quot;Aborted!&quot;);
+  } else {
+    throw err;
+  }
+}
+</code></pre>
+<p><code>AbortController</code> 是可扩展的，它允许一次取消多个 fetch。也可以等待需要完成的 <code>fetch</code> 异步网络请求后中止其他 <code>fetch</code>。</p>
+<pre><code class="language-js">let urls = [...];
+let controller = new AbortController();
+
+let ourJob = new Promise((resolve, reject) =&gt; { // 需要完成的 fetch
+  ...
+  controller.signal.addEventListener('abort', reject);
+});
+
+let fetchJobs = urls.map(url =&gt; fetch(url, { // 所有 fetch
+  signal: controller.signal
+}));
+
+// 等待完成我们的任务和所有 fetch
+let results = await Promise.all([...fetchJobs, ourJob]);
+
+// 如果 controller.abort() 被从其他地方调用，
+// 它将中止所有 fetch 和 ourJob
+</code></pre>
 
             </div>
             
@@ -695,7 +742,7 @@ docker 镜像查看命令
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://keasar.com.cn/post/centos76-an-zhuang-docker-bing-zai-docker-zhong-li-yong-tomcat-bu-shu-jing-tai-wang-ye/" title="CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页">https://keasar.com.cn/post/centos76-an-zhuang-docker-bing-zai-docker-zhong-li-yong-tomcat-bu-shu-jing-tai-wang-ye/</a>
+      <a href="https://keasar.com.cn/post/javascript-wang-luo-qing-qiu-fetch/" title="JavaScript 网络请求 Fetch">https://keasar.com.cn/post/javascript-wang-luo-qing-qiu-fetch/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -704,21 +751,21 @@ docker 镜像查看命令
   </ul>
   <div class="tags">
     
-      <a href="https://keasar.com.cn/tag/WBli5YTXs/"># Linux</a>
+      <a href="https://keasar.com.cn/tag/Ulizgur0M/"># ReactNative</a>
+    
+      <a href="https://keasar.com.cn/tag/PiGRmt12r/"># React</a>
+    
+      <a href="https://keasar.com.cn/tag/5OF6wA66L/"># JavaScript</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="💀计算机网络学习笔记（一）--  计算机网络概述" href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">💀计算机网络学习笔记（一）--  计算机网络概述</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="💀计算机网络学习笔记（一）--  计算机网络概述" href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="函数（上）" href="https://keasar.com.cn/post/han-shu-shang/">函数（上）</a>
-        <a class="nav-mobile-next" title="函数（上）" href="https://keasar.com.cn/post/han-shu-shang/">下一篇</a>
+        <a class="nav-pc-next" title="React 高级 -- Context" href="https://keasar.com.cn/post/react-gao-ji-context/">React 高级 -- Context</a>
+        <a class="nav-mobile-next" title="React 高级 -- Context" href="https://keasar.com.cn/post/react-gao-ji-context/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

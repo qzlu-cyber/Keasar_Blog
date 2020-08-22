@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://keasar.com.cn</id>
     <title>Keasar`Blog</title>
-    <updated>2020-08-22T02:09:23.261Z</updated>
+    <updated>2020-08-22T03:42:14.886Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://keasar.com.cn"/>
     <link rel="self" href="https://keasar.com.cn/atom.xml"/>
@@ -10,6 +10,148 @@
     <logo>https://keasar.com.cn/images/avatar.png</logo>
     <icon>https://keasar.com.cn/favicon.ico</icon>
     <rights>All rights reserved 2020, Keasar`Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[JavaScript 网络请求 Fetch]]></title>
+        <id>https://keasar.com.cn/post/javascript-wang-luo-qing-qiu-fetch/</id>
+        <link href="https://keasar.com.cn/post/javascript-wang-luo-qing-qiu-fetch/">
+        </link>
+        <updated>2020-08-22T03:40:07.000Z</updated>
+        <summary type="html"><![CDATA[<p>JavaScript 可以将网络请求发送到服务器，并在需要时加载新信息。例如在表单提交、从服务器加载数据等都需要使用网络请求。对于来自 JavaScript 的网络请求，有一个总称术语 “AJAX”，有很多方式可以向服务端发送网络请求获取到数据。<code>fetch()</code>是目前比较通用的方法。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>JavaScript 可以将网络请求发送到服务器，并在需要时加载新信息。例如在表单提交、从服务器加载数据等都需要使用网络请求。对于来自 JavaScript 的网络请求，有一个总称术语 “AJAX”，有很多方式可以向服务端发送网络请求获取到数据。<code>fetch()</code>是目前比较通用的方法。</p>
+<!-- more -->
+<h4 id="基本语法">基本语法</h4>
+<pre><code class="language-js">let promise = fetch(url, [options])
+</code></pre>
+<ul>
+<li><code>url</code>：要访问的 <code>url</code>地址</li>
+<li><code>options</code>：可选参数，<code>method</code>、<code>header</code>等，参数为空则发起 <code>GET</code>请求</li>
+<li>返回值为一个 <code>Promise</code> 对象</li>
+</ul>
+<h4 id="请求阶段">请求阶段</h4>
+<p>获取到响应通常要经历两个阶段。</p>
+<p>第一阶段：当服务器发送了响应头（response header），<code>fetch</code> 返回的 <code>promise</code> 就使用内建的 <a href="https://fetch.spec.whatwg.org/#response-class">Response</a> class 对象来对响应头进行解析。此时，我们可以通过检查响应头来检查 HTTP 状态来确认网络请求是否成功，这是还没有响应体 <code>response body</code>。</p>
+<p>若<code>fetch</code> 无法建立一个 HTTP 请求，如网络问题，或是请求的网址不存在，那么 <code>promise</code> 就会 <code>reject</code>。异常的 HTTP 状态，例如 404 或 500，不会导致出现 <code>error</code>。</p>
+<ul>
+<li><code>response.status</code> -- HTTP 状态码</li>
+<li><code>response.ok</code> -- Boolean，若为 200 - 299 为 <code>true</code></li>
+</ul>
+<p>第二阶段：获取到 <code>response body</code>，<code>Response</code> 提供了多种基于 <code>promise</code> 的方法，来以不同的格式访问 <code>body</code>：</p>
+<ul>
+<li><strong><code>response.text()</code></strong> —— 读取 response，并以文本形式返回 response</li>
+<li><strong><code>response.json()</code></strong> —— 将 response 解析为 JSON</li>
+<li><strong><code>response.formData()</code></strong> —— 以 <code>FormData</code> 对象的形式返回 response</li>
+<li><strong><code>response.blob()</code></strong> —— 以 <a href="https://zh.javascript.info/blob">Blob</a>（具有类型的二进制数据）形式返回 response</li>
+<li><strong><code>response.arrayBuffer()</code></strong> —— 以 <a href="https://zh.javascript.info/arraybuffer-binary-arrays">ArrayBuffer</a>（低级别的二进制数据）形式返回 response</li>
+<li>另外，<code>response.body</code> 是 <a href="https://streams.spec.whatwg.org/#rs-class">ReadableStream</a> 对象，它允许你逐块读取 body，我们稍后会用一个例子解释它。</li>
+</ul>
+<blockquote>
+<p>我们只能选择一种读取 <code>body</code> 的方法。</p>
+<p>如果我们已经使用了 <code>response.text()</code> 方法来获取 <code>response</code>，那么如果再用 <code>response.json()</code>，则不会生效，因为 <code>body</code> 内容已经被处理过了。</p>
+</blockquote>
+<h4 id="post-请求"><code>POST</code> 请求</h4>
+<pre><code class="language-js">let response = await fetch(url, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8'
+  },
+  body: requestBody
+});
+</code></pre>
+<ul>
+<li><code>body</code> -- 请求体，可以是字符串、<code>FormData</code>对象（以 <code>form/multipart</code> 形式发送）、<code>Blob/BufferSource</code>二进制数据等</li>
+</ul>
+<blockquote>
+<p>如果请求的 <code>body</code> 是字符串，则 <code>Content-Type</code> 会默认设置为 <code>text/plain;charset=UTF-8</code>。但是，当我们要发送 JSON 时，我们会使用 <code>headers</code> 选项来发送 <code>application/json</code>，这是 JSON 编码的数据的正确的 <code>Content-Type</code>。</p>
+</blockquote>
+<h4 id="用法小结">用法小结</h4>
+<p>典型的 <code>fetch</code> 请求由两个 <code>await</code> 调用组成：</p>
+<pre><code class="language-js">let response = await fetch(url, [options]); // 解析 response header
+let result = await response.json(); // 将 body 读取为 json
+</code></pre>
+<p>或者以 <code>promise</code> 形式：</p>
+<pre><code class="language-js">fetch(url, [options])
+  .then(response =&gt; response.json())
+  .then(result =&gt; /* 处理结果 */)
+</code></pre>
+<h4 id="实例">实例</h4>
+<p>从 GitHub 获取用户信息：</p>
+<pre><code class="language-js">  async function getUsers(names) {
+    const response = await fetch(`https://api.github.com/users/${names}`);
+    if (response.ok) {
+    		const result = await response.json();
+    		console.log(result);
+    } else {
+      return null;
+    }
+  }
+  getUsers('qzlu-cyber');
+</code></pre>
+<h4 id="fetch-跟踪下载进度"><code>Fetch</code> 跟踪下载进度</h4>
+<p><code>fetch()</code> 无法跟踪上传进度，但是可以跟踪下载进度。要跟踪下载进度，可以使用 <code>response.body</code> 属性。它是 <code>ReadableStream</code> —— 一个特殊的对象，它可以逐块（chunk）提供 <code>body</code>。</p>
+<pre><code class="language-js">// 代替 response.json() 以及其他方法
+const reader = response.body.getReader();
+
+// 在 body 下载时，一直为无限循环
+while(true) {
+  // 当最后一块下载完成时，done 值为 true，否则为 false
+  // value 是块字节的 Uint8Array
+  const {done, value} = await reader.read();
+
+  if (done) {
+    break;
+  }
+
+  console.log(`Received ${value.length} bytes`)
+}
+</code></pre>
+<h4 id="fetch-中止"><code>fetch</code> 中止</h4>
+<p>JavaScript 有一个特殊的内建对象 <code>AbortController</code>，既可以中止 <code>fetch</code> 也可以中止其他异步任务。</p>
+<p>用法：</p>
+<pre><code class="language-js">let controller = new AbortController();
+</code></pre>
+<p><code>controller</code> 对象具有 <code>abort()</code> 方法和 <code>signal</code>属性。当 <code>abort()</code> 被调用时，<code>abort</code> 事件会在 <code>controller.signal</code> 上触发，同时 <code>controller.signal.aborted</code> 属性变为 <code>true</code>。</p>
+<pre><code class="language-js">let controller = new AbortController();
+fetch(url, {
+  signal: controller.signal // 将 signal 属性传递给 fetch 参数
+}); // fetch 会监听 signal 上的 abort
+
+controller.abort(); // 调用 controller.abort() 来中止
+</code></pre>
+<p>当一个 <code>fetch</code> 被中止，它的 <code>promise</code> 就会以一个 error <code>AbortError</code> 被 reject：</p>
+<pre><code class="language-js">try {
+  let response = await fetch('/article/fetch-abort/demo/hang', {
+    signal: controller.signal
+  });
+} catch(err) {
+  if (err.name == 'AbortError') { // 处理 abort()
+    alert(&quot;Aborted!&quot;);
+  } else {
+    throw err;
+  }
+}
+</code></pre>
+<p><code>AbortController</code> 是可扩展的，它允许一次取消多个 fetch。也可以等待需要完成的 <code>fetch</code> 异步网络请求后中止其他 <code>fetch</code>。</p>
+<pre><code class="language-js">let urls = [...];
+let controller = new AbortController();
+
+let ourJob = new Promise((resolve, reject) =&gt; { // 需要完成的 fetch
+  ...
+  controller.signal.addEventListener('abort', reject);
+});
+
+let fetchJobs = urls.map(url =&gt; fetch(url, { // 所有 fetch
+  signal: controller.signal
+}));
+
+// 等待完成我们的任务和所有 fetch
+let results = await Promise.all([...fetchJobs, ourJob]);
+
+// 如果 controller.abort() 被从其他地方调用，
+// 它将中止所有 fetch 和 ourJob
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[React 高级 -- Context]]></title>
         <id>https://keasar.com.cn/post/react-gao-ji-context/</id>
@@ -3056,200 +3198,5 @@ A收到释放请求后，向B发送确认应答，此时A进入TIME-WAIT 状态�
 <p>此部分转载自CSDN，<a href="%5Bhttps://blog.csdn.net/KnightOnHourse/article/details/80198611?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522159127115919725219954270%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=159127115919725219954270&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-2-80198611.ecpm_v1_rank_ctr_v1&amp;utm_term=%E9%AB%98%E9%80%9F%E4%BB%A5%E5%A4%AA%E7%BD%91%5D(https://blog.csdn.net/KnightOnHourse/article/details/80198611?ops_request_misc=%7B%22request%5Fid%22%3A%22159127115919725219954270%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&amp;request_id=159127115919725219954270&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-2-80198611.ecpm_v1_rank_ctr_v1&amp;utm_term=%E9%AB%98%E9%80%9F%E4%BB%A5%E5%A4%AA%E7%BD%91)">原文地址</a>（如侵删）</p>
 <div class="htmledit_views prism-atom-one-light" id="content_views">
                                             <div class="blogpost-body"><p><strong>1. 100M以太网</strong></p><p align="center">快速以太网（100M）标准</p><div align="center"><div class="table-box"><table border="1" cellpadding="0" cellspacing="0"><tbody><tr><td valign="top" width="95"><p align="center">名称</p></td><td valign="top" width="81"><p align="center">传输介质</p></td><td valign="top" width="130"><p align="center">网段最大长度</p></td><td valign="top" width="360"><p align="center">特点</p></td></tr><tr><td valign="top" width="95"><p align="center">100BASE-TX</p></td><td valign="top" width="81"><p align="center">铜缆</p></td><td valign="top" width="130"><p align="center">100m</p></td><td valign="top" width="360"><p align="left">两对UTP5类线或屏蔽双绞线</p></td></tr><tr><td valign="top" width="95"><p align="center">100BASE-T4</p></td><td valign="top" width="81"><p align="center">铜缆</p></td><td valign="top" width="130"><p align="center">100m</p></td><td valign="top" width="360"><p align="left">四对UTP3类线或5类线</p></td></tr><tr><td valign="top" width="95"><p align="center">100BASE-FX</p></td><td valign="top" width="81"><p align="center">光纤</p></td><td valign="top" width="130"><p align="center">2000m</p></td><td valign="top" width="360"><p align="left">两根光纤，发送和接收各用一根，全双工，长距离</p></td></tr></tbody></table></div></div><p>（1）100BASE-T是在双绞线上传送100Mb/s基带信号的星型拓扑的以太网，仍使用IEEE802.3的CSMA/CD协议，它又称为快速以太网（FastEthernet）</p><p>（2）使用交换机组建的100BASE-T以太网，可在全双工方式下工作而无冲突发生。因此，<span style="color:#ff00ff;"><strong>CSMA/CD协议对全双工方式工作的快速以太网是不起作用的</strong></span>。<span style="color:#ff0000;"><strong>因为其帧格式和以太网一样</strong></span>，所以依然称<span style="color:#ff0000;"><strong>交换机组成的网络为以太网</strong></span>。</p><p>（3）以太网的最短帧与带宽和链路长度有关。<span style="color:#ff0000;"><strong>100M以太网</strong></span>比10M以太网速率提高10位，要想和10M以太网兼容，就要确保最短帧也是64字节，那就将电缆最大长度由1000m降到<span style="color:#0000ff;"><strong>100m</strong></span>，因此以太网的争用期依然是51.2μs，最短帧依然是64字节。</p><p><strong>2. 吉比特以太网</strong></p><p align="center">吉比特以太网（1000M）标准</p><div align="center"><div class="table-box"><table border="1" cellpadding="0" cellspacing="0"><tbody><tr><td valign="top" width="95"><p align="center">名称</p></td><td valign="top" width="81"><p align="center">传输介质</p></td><td valign="top" width="130"><p align="center">网段最大长度</p></td><td valign="top" width="360"><p align="center">特点</p></td></tr><tr><td valign="top" width="95"><p align="center">1000BASE-SX</p></td><td valign="top" width="81"><p align="center">光缆</p></td><td valign="top" width="130"><p align="center">550m</p></td><td valign="top" width="360"><p align="left">多模光纤（10和62.5μm）</p></td></tr><tr><td valign="top" width="95"><p align="center">1000BASE-LX</p></td><td valign="top" width="81"><p align="center">光缆</p></td><td valign="top" width="130"><p align="center">5000m</p></td><td valign="top" width="360"><p align="left">单模光纤（10μm）、多模光纤（50和62.5μm）</p></td></tr><tr><td valign="top" width="95"><p align="center">1000BASE-CX</p></td><td valign="top" width="81"><p align="center">铜线</p></td><td valign="top" width="130"><p align="center">25m</p></td><td valign="top" width="360"><p align="left">使用两对屏蔽双绞线电缆STP</p></td></tr><tr><td valign="top" width="95"><p align="center">1000BASE-T</p></td><td valign="top" width="81"><p align="center">铜线</p></td><td valign="top" width="130"><p align="center">100m</p></td><td valign="top" width="360"><p align="left">使用四对UTP5类线</p></td></tr></tbody></table></div></div><p>（1）吉比特（1000M）以太网的特点</p><p>　　①允许在1Gb/s下<span style="color:#0000ff;"><strong>全双工和半双工</strong></span>两种方式下工作。</p><p>　　②使用IEEE802.3协议规定的帧格式</p><p>　　③在<span style="color:#ff0000;"><strong>半双工方式下使用CSMA/CD协议</strong>（<strong>全双工方式不需要使用CSMA/CD协议</strong>）</span></p><p>　　④与10BASE-T和100BASE-T技术向后兼容。</p><p>（2）“载波延伸”</p><p align="center"><img src="https://s1.ax1x.com/2020/06/04/tBw2J1.png" alt="" height="235" width="658">&nbsp;</p><p>　　①吉比特以太网工作<span style="color:#ff0000;"><strong>在半双工时</strong></span>，就必须进行碰撞检测。数据速率提高了，要想和10M以太网兼容，就要确保最短帧也是64字节，这只能减少最大电缆长度，<span style="color:#0000ff;"><strong>以太网最大电缆就要缩短到10m</strong></span>，短到几乎没有实用价值。</p><p>　　②吉比特以太网<span style="color:#ff0000;"><strong>为了增加最大传输距离</strong>，<strong>将最短帧由64字节增加到512字节</strong></span>。</p><p>　　③如果数据帧不超过512字节，则在<span style="color:#ff00ff;"><strong>FCS域后面添加“载波延伸”域</strong></span>，当主机发送完短数据帧后，继续发送载波延伸信号，冲突信号传回来时，发送端就能感知到了。</p><p>（3）分组突发</p><p align="center"><img src="https://s1.ax1x.com/2020/06/04/tBw4sO.png" alt="" height="251" width="756">&nbsp;</p><p>　　①如果发送的数据帧都是小于64字节的<span style="color:#ff0000;"><strong>短报文</strong></span>时，那么<span style="color:#ff00ff;"><strong>链路的利用率就会很低</strong></span>，因为“载波延伸”域占用了大量的带宽。于是，千兆以太网引入了“分组突发”机制来改善这个问题。</p><p>　　②当很多短帧要发送时，<span style="color:#ff0000;"><strong>第一个短帧采用“载波延伸”方法进行填充</strong></span>，<strong><span style="color:#0000ff;">后面的一些短帧可以一个接一个发送</span>，<span style="color:#ff0000;">它们之间只要留必要的帧间最小间隔即可</span></strong>。这样就形成一串分组突发，直到达到1500字节或稍多一些为止。从而提高链路的利用率。</p><p>　　③“载波延伸”和“分组突发”<span style="color:#0000ff;"><strong>仅用于千兆以太网的半双工模式</strong></span>；而全双工模式不需要使用CSMA/CD协议，也就不需要这两个特性。</p><p><strong>3. 10吉比特以太网</strong></p><p align="center">万兆以太网标准</p><div align="center"><div class="table-box"><table border="1" cellpadding="0" cellspacing="0"><tbody><tr><td valign="top" width="101"><p align="center">名称</p></td><td valign="top" width="81"><p align="center">传输介质</p></td><td valign="top" width="129"><p align="center">网段最大长度</p></td><td valign="top" width="220"><p align="center">特点</p></td></tr><tr><td valign="top" width="101"><p align="center">10GBASE-SR</p></td><td valign="top" width="81"><p align="center">光缆</p></td><td valign="top" width="129"><p align="center">300m</p></td><td valign="top" width="220"><p align="left">多模光纤（0.85μm）</p></td></tr><tr><td valign="top" width="101"><p align="center">10GBASE-LR</p></td><td valign="top" width="81"><p align="center">光缆</p></td><td valign="top" width="129"><p align="center">10km</p></td><td valign="top" width="220"><p align="left">单模光纤（1.3μm）</p></td></tr><tr><td valign="top" width="101"><p align="center">10GBASE-ER</p></td><td valign="top" width="81"><p align="center">光缆</p></td><td valign="top" width="129"><p align="center">40m</p></td><td valign="top" width="220"><p align="left">单模光纤（1.3μm）</p></td></tr><tr><td valign="top" width="101"><p>10GBASE-CX4</p></td><td valign="top" width="81"><p align="center">铜线</p></td><td valign="top" width="129"><p align="center">15m</p></td><td valign="top" width="220"><p align="left">使用四对双芯同轴电缆</p></td></tr><tr><td valign="top" width="101"><p align="center">10GBASE-T</p></td><td valign="top" width="81"><p align="center">铜线</p></td><td valign="top" width="129"><p align="center">100m</p></td><td valign="top" width="220"><p align="left">使用4对6A类的UTP双绞线</p></td></tr></tbody></table></div></div><p>（1）10GE的帧格式与10Mb/s、100Mb/s和1Gb/s以太网的帧格式完全相同。10GE还保留了802.3标准规定的了以太网最小和最长帧长。</p><p>（2）由于数据率很高，10GE不再使用铜线而只使用光纤作为传输媒体。它使用长距离（40km）的光收发器与单模光纤接口，以便能够工作在广域网和城域网的范围。</p><p>（3）10GE只工作在全双工模式，因此不存在争用问题，也不使用CSMA/CD协议。这就使用10GE的传输距离不再受碰撞检测的限制而大大提高了</p></div>                                    </div>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[☠️计算机网络学习笔记（二）--  物理层]]></title>
-        <id>https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/</id>
-        <link href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">
-        </link>
-        <updated>2020-06-04T04:31:50.000Z</updated>
-        <summary type="html"><![CDATA[<p>😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
-😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
-😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a><br>
-😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
-<h3 id="1-物理层特性">1. 物理层特性</h3>
-<ul>
-<li><strong>机械特性</strong></li>
-<li><strong>电气特性</strong></li>
-<li><strong>功能特性</strong></li>
-<li><strong>规程特性</strong></li>
-</ul>
-]]></summary>
-        <content type="html"><![CDATA[<p>😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
-😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">计算机网络学习笔记（三）--  数据链路层</a><br>
-😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a><br>
-😉<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
-<h3 id="1-物理层特性">1. 物理层特性</h3>
-<ul>
-<li><strong>机械特性</strong></li>
-<li><strong>电气特性</strong></li>
-<li><strong>功能特性</strong></li>
-<li><strong>规程特性</strong></li>
-</ul>
-<!-- more -->
-<h3 id="2-数据通信基础知识">2. 数据通信基础知识</h3>
-<ol>
-<li>
-<h4 id="数据通信系统模型">数据通信系统模型</h4>
-<ul>
-<li>
-<p>数据通信系统三部分：<strong>源系统(发送端)、传输系统、目的系统(接收端)</strong></p>
-<figure data-type="image" tabindex="1"><img src="https://s1.ax1x.com/2020/06/04/twjDlq.png" alt="twjDlq.png" loading="lazy"></figure>
-</li>
-<li>
-<p><strong>模拟信号</strong>：连续信号，表示消息的参数取值是连续的。</p>
-</li>
-<li>
-<p><strong>数字信号</strong>：离散信号，表示消息的参数取值是离散的。</p>
-</li>
-</ul>
-</li>
-<li>
-<h4 id="信道">信道</h4>
-<ul>
-<li>按照通信双方信息交互的方式分为：<strong>单工通信</strong>、<strong>半双工通信</strong>、<strong>全双工通信</strong>。</li>
-<li><strong>曼切斯特编码产生的信号频率比不归零制高。不归零制没有自同步能力，曼切斯特编码具有自同步能力。</strong></li>
-<li>基带信号：来自信源的信号.计算机输出的代表各种文字或图像文件的数据信号都属于基带信号。包含有较多低频成分，需要进行调制。<br>
-调制分为：
-<ul>
-<li>基带调制：对基带信号波形进行变换，仍然是基带信号</li>
-<li>带通调制：经过载波进行调制，把基带信号的频率范围搬移到较高的频段以便在信道中传输。经过载波调制后的信号称为带通信号。基本的带通调制方法有：</li>
-<li>调幅AM：载波的振幅随基带数字信号而变化。</li>
-<li>调频FM：载波的频率随基带数字信号而变化。</li>
-<li>调相PM：载波的初始相位随基带数字信号而变化。</li>
-<li>正交振幅调制QAM：多元制的振幅相位混合调制方法，信息传输速率更高。</li>
-</ul>
-</li>
-<li>调制解调原因</li>
-</ul>
-<blockquote>
-<p>无线电通信系统：通过空间辐射方式传送信号。<br>
-电磁波理论可知：天线尺寸为被辐射信号波长的十分之一或更大些，信号才能有效的被辐射。<br>
-对于语音信号：天线尺寸需要在几十公里以上，因此需要调制(语音信号的频率范围为300~3400Hz)。<br>
-调制过程：将信号频谱搬移到任何所需的较高频率范围，这就容易以电磁波形式辐射出去。<br>
-如果不进行调制，而是把被传送的信号直接辐射出去，那么各电台所发出的信号频率就会相同，他们混在一起，收信者将无法选择所要接收的信号。<br>
-调制作用的实质：把各种信号的频谱搬移，使它们互不重叠地占据不同的频率范围，即信号分别托付于不同频率的载波上，接收机可以分离出所需要的频率的信号，不致相互干扰。（实现了多路复用）</p>
-</blockquote>
-</li>
-<li>
-<h4 id="信道极限容量">信道极限容量</h4>
-<ul>
-<li>
-<p>码元传输的速率越高，或者信号传输的距离越远，或噪声干扰越大，或传输媒体质量越差，在接收端的波形失真就越严重。</p>
-</li>
-<li>
-<p>限制码元在信道上的传输速率的因素有：</p>
-<ol>
-<li>信道能够通过的频率范围<br>
-奈氏准则：在任何信道中，码元传输的速率是由上限的，传输速率超过此上限，就会出现严重的码间串扰的问题，使接收端对码元的判决成为不可能。</li>
-<li>信噪比：信号的平均功率和噪声的平均功率之比(S/N)单位dB<br>
-信噪比(dB)=10log10(S/N)(dB)<br>
-信道的极限信息传输速率C=Wlog2(1+S/N) (b/s)</li>
-</ol>
-<p>可以看出：<strong>信道的带宽或信道中的信噪比越大，信息的极限传输速率就越高。</strong></p>
-</li>
-<li>
-<p>提高信息的传输速率：尽可能的让每一个码元携带更多信息量。</p>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="3-物理层下的传输媒体">3. 物理层下的传输媒体</h3>
-<ul>
-<li>导向传输媒体：固体媒体(铜线或光纤)。双绞线、同轴电缆、光纤。</li>
-<li>非导向传输媒体：指利用无线电波在自由空间传播。</li>
-</ul>
-<h3 id="4-信道复用技术">4. 信道复用技术</h3>
-<ol>
-<li>
-<h4 id="频分-时分-统计时分复用">频分、时分、统计时分复用</h4>
-<ul>
-<li>
-<p><strong>频分复用</strong>FDM：所有用户在同样的时间占用不同的带宽资源。</p>
-<figure data-type="image" tabindex="2"><img src="https://s1.ax1x.com/2020/06/04/t0FCDA.png" alt="t0FCDA.png" loading="lazy"></figure>
-</li>
-<li>
-<p><strong>时分复用</strong>TDM：所有用户在不同的时间占用同样的频带宽度。</p>
-<figure data-type="image" tabindex="3"><img src="https://s1.ax1x.com/2020/06/04/t0Fegg.png" alt="t0Fegg.png" loading="lazy"></figure>
-<p>TDM有时会造成信道利用率不高：</p>
-  <img src="https://s1.ax1x.com/2020/06/04/t0eoin.png" alt="t0eoin.png" border="0" />
-</li>
-<li>
-<p><strong>统计时分复用</strong>STDM：TDM的改进，提高信道利用率。</p>
-  <div align="center"><img src="https://s1.ax1x.com/2020/06/04/t0e2M8.png" alt="t0e2M8.png" border="0" /></div>
-</li>
-</ul>
-</li>
-<li>
-<h4 id="波分复用">波分复用</h4>
-<ul>
-<li><strong>波分复用</strong>WDM：即光的频分复用。</li>
-</ul>
-</li>
-</ol>
-  <div align="center"><img src="https://s1.ax1x.com/2020/06/04/t0FUKJ.png" alt="t0FUKJ.png" border="0" /></div>
-<p>经过复用器合波后，速率达到8 x 2.5Gbit/s = 20Gbit/s。</p>
-<ol start="3">
-<li>
-<h4 id="码分复用">码分复用</h4>
-<ul>
-<li>
-<p><strong>码分复用</strong>CDM：即<strong>码分多址CDMA</strong>，每一个用户可以在同样的时间使用同样的频带进行通信。</p>
-<p>为每个用户分配 m bit 的码片，并且所有的码片<strong>正交</strong>，对于任意两个码片 <em>S</em> (S站的码片向量) 和 <em>T</em> (T站的码片向量) 有</p>
-<figure data-type="image" tabindex="4"><img src="https://s1.ax1x.com/2020/06/04/t0k1Ld.png" alt="t0k1Ld.png" loading="lazy"></figure>
-<p>为了方便，取 m=8，设码片 <em>S</em> 为 00011011。在拥有该码片的用户<strong>发送比特 1 时就发送该码片，发送比特 0 时就发送该码片的反码</strong> 11100100。</p>
-<p>在计算时将 00011011 记作 (-1 -1 -1 +1 +1 -1 +1 +1)，可以得到</p>
-<figure data-type="image" tabindex="5"><img src="https://s1.ax1x.com/2020/06/04/t0kUW8.png" alt="t0kUW8.png" loading="lazy"></figure>
-<figure data-type="image" tabindex="6"><img src="https://s1.ax1x.com/2020/06/04/t0k0yQ.png" alt="t0k0yQ.png" loading="lazy"></figure>
-<p>其中 <em>S</em>' 为 <em>S</em> 的反码。</p>
-<p><strong>任何一个码片向量和该码片向量自己的规格化内积都是1。</strong></p>
-<p>利用上面的式子我们知道，当接收端使用码片 <em>S</em> 对接收到的数据进行内积运算时，<strong>结果为 0 的是其它用户发送的数据，结果为 1 的是用户发送的比特 1，结果为 -1 的是用户发送的比特 0。</strong></p>
-<p>码分复用需要发送的数据量为原先的 m 倍。</p>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="5-宽带接入技术">5. 宽带接入技术</h3>
-<ol>
-<li>
-<h4 id="xdsl技术用数字技术对现有的模拟电话用户线进行改造使它能够承载宽带业务">xDSL技术：用数字技术对现有的模拟电话用户线进行改造，使它能够承载宽带业务。</h4>
-<p>其中，0-4kHz低端频谱留给传统电话使用，高端频谱留给用户上网使用。几种类型:ADSL/HDSL/SDSL/VDSL</p>
-<ul>
-<li>ADSL技术：非对称数字用户线。ADSL把上行和下行带宽做成不对称的。上行指从用户到ISP,下行指从ISP到用户。用户线两端是调制解调器(DMT).<br>
-DMT调制技术采用频分复用。40kHz-1.1MHz的高端频谱划分许多子信道，25个用于上行，249个用于下行。每个信道占据4kHz带宽。ADSL不能保证固定的数据率。</li>
-<li>基于ADSL的接入网组成：
-<ul>
-<li>数字用户线接入复用器DSLAM（包含许多ADSL调制解调器，记为ATU-C和ATU-R）</li>
-<li>用户线</li>
-<li>用户家的设施</li>
-<li>总结：ADSL是借助于在用户线两端安装ADSL调制解调器(即ATU-R和ATU-C)对数字信号进行调制，使得调制后的数字信号的频谱适合在原来的用线上传输。</li>
-</ul>
-</li>
-<li>光纤同轴混合网(HFC网)<br>
-HFC网是目前覆盖面很广的有线电视网CATV的基础上开发的一种居民带宽接入网。
-<ul>
-<li>功能：传送CATV、电话业务、数据和其他宽带交互型业务。</li>
-<li>特点：
-<ol>
-<li>HFC网的主干线路采用光纤</li>
-<li>HFC网采用结点体系结构：从头端到各个光纤结点用模拟光纤连接，构成星型网。</li>
-<li>HFC网具有比CATV网更宽的频谱，且具有双向传输功能</li>
-<li>每个家庭要安装一个用户接口盒，其提供三种连接：使用同轴电缆连接到机顶盒再连接到用户的电视机；使用双绞线连接到用户的电话机；使用电缆调制解调器连接到用户的计算机。</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<h4 id="fttx技术光纤到">FTTx技术（光纤到…）</h4>
-<ul>
-<li>光纤到户FTTH：即将光纤一直铺设到用户家庭。</li>
-<li>光纤到大楼FTTB：支持大中型企业、大公司高速率宽带业务需求，比FTTH经济。</li>
-<li>光纤到路边FTTC：比较流行。</li>
-</ul>
-</li>
-</ol>
-]]></content>
     </entry>
 </feed>
