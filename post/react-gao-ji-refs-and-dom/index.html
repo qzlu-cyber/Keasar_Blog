@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页 | Keasar`Blog</title>
+<title>React 高级 -- Refs and DOM | Keasar`Blog</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1598092163777">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -48,8 +48,8 @@
 </script>
 
 
-  <meta name="description" content="CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页" />
-  <meta name="keywords" content="Linux" />
+  <meta name="description" content="React 高级 -- Refs and DOM" />
+  <meta name="keywords" content="React" />
 </head>
 
 <body>
@@ -274,9 +274,14 @@
 <ul>
 <li>
 <ul>
-<li><a href="#centos76%E5%AE%89%E8%A3%85docker%E5%B9%B6%E5%9C%A8docker%E4%B8%AD%E5%88%A9%E7%94%A8tomcat%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5">CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页</a>
+<li>
 <ul>
-<li><a href="#1-%E5%AE%89%E8%A3%85docker">1. 安装Docker</a></li>
+<li><a href="#%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8">何时使用</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8-refs">使用 Refs</a></li>
+<li><a href="#%E8%AE%BF%E9%97%AE-refs">访问 Refs</a></li>
+<li><a href="#%E6%93%8D%E4%BD%9C-dom">操作 DOM</a></li>
+<li><a href="#%E4%B8%BA-dom-%E5%85%83%E7%B4%A0%E6%B7%BB%E5%8A%A0-ref">为 DOM 元素添加 <code>ref</code></a></li>
+<li><a href="#%E4%B8%BA%E7%B1%BB%E7%BB%84%E4%BB%B6%E6%B7%BB%E5%8A%A0-ref">为类组件添加 <code>Ref</code></a></li>
 </ul>
 </li>
 </ul>
@@ -548,8 +553,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://keasar.com.cn/post/centos76-an-zhuang-docker-bing-zai-docker-zhong-li-yong-tomcat-bu-shu-jing-tai-wang-ye/">
-      CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页
+    <a class="post-title-link" href="https://keasar.com.cn/post/react-gao-ji-refs-and-dom/">
+      React 高级 -- Refs and DOM
     </a>
   </h1>
   <div class="post-meta">
@@ -557,7 +562,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-06-03 14:40:59">2020-06-03</span>
+      <span class="publish-time" data-t="2020-08-22 18:27:06">2020-08-22</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -566,8 +571,8 @@
       <span class="pc-show language" data-lan="category-in">分类于</span>
       
       
-      <a href="https://keasar.com.cn/tag/WBli5YTXs/">
-        <span>Linux</span>
+      <a href="https://keasar.com.cn/tag/PiGRmt12r/">
+        <span>React</span>
       </a>
       
       
@@ -576,17 +581,17 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2<span class="language" data-lan="minute">分钟</span></span>
+      <span>4<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>368<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>800<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
     
-    <span id="/post/centos76-an-zhuang-docker-bing-zai-docker-zhong-li-yong-tomcat-bu-shu-jing-tai-wang-ye/" data-flag-title="CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页" class="meta-item pc-show leancloud_visitors">
+    <span id="/post/react-gao-ji-refs-and-dom/" data-flag-title="React 高级 -- Refs and DOM" class="meta-item pc-show leancloud_visitors">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-eye"></i>
       <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
@@ -595,109 +600,159 @@
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h3 id="centos76安装docker并在docker中利用tomcat部署静态网页">CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页</h3>
+              <p>React 数据流是单向的，通过 <code>props</code> 由父组件向子组件传递数据，如果要修改子组件，需要修改 <code>props</code> 来重新渲染子组件。<code>refs</code> 就是另一种方法，它允许我们访问真实的 DOM 节点或在 <code>render</code> 方法中创建的 React 元素。</p>
 <!-- more -->
-<h4 id="1-安装docker">1. 安装Docker</h4>
+<h4 id="何时使用">何时使用</h4>
 <ul>
-<li>
-<p>更新yum包</p>
-<pre><code>yum update
-</code></pre>
-</li>
-<li>
-<p>查看是否安装过docker</p>
-<pre><code>whereis docker
-</code></pre>
-</li>
-<li>
-<p>如果安装过，则删除之前的版本</p>
-<pre><code>yum remove docker docker-common docker-selinux docker-engine
-</code></pre>
-</li>
-<li>
-<p>设置yum源</p>
-<pre><code>yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-</code></pre>
-</li>
-<li>
-<p>查看docker版本</p>
-<pre><code>yum list docker-ce --showduplicates | sort -r
-</code></pre>
-</li>
-<li>
-<p>安装</p>
-<pre><code>yum install docker-ce 
-</code></pre>
-</li>
-<li>
-<p>启动Docker</p>
-<pre><code>systemctl start docker
-</code></pre>
-</li>
-<li>
-<p>开机启动</p>
-<pre><code>systemctl enable docker
-</code></pre>
-</li>
-<li>
-<p>验证安装是否成功</p>
-<pre><code>docker version
-</code></pre>
-<ul>
-<li>
-<p>如下存在Client和Server则成功</p>
-<figure data-type="image" tabindex="1"><img src="X:%5Cclassworks%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%5Cdockerversion.png" alt="dockerversion" loading="lazy"></figure>
-</li>
+<li>管理焦点，文本选择或媒体播放。</li>
+<li>触发强制动画。</li>
+<li>集成第三方 DOM 库。</li>
 </ul>
-</li>
-</ul>
-<p>2.Docker常用命令</p>
-<pre><code>docker 运行容器命令
-docker ps
- 
-docker 所有容器命令
-docker ps -a
- 
-docker 删除容器命令
-docker rm 容器id
- 
-docker 镜像查看命令
-</code></pre>
-<p>3.利用Tomcat部署静态网页</p>
+<p><strong>请勿过度使用 Refs，尽可能少地操作 DOM。</strong></p>
+<h4 id="使用-refs">使用 Refs</h4>
 <ul>
 <li>
-<p>拉取Tomcat</p>
-<pre><code>docker pull tomcat
+<p>利用 <code>React.createRef()</code> 构建：</p>
+<pre><code class="language-jsx">export default class App extends Component {
+  render() {
+    return &lt;Hello /&gt;;
+  }
+}
+
+class Hello extends Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef(); // 创建 Refs
+  }
+
+  render() {
+    return (
+      &lt;div style={{ margin: &quot;0 auto&quot;, width: &quot;80px&quot; }}&gt;
+        &lt;h1 ref={this.myRef}&gt;Hello&lt;/h1&gt; {/*通过 ref 属性附加到 React 元素*/}
+      &lt;/div&gt;
+    );
+  }
+}
 </code></pre>
 </li>
 <li>
-<p>启动容器，验证Tomcat服务</p>
-<pre><code>docker run -p 8080:8080 tomcat
-</code></pre>
-</li>
-<li>
-<p>访问</p>
-<p>服务器外网IP:8080即可</p>
-<p>如果不行，看是否能ping通或者是服务器端口是否开放</p>
-</li>
-<li>
-<p>将静态页面拷贝到docker中tomcat的webapps下，建议挂载</p>
-<ul>
-<li>
-<p>将Tomcat启动，进入docker中查看命令：</p>
-<pre><code>docker exec -it 容器id /bin/bash //容器ID可通过 docker ps命令查询
-</code></pre>
-</li>
-<li>
-<p>挂载静态文件</p>
-<p>首先将静态资源文件夹上传至云服务器，例如我的上传至了/root下，即SongMove文件夹。下面这条命令即是将静态资源目录映射到容器的/ROOT下</p>
-<pre><code>docker run -d -v /root/SongMove/:/usr/local/tomcat/webapps/ROOT/ -p 8080:8080 tomcat:latest
+<p>回调形式的 <code>refs</code></p>
+<pre><code class="language-jsx">export default class App extends Component {
+  render() {
+    return &lt;Hello /&gt;;
+  }
+}
+
+class Hello extends Component {
+  constructor(props) {
+    super(props);
+    this.myRef = null; // 创建 Refs
+  }
+
+  render() {
+    return (
+      &lt;div style={{ margin: &quot;0 auto&quot;, width: &quot;80px&quot; }}&gt;
+        &lt;h1 ref={(element) =&gt; this.myRef = element}&gt;Hello&lt;/h1&gt; {/*通过 ref 属性附加到 React 元素*/}
+      &lt;/div&gt;
+    );
+  }
+}	
 </code></pre>
 </li>
 </ul>
-</li>
+<h4 id="访问-refs">访问 Refs</h4>
+<pre><code class="language-jsx">const node = this.myRefs.current; // 将会得到 &lt;h1&gt; 标签
+</code></pre>
+<p>当使用回调形式的 <code>refs</code> 时无 <code>current</code> 属性，<code>this.myRefs</code> 即为 DOM。可通过下面的形式定义出 <code>current</code>，可简单理解为利用 <code>React.createRef()</code> 构建的 <code>refs</code> 即是这种原理（实际上官方还做了密封处理）：</p>
+<pre><code class="language-jsx">class Hello extends Component {
+  constructor(props) {
+    super(props);
+    this.myRef = {
+      current: null
+    }; // 创建 Refs
+  }
+  
+  render() {
+    return (
+      &lt;div style={{ margin: &quot;0 auto&quot;, width: &quot;80px&quot; }}&gt;
+        &lt;h1 ref={this.myRef}&gt;Hello&lt;/h1&gt; {/*通过 ref 属性附加到 React 元素*/}
+      &lt;/div&gt;
+    );
+  }
+}	
+</code></pre>
+<p><code>ref</code> 的值根据节点的类型而有所不同：</p>
+<ul>
+<li>当 <code>ref</code> 属性用于 HTML 元素时，构造函数中使用 <code>React.createRef()</code> 创建的 <code>ref</code> 接收底层 DOM 元素作为其 <code>current</code> 属性。</li>
+<li>当 <code>ref</code> 属性用于自定义 <code>class</code> 组件时，<code>ref</code> 对象接收组件的挂载实例作为其 <code>current</code> 属性。</li>
+<li><strong>你不能在函数组件上使用 <code>ref</code> 属性</strong>，因为它们没有实例。</li>
 </ul>
-<p>4.服务器IP:8080访问即可</p>
+<p>React 会在组件挂载时给 <code>current</code> 属性传入 DOM 元素，并在组件卸载时传入 <code>null</code> 值。<code>ref</code> 会在 <code>componentDidMount</code> 或 <code>componentDidUpdate</code> 生命周期钩子触发前更新。</p>
+<figure data-type="image" tabindex="1"><img src="https://s1.ax1x.com/2020/08/22/daHKUS.png" alt="何时获取到DOM" loading="lazy"></figure>
+<h4 id="操作-dom">操作 DOM</h4>
+<pre><code class="language-jsx">class Hello extends Component {
+...
+  componentDidMount() {
+    if (this.myRef &amp;&amp; this.myRef.current) {
+    this.myRef.current.innerHTML = &quot;World&quot;; // 原本 &lt;h1&gt; 标签中的 Hello 将被替换为 World
+    }
+  }
+...
+}
+
+export default Hello;
+</code></pre>
+<h4 id="为-dom-元素添加-ref">为 DOM 元素添加 <code>ref</code></h4>
+<pre><code class="language-jsx">import React from &quot;react&quot;;
+
+export default class CustomTextInput extends React.Component {
+  constructor(props) {
+    super(props);
+    // 创建一个 ref 来存储 textInput 的 DOM 元素
+    this.textInput = React.createRef();
+    this.focusTextInput = this.focusTextInput.bind(this);
+  }
+
+  focusTextInput() {
+    // 直接使用原生 API 使 text 输入框获得焦点
+    // 注意：我们通过 &quot;current&quot; 来访问 DOM 节点
+    this.textInput.current.focus();
+  }
+
+  render() {
+    // 告诉 React 我们想把 &lt;input&gt; ref 关联到
+    // 构造器里创建的 `textInput` 上
+    return (
+      &lt;div&gt;
+        &lt;input type='text' ref={this.textInput} /&gt;
+        &lt;input
+          type='button'
+          value='Focus the text input'
+          onClick={this.focusTextInput} {/*每当点击按钮输入框将自动获得焦点*/}
+        /&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+</code></pre>
+<h4 id="为类组件添加-ref">为类组件添加 <code>Ref</code></h4>
+<pre><code class="language-jsx">class AutoFocusTextInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.textInput = React.createRef();
+  }
+
+  componentDidMount() {
+    this.textInput.current.focusTextInput(); //挂载后调用 current 内部方法实现输入框自动获取到焦点
+  }
+
+  render() {
+    return (
+      &lt;CustomTextInput ref={this.textInput} /&gt;
+    );
+  }
+}
+</code></pre>
 
             </div>
             
@@ -710,7 +765,7 @@ docker 镜像查看命令
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://keasar.com.cn/post/centos76-an-zhuang-docker-bing-zai-docker-zhong-li-yong-tomcat-bu-shu-jing-tai-wang-ye/" title="CentOS7.6安装Docker并在Docker中利用Tomcat部署静态网页">https://keasar.com.cn/post/centos76-an-zhuang-docker-bing-zai-docker-zhong-li-yong-tomcat-bu-shu-jing-tai-wang-ye/</a>
+      <a href="https://keasar.com.cn/post/react-gao-ji-refs-and-dom/" title="React 高级 -- Refs and DOM">https://keasar.com.cn/post/react-gao-ji-refs-and-dom/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -719,21 +774,17 @@ docker 镜像查看命令
   </ul>
   <div class="tags">
     
-      <a href="https://keasar.com.cn/tag/WBli5YTXs/"># Linux</a>
+      <a href="https://keasar.com.cn/tag/PiGRmt12r/"># React</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="计算机网络学习笔记（一）--  计算机网络概述" href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="计算机网络学习笔记（一）--  计算机网络概述" href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="函数（上）" href="https://keasar.com.cn/post/han-shu-shang/">函数（上）</a>
-        <a class="nav-mobile-next" title="函数（上）" href="https://keasar.com.cn/post/han-shu-shang/">下一篇</a>
+        <a class="nav-pc-next" title="JavaScript 网络请求 Fetch" href="https://keasar.com.cn/post/javascript-wang-luo-qing-qiu-fetch/">JavaScript 网络请求 Fetch</a>
+        <a class="nav-mobile-next" title="JavaScript 网络请求 Fetch" href="https://keasar.com.cn/post/javascript-wang-luo-qing-qiu-fetch/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

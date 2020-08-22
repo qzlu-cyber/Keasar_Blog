@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>计算机网络学习笔记（一）--  计算机网络概述 | Keasar`Blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1598075665229">
+<link rel="shortcut icon" href="/favicon.ico?v=1598092163777">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -212,7 +212,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">14</span>
+        <span class="site-item-stat-count">15</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -1844,6 +1844,164 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://keasar.com.cn/post/react-gao-ji-refs-and-dom/"" data-c="
+          &lt;p&gt;React 数据流是单向的，通过 &lt;code&gt;props&lt;/code&gt; 由父组件向子组件传递数据，如果要修改子组件，需要修改 &lt;code&gt;props&lt;/code&gt; 来重新渲染子组件。&lt;code&gt;refs&lt;/code&gt; 就是另一种方法，它允许我们访问真实的 DOM 节点或在 &lt;code&gt;render&lt;/code&gt; 方法中创建的 React 元素。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h4 id=&#34;何时使用&#34;&gt;何时使用&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;管理焦点，文本选择或媒体播放。&lt;/li&gt;
+&lt;li&gt;触发强制动画。&lt;/li&gt;
+&lt;li&gt;集成第三方 DOM 库。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;请勿过度使用 Refs，尽可能少地操作 DOM。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;使用-refs&#34;&gt;使用 Refs&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;利用 &lt;code&gt;React.createRef()&lt;/code&gt; 构建：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;export default class App extends Component {
+  render() {
+    return &amp;lt;Hello /&amp;gt;;
+  }
+}
+
+class Hello extends Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef(); // 创建 Refs
+  }
+
+  render() {
+    return (
+      &amp;lt;div style={{ margin: &amp;quot;0 auto&amp;quot;, width: &amp;quot;80px&amp;quot; }}&amp;gt;
+        &amp;lt;h1 ref={this.myRef}&amp;gt;Hello&amp;lt;/h1&amp;gt; {/*通过 ref 属性附加到 React 元素*/}
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;回调形式的 &lt;code&gt;refs&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;export default class App extends Component {
+  render() {
+    return &amp;lt;Hello /&amp;gt;;
+  }
+}
+
+class Hello extends Component {
+  constructor(props) {
+    super(props);
+    this.myRef = null; // 创建 Refs
+  }
+
+  render() {
+    return (
+      &amp;lt;div style={{ margin: &amp;quot;0 auto&amp;quot;, width: &amp;quot;80px&amp;quot; }}&amp;gt;
+        &amp;lt;h1 ref={(element) =&amp;gt; this.myRef = element}&amp;gt;Hello&amp;lt;/h1&amp;gt; {/*通过 ref 属性附加到 React 元素*/}
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}	
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;访问-refs&#34;&gt;访问 Refs&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;const node = this.myRefs.current; // 将会得到 &amp;lt;h1&amp;gt; 标签
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;当使用回调形式的 &lt;code&gt;refs&lt;/code&gt; 时无 &lt;code&gt;current&lt;/code&gt; 属性，&lt;code&gt;this.myRefs&lt;/code&gt; 即为 DOM。可通过下面的形式定义出 &lt;code&gt;current&lt;/code&gt;，可简单理解为利用 &lt;code&gt;React.createRef()&lt;/code&gt; 构建的 &lt;code&gt;refs&lt;/code&gt; 即是这种原理（实际上官方还做了密封处理）：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;class Hello extends Component {
+  constructor(props) {
+    super(props);
+    this.myRef = {
+      current: null
+    }; // 创建 Refs
+  }
+  
+  render() {
+    return (
+      &amp;lt;div style={{ margin: &amp;quot;0 auto&amp;quot;, width: &amp;quot;80px&amp;quot; }}&amp;gt;
+        &amp;lt;h1 ref={this.myRef}&amp;gt;Hello&amp;lt;/h1&amp;gt; {/*通过 ref 属性附加到 React 元素*/}
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}	
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;ref&lt;/code&gt; 的值根据节点的类型而有所不同：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当 &lt;code&gt;ref&lt;/code&gt; 属性用于 HTML 元素时，构造函数中使用 &lt;code&gt;React.createRef()&lt;/code&gt; 创建的 &lt;code&gt;ref&lt;/code&gt; 接收底层 DOM 元素作为其 &lt;code&gt;current&lt;/code&gt; 属性。&lt;/li&gt;
+&lt;li&gt;当 &lt;code&gt;ref&lt;/code&gt; 属性用于自定义 &lt;code&gt;class&lt;/code&gt; 组件时，&lt;code&gt;ref&lt;/code&gt; 对象接收组件的挂载实例作为其 &lt;code&gt;current&lt;/code&gt; 属性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;你不能在函数组件上使用 &lt;code&gt;ref&lt;/code&gt; 属性&lt;/strong&gt;，因为它们没有实例。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;React 会在组件挂载时给 &lt;code&gt;current&lt;/code&gt; 属性传入 DOM 元素，并在组件卸载时传入 &lt;code&gt;null&lt;/code&gt; 值。&lt;code&gt;ref&lt;/code&gt; 会在 &lt;code&gt;componentDidMount&lt;/code&gt; 或 &lt;code&gt;componentDidUpdate&lt;/code&gt; 生命周期钩子触发前更新。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/08/22/daHKUS.png&#34; alt=&#34;何时获取到DOM&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;操作-dom&#34;&gt;操作 DOM&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;class Hello extends Component {
+...
+  componentDidMount() {
+    if (this.myRef &amp;amp;&amp;amp; this.myRef.current) {
+    this.myRef.current.innerHTML = &amp;quot;World&amp;quot;; // 原本 &amp;lt;h1&amp;gt; 标签中的 Hello 将被替换为 World
+    }
+  }
+...
+}
+
+export default Hello;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;为-dom-元素添加-ref&#34;&gt;为 DOM 元素添加 &lt;code&gt;ref&lt;/code&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;import React from &amp;quot;react&amp;quot;;
+
+export default class CustomTextInput extends React.Component {
+  constructor(props) {
+    super(props);
+    // 创建一个 ref 来存储 textInput 的 DOM 元素
+    this.textInput = React.createRef();
+    this.focusTextInput = this.focusTextInput.bind(this);
+  }
+
+  focusTextInput() {
+    // 直接使用原生 API 使 text 输入框获得焦点
+    // 注意：我们通过 &amp;quot;current&amp;quot; 来访问 DOM 节点
+    this.textInput.current.focus();
+  }
+
+  render() {
+    // 告诉 React 我们想把 &amp;lt;input&amp;gt; ref 关联到
+    // 构造器里创建的 `textInput` 上
+    return (
+      &amp;lt;div&amp;gt;
+        &amp;lt;input type=&#39;text&#39; ref={this.textInput} /&amp;gt;
+        &amp;lt;input
+          type=&#39;button&#39;
+          value=&#39;Focus the text input&#39;
+          onClick={this.focusTextInput} {/*每当点击按钮输入框将自动获得焦点*/}
+        /&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;为类组件添加-ref&#34;&gt;为类组件添加 &lt;code&gt;Ref&lt;/code&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;class AutoFocusTextInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.textInput = React.createRef();
+  }
+
+  componentDidMount() {
+    this.textInput.current.focusTextInput(); //挂载后调用 current 内部方法实现输入框自动获取到焦点
+  }
+
+  render() {
+    return (
+      &amp;lt;CustomTextInput ref={this.textInput} /&amp;gt;
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+">React 高级 -- Refs and DOM</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://keasar.com.cn/post/javascript-wang-luo-qing-qiu-fetch/"" data-c="
