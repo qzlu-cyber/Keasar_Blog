@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Keasar`Blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1598092163777">
+<link rel="shortcut icon" href="/favicon.ico?v=1598158333664">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -194,7 +194,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">15</span>
+        <span class="site-item-stat-count">16</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -272,6 +272,10 @@
           <small class="language" data-lan="tag">标签</small>
         </h2>
       </div>
+      
+      
+      
+      
       
       
       
@@ -1130,6 +1134,172 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://keasar.com.cn/post/javascript-this-guan-jian-zi/"" data-c="
+          &lt;p&gt;面向对象语言中 &lt;code&gt;this&lt;/code&gt; 表示当前对象的一个引用。但在 JavaScript 中 &lt;code&gt;this&lt;/code&gt; 不是固定不变的，它会随着执行环境的改变而改变。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h4 id=&#34;每一个函数内部都有一个关键字this-并且this-可供直接调用&#34;&gt;每一个函数内部都有一个关键字&lt;code&gt;this&lt;/code&gt; ，并且&lt;code&gt;this&lt;/code&gt; 可供直接调用&lt;/h4&gt;
+&lt;h4 id=&#34;函数内部的-this-只和函数的调用方式有关系和函数的定义方式没有关系&#34;&gt;&lt;strong&gt;函数内部的 this 只和函数的调用方式有关系，和函数的定义方式没有关系&lt;/strong&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;全局定义的函数直接调用，&lt;code&gt;this =&amp;gt; window&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function fn() {
+  console.log(this);
+}
+fn();
+// 此时 this 指向 window
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;对象内部的方法调用，&lt;code&gt;this =&amp;gt; 调用者&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const obj = {
+  fn: function () {
+    console.log(this);
+  }
+}
+obj.fn();
+// 此时 this 指向 obj
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;定时器的处理函数，&lt;code&gt;this =&amp;gt; window&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;setTimeout(function () {
+  console.log(this)
+}, 0)
+// 此时定时器处理函数里面的 this 指向 window
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;事件处理函数，&lt;code&gt;this =&amp;gt; 事件源&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;div.onclick = function () {
+  console.log(this)
+}
+// 当你点击 div 的时候，this 指向 div
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;自调用函数，&lt;code&gt;this =&amp;gt; window&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;(function () {
+  console.log(this)
+})()
+// 此时 this 指向 window
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;箭头函数，箭头函数内部没有 &lt;code&gt;this&lt;/code&gt;，箭头函数的 &lt;code&gt;this&lt;/code&gt; 是&lt;code&gt;上下文的 this&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// 在箭头函数定义的位置往上查找，这一行是可以打印出 this 的
+// 因为这里的 this 是 window
+// 所以箭头函数内部的 this 就是 window
+const obj = {
+  fn: function () {
+    console.log(this)
+  },
+  // 这个位置是箭头函数的上一行，但是不能打印出 this
+  fun: () =&amp;gt; {
+    // 箭头函数内部的 this 是书写箭头函数的上一行一个可以打印出 this 的位置
+    console.log(this)
+  }
+}
+
+obj.fn()
+obj.fun()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;显式函数绑定&#34;&gt;&lt;strong&gt;显式函数绑定&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;在 JavaScript 中函数也是对象，对象则有方法，&lt;code&gt;apply&lt;/code&gt; 和 &lt;code&gt;call&lt;/code&gt; 就是函数对象的方法。这两个方法异常强大，他们允许切换函数执行的上下文环境（context），即 &lt;code&gt;this&lt;/code&gt; 绑定的对象。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;apply&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;apply&lt;/code&gt; 方法是附加在函数调用后面使用，可以忽略函数本身的 &lt;code&gt;this&lt;/code&gt; 指向&lt;/li&gt;
+&lt;li&gt;语法： &lt;code&gt;函数名.apply(要改变的 this 指向，[要给函数传递的参数1， 要给函数传递的参数2， ...])&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const obj = { name: &#39;Jack&#39; };
+function fn(a, b) {
+  console.log(this);
+  console.log(a);
+  console.log(b);
+}
+fn(1, 2); // this =&amp;gt; window
+fn.call(obj, [1, 2]); // this =&amp;gt; obj
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;apply&lt;/code&gt; :
+&lt;ul&gt;
+&lt;li&gt;会立即执行函数&lt;/li&gt;
+&lt;li&gt;第一个参数是你要改变的函数内部的 &lt;code&gt;this&lt;/code&gt; 指向&lt;/li&gt;
+&lt;li&gt;第二个参数是一个 &lt;strong&gt;数组&lt;/strong&gt;，数组里面的每一项依次是向函数传递的参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;call&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;call&lt;/code&gt; 方法是附加在函数调用后面使用，可以忽略函数本身的 &lt;code&gt;this&lt;/code&gt; 指向&lt;/li&gt;
+&lt;li&gt;语法： &lt;code&gt;函数名.call(要改变的 this 指向，要给函数传递的参数1，要给函数传递的参数2， ...)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const obj = { name: &#39;Jack&#39; };
+function fn(a, b) {
+  console.log(this);
+  console.log(a);
+  console.log(b);
+}
+fn(1, 2); // this =&amp;gt; window
+fn.call(obj, 1, 2); // this =&amp;gt; obj
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;call&lt;/code&gt;:
+&lt;ul&gt;
+&lt;li&gt;会立即执行函数&lt;/li&gt;
+&lt;li&gt;第一个参数是你要改变的函数内部的 &lt;code&gt;this&lt;/code&gt; 指向&lt;/li&gt;
+&lt;li&gt;第二个参数开始，依次是向函数传递参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;bind&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;bind&lt;/code&gt; 方法是附加在函数调用后面使用，可以忽略函数本身的 &lt;code&gt;this&lt;/code&gt; 指向&lt;/li&gt;
+&lt;li&gt;和 &lt;code&gt;call / apply&lt;/code&gt; 有一些不一样，它不会立即执行函数，而是返回一个已经改变了 &lt;code&gt;this&lt;/code&gt; 指向的函数&lt;/li&gt;
+&lt;li&gt;语法： &lt;code&gt;const newFn = 函数名.bind(要改变的 this 指向); newFn(传递参数)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const obj = { name: &#39;Jack&#39; };
+function fn(a, b) {
+  console.log(this);
+  console.log(a);
+  console.log(b);
+}
+fn(1, 2);
+const newFn = fn.bind(obj); // 改变了 this 指向
+newFn(1, 2); // 执行结果一致，但是 this =&amp;gt; obj
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;总结&#34;&gt;总结&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;this&lt;/code&gt; 是作用域内部使用的关键字&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;this&lt;/code&gt; 指向不看函数定义，只和调用方式有关
+&lt;ul&gt;
+&lt;li&gt;全局调用 &lt;code&gt;fn() this =&amp;gt; window&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;对象调用 &lt;code&gt;obj. fn() this =&amp;gt; obj&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;定时器函数 &lt;code&gt;this =&amp;gt; window&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;事件处理函数 &lt;code&gt;this =&amp;gt; 事件源&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;自执行函数 &lt;code&gt;this =&amp;gt; window&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;构造函数 &lt;code&gt;this =&amp;gt; 当前实例&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;箭头函数 &lt;code&gt;没有 this ，它的 this 是上下文，即外部作用域的 this&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+">JavaScript -- this 关键字</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://keasar.com.cn/post/react-gao-ji-refs-and-dom/"" data-c="

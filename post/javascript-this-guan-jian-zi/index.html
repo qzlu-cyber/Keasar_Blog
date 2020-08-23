@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>计算机网络学习笔记（三）--  数据链路层 | Keasar`Blog</title>
+<title>JavaScript -- this 关键字 | Keasar`Blog</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1598158333664">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -48,8 +48,8 @@
 </script>
 
 
-  <meta name="description" content="计算机网络学习笔记（三）--  数据链路层" />
-  <meta name="keywords" content="计算机网络" />
+  <meta name="description" content="JavaScript -- this 关键字" />
+  <meta name="keywords" content="JavaScript" />
 </head>
 
 <body>
@@ -274,33 +274,14 @@
 <ul>
 <li>
 <ul>
-<li><a href="#1-%E4%BD%BF%E7%94%A8%E7%82%B9%E5%AF%B9%E7%82%B9%E4%BF%A1%E9%81%93%E7%9A%84%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82">1. 使用点对点信道的数据链路层</a></li>
-<li><a href="#2-%E7%82%B9%E5%AF%B9%E7%82%B9%E5%8D%8F%E8%AE%AE-ppp">2. 点对点协议 PPP</a><br>
-*
+<li>
 <ul>
-<li><a href="#ppp-%E5%8D%8F%E8%AE%AE%E5%B0%B1%E6%98%AF%E7%94%A8%E6%88%B7-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%92%8C-isp-%E8%BF%9B%E8%A1%8C%E9%80%9A%E4%BF%A1%E6%97%B6%E6%89%80%E4%BD%BF%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8D%8F%E8%AE%AE">PPP 协议就是用户 计算机和 ISP 进行通信时所使用的数据链路层协议。</a></li>
+<li><a href="#%E6%AF%8F%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%86%85%E9%83%A8%E9%83%BD%E6%9C%89%E4%B8%80%E4%B8%AA%E5%85%B3%E9%94%AE%E5%AD%97this-%E5%B9%B6%E4%B8%94this-%E5%8F%AF%E4%BE%9B%E7%9B%B4%E6%8E%A5%E8%B0%83%E7%94%A8">每一个函数内部都有一个关键字<code>this</code> ，并且<code>this</code> 可供直接调用</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E5%86%85%E9%83%A8%E7%9A%84-this-%E5%8F%AA%E5%92%8C%E5%87%BD%E6%95%B0%E7%9A%84%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F%E6%9C%89%E5%85%B3%E7%B3%BB%E5%92%8C%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E6%96%B9%E5%BC%8F%E6%B2%A1%E6%9C%89%E5%85%B3%E7%B3%BB"><strong>函数内部的 this 只和函数的调用方式有关系，和函数的定义方式没有关系</strong></a></li>
+<li><a href="#%E6%98%BE%E5%BC%8F%E5%87%BD%E6%95%B0%E7%BB%91%E5%AE%9A"><strong>显式函数绑定</strong></a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 </ul>
 </li>
-<li><a href="#3-%E4%BD%BF%E7%94%A8%E5%B9%BF%E6%92%AD%E4%BF%A1%E9%81%93%E7%9A%84%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82">3. 使用广播信道的数据链路层</a><br>
-*
-<ul>
-<li><a href="#%E5%B9%BF%E6%92%AD%E4%BF%A1%E9%81%93%E5%8F%AF%E4%BB%A5%E8%BF%9B%E8%A1%8C%E4%B8%80%E5%AF%B9%E5%A4%9A%E7%9A%84%E9%80%9A%E4%BF%A1%E5%B1%80%E5%9F%9F%E7%BD%91%E5%85%B7%E6%9C%89%E5%B9%BF%E6%92%AD%E5%8A%9F%E8%83%BD%E5%B1%80%E5%9F%9F%E7%BD%91%E4%B8%8A%E7%9A%84%E4%B8%BB%E6%9C%BA%E5%8F%AF%E5%85%B1%E4%BA%AB%E8%BF%9E%E6%8E%A5%E5%9C%A8%E5%B1%80-%E5%9F%9F%E7%BD%91%E4%B8%8A%E7%9A%84%E5%90%84%E7%A7%8D%E7%A1%AC%E4%BB%B6%E5%92%8C%E8%BD%AF%E4%BB%B6%E8%B5%84%E6%BA%90">广播信道可以进行一对多的通信，局域网具有广播功能，局域网上的主机可共享连接在局 域网上的各种硬件和软件资源。</a></li>
-<li><a href="#csmacd%E5%8D%8F%E8%AE%AE%E7%9A%84%E8%A6%81%E7%82%B9">CSMA/CD协议的要点：</a></li>
-<li><a href="#%E5%BC%BA%E5%8C%96%E7%A2%B0%E6%92%9E">强化碰撞：</a></li>
-<li><a href="#%E6%80%BB%E7%BB%93">总结：</a></li>
-<li><a href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E7%9A%84%E4%BF%A1%E9%81%93%E5%88%A9%E7%94%A8%E7%8E%87">以太网的信道利用率</a></li>
-</ul>
-</li>
-<li><a href="#4-%E4%BB%A5%E5%A4%AA%E7%BD%91%E7%9A%84mac%E5%B1%82">4. 以太网的MAC层</a></li>
-<li><a href="#5-%E6%89%A9%E5%B1%95%E7%9A%84%E4%BB%A5%E5%A4%AA%E7%BD%91">5. 扩展的以太网</a><br>
-*
-<ul>
-<li><a href="#%E6%89%A9%E5%B1%95%E7%9A%84%E4%BB%A5%E5%A4%AA%E7%BD%91%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%B1%82%E7%9C%8B%E6%9D%A5%E4%BB%8D%E7%84%B6%E6%98%AF%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C">扩展的以太网在网络层看来仍然是一个网络。</a></li>
-<li><a href="#%E7%BD%91%E6%A1%A5%E8%87%AA%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95">网桥（自学习算法）</a></li>
-<li><a href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%AC%AC%E4%BA%8C%E5%B1%82%E4%BA%A4%E6%8D%A2%E6%9C%BA-%E5%8D%B3%E5%A4%9A%E6%8E%A5%E5%8F%A3%E7%BD%91%E6%A1%A5%E5%BC%BA%E8%B0%83%E8%BF%99%E7%A7%8D%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%B7%A5%E4%BD%9C%E5%9C%A8%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82">以太网交换机（第二层交换机 ），即多接口网桥，强调这种交换机工作在数据链路层。</a></li>
-</ul>
-</li>
-<li><a href="#6-%E9%AB%98%E9%80%9F%E4%BB%A5%E5%A4%AA%E7%BD%91">6. 高速以太网</a></li>
 </ul>
 </li>
 </ul>
@@ -570,8 +551,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/">
-      计算机网络学习笔记（三）--  数据链路层
+    <a class="post-title-link" href="https://keasar.com.cn/post/javascript-this-guan-jian-zi/">
+      JavaScript -- this 关键字
     </a>
   </h1>
   <div class="post-meta">
@@ -579,7 +560,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-06-04 19:53:32">2020-06-04</span>
+      <span class="publish-time" data-t="2020-08-23 12:50:51">2020-08-23</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -588,8 +569,8 @@
       <span class="pc-show language" data-lan="category-in">分类于</span>
       
       
-      <a href="https://keasar.com.cn/tag/huZmcNfOq/">
-        <span>计算机网络</span>
+      <a href="https://keasar.com.cn/tag/5OF6wA66L/">
+        <span>JavaScript</span>
       </a>
       
       
@@ -598,17 +579,17 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>20<span class="language" data-lan="minute">分钟</span></span>
+      <span>4<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>5525<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>962<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
     
-    <span id="/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/" data-flag-title="计算机网络学习笔记（三）--  数据链路层" class="meta-item pc-show leancloud_visitors">
+    <span id="/post/javascript-this-guan-jian-zi/" data-flag-title="JavaScript -- this 关键字" class="meta-item pc-show leancloud_visitors">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-eye"></i>
       <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
@@ -617,276 +598,168 @@
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p><a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-yi/">计算机网络学习笔记（一）--  计算机网络概述</a><br>
-<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a><br>
-<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a><br>
-<a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-wu-yun-shu-ceng/">计算机网络学习笔记（五）--  运输层</a></p>
-<p>数据链路层使用的信道有两种类型：</p>
-<ul>
-<li>点对点信道</li>
-<li>广播信道</li>
-</ul>
+              <p>面向对象语言中 <code>this</code> 表示当前对象的一个引用。但在 JavaScript 中 <code>this</code> 不是固定不变的，它会随着执行环境的改变而改变。</p>
 <!-- more -->
-<h3 id="1-使用点对点信道的数据链路层">1. 使用点对点信道的数据链路层</h3>
-<ol>
-<li>
-<p>数据链路和帧</p>
+<h4 id="每一个函数内部都有一个关键字this-并且this-可供直接调用">每一个函数内部都有一个关键字<code>this</code> ，并且<code>this</code> 可供直接调用</h4>
+<h4 id="函数内部的-this-只和函数的调用方式有关系和函数的定义方式没有关系"><strong>函数内部的 this 只和函数的调用方式有关系，和函数的定义方式没有关系</strong></h4>
 <ul>
 <li>
-<p><strong>链路</strong> ：从一个结点到相邻结点的一段物理线路。</p>
+<p>全局定义的函数直接调用，<code>this =&gt; window</code></p>
+<pre><code class="language-js">function fn() {
+  console.log(this);
+}
+fn();
+// 此时 this 指向 window
+</code></pre>
 </li>
 <li>
-<p><strong>数据链路</strong> ：把实现这些协议的硬件和软件加载链路上。<br>
-现在最常用的方法是使用适配器（即网卡）来实现这些协议的硬件和软件。一般的适配器都包括了数据链路层和物理层这两层的功能。</p>
-</li>
-<li>
-<p><strong>帧</strong>：点对点信道的数据链路层的协议数据单元。</p>
+<p>对象内部的方法调用，<code>this =&gt; 调用者</code></p>
+<pre><code class="language-js">const obj = {
+  fn: function () {
+    console.log(this);
+  }
+}
+obj.fn();
+// 此时 this 指向 obj
+</code></pre>
 </li>
 </ul>
-<figure data-type="image" tabindex="1"><img src="https://s1.ax1x.com/2020/06/04/t05kPf.png" alt="t05kPf.png" loading="lazy"></figure>
 <ul>
-<li><strong>点对点信道通信时的主要步骤</strong>：
-<ol>
-<li>结点 A 的数据链路层把网络层交下来的 IP 数据报添加首部和尾部封装成帧。</li>
-<li>结点 A 把封装好的帧发送给结点 B 的数据链路层。</li>
-<li>若结点 B 的数据链路层收到的帧无差错，则从收到的帧中提取出 IP 数据报交给上面的网络层；否则丢弃这个帧。</li>
-</ol>
+<li>
+<p>定时器的处理函数，<code>this =&gt; window</code></p>
+<pre><code class="language-javascript">setTimeout(function () {
+  console.log(this)
+}, 0)
+// 此时定时器处理函数里面的 this 指向 window
+</code></pre>
+</li>
+<li>
+<p>事件处理函数，<code>this =&gt; 事件源</code></p>
+<pre><code class="language-javascript">div.onclick = function () {
+  console.log(this)
+}
+// 当你点击 div 的时候，this 指向 div
+</code></pre>
+</li>
+<li>
+<p>自调用函数，<code>this =&gt; window</code></p>
+<pre><code class="language-javascript">(function () {
+  console.log(this)
+})()
+// 此时 this 指向 window
+</code></pre>
 </li>
 </ul>
-</li>
-<li>
-<p>数据链路层三个基本问题：</p>
-<ol>
-<li>
-<p>封装成帧</p>
-<p>就是在一段数据的前后分别<strong>添加首部</strong>（帧开始符 SOH 01）和<strong>尾部</strong>（帧结束符 EOT 04），然后就构成了一个<strong>帧</strong>。（数据部分 &lt;= 长度限制 MTU）首部和尾部的一个重要作用就是进行帧定界。<br>
-<strong>帧定界是分组交换的必然要求</strong>。</p>
-<figure data-type="image" tabindex="2"><img src="https://s1.ax1x.com/2020/06/04/t0IK6e.png" alt="t0IK6e.png" loading="lazy"></figure>
-<figure data-type="image" tabindex="3"><img src="https://s1.ax1x.com/2020/06/04/t0IJtP.png" alt="t0IJtP.png" loading="lazy"></figure>
-</li>
-<li>
-<p>透明传输</p>
-<p>为了达到透明传输（即传输的数据部分不会因为包含SOH和EOT而出错），在数据中出现控制字符“SOH”或“EOT”的前面插入一个转义字符“ESC”(十六进制1B)<br>
-<strong>透明传输避免消息符号与帧定界符号相混淆</strong>。</p>
-<figure data-type="image" tabindex="4"><img src="https://s1.ax1x.com/2020/06/04/t0IxHA.png" alt="t0IxHA.png" loading="lazy"></figure>
-</li>
-<li>
-<p>差错检测</p>
-<p>现实通信链路中比特在传输中会产生差错，传输错误的比特占比称为<strong>误码率BER</strong>，为了保证可靠性，通常通过<strong>循环冗余检验CRC</strong>来做差错检测。<br>
-<strong>差错检测防止无效数据帧浪费后续路由上的传输和处理资源</strong>。</p>
-<p><strong>循环冗余检验CRC</strong>：</p>
-<p>​		在发送端将数据分组，每组 <em>k</em> bit，在待传送数据 <em>M</em> (<em>k</em> bit) 后添加 <em>n</em> 位冗余码，构成一个帧发送出去，因此一共发送 <em>k+n</em> bit。</p>
-<p>​		利用<strong>模二运算</strong>（不进位，不借位）计算 <em>2^n x M / P</em>, 即在待传送数据 <em>M</em> 后加 n 个0作为被除数，除以商定好的除数 <em>P</em>（比 n 多一位），得到的</p>
-<p>余数 <em>R</em> （比 <em>n</em> 少一位）即为冗余码，将其拼接到数据 <em>M</em> 后发送出去。为了进行检错而添加的冗余码常称为帧检验序列 <em>FCS</em>。</p>
-<p>​		在接收端把接收到的数据以帧为单位进行 CRC 检验：把收到的每一个帧都除以同样的 除数 <em>P</em>（模二运算），然后检查得到的余数 <em>R</em> 如果在传输过程中<strong>无差错，那么经过 CRC 检验后得出的余数肯定是0</strong>。</p>
-<p>​		若 <em>M</em> = 101001(即<em>k</em> = 6)，除数 <em>P</em> = 1101, 还可表示为 <em>P(X) = X^3 + X^2 + 1</em>，此时被除数 <em>2^n x M</em> 为101001000除以 <em>P</em> 的余数 <em>R</em> 为001。因此加上 <em>FCS</em> 后发送的帧是 101001001。接收端被除数即为 101001001，除以除数 <em>P</em> 得到余数 <em>R</em>。若 <em>R</em> = 0，帧无错，接受；若 <em>R</em> ≠ 0，帧出错(无法判断哪一位出错)，丢弃。</p>
-<p><strong>在数据链 路层使用 CRC 检验，能够实现无比特差错的传输，但这还不是可靠传输。</strong></p>
-<p>对于通信质量良好的有线传输链路，不要求数据链路层向上提供可靠传输的服务。改正差错的任务就由上层协议（例如，运输层的 TCP 协议）来完成。 对于通信质量较差的无线传输链路，数据链路层协议使用确认和重传机制，数据链路层向上提供可靠传输的服务。</p>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="2-点对点协议-ppp">2. 点对点协议 PPP</h3>
-<h5 id="ppp-协议就是用户-计算机和-isp-进行通信时所使用的数据链路层协议">PPP 协议就是用户 计算机和 ISP 进行通信时所使用的数据链路层协议。</h5>
-<figure data-type="image" tabindex="5"><img src="https://s1.ax1x.com/2020/06/04/tBaXtI.png" alt="tBaXtI.png" loading="lazy"></figure>
-<!-- more -->
-<!-- more -->
-<p>在 TCP/IP 协议族中，可靠传输由运输层的 TCP 协议负责，因此数据链路层的 PPP 议不需要进行纠错，不需要设置序号，也不需要进行流量控制。 PPP 协议不支待多点线路 （即一个主站轮流和链路上的多个从站进行通信），而<strong>只支持点对点的链路通信</strong>。此外， PPP 协议<strong>只支持全双工链路</strong>。</p>
-<ol>
-<li>
-<p>PPP 协议的组成</p>
-<ul>
-<li>一个将 IP 数据报封装到串行链路的方法。</li>
-<li>链路控制协议 LCP (Link Control Protocol)，用来建立、测试、配置数据链路连接。</li>
-<li>网络控制协议 NCP (Network Control Protocol)，用来支持不同的网络层协议。</li>
-</ul>
-</li>
-<li>
-<p>PPP 协议帧格式</p>
-<figure data-type="image" tabindex="6"><img src="https://s1.ax1x.com/2020/06/04/tBPn9U.png" alt="tBPn9U.png" loading="lazy"></figure>
-<p>若出现连续两个标志字段，就表示这是一个空帧，应当丢弃。</p>
-<ul>
-<li>首部中的标志字段F(Flag)，规定为0x7E(符号0x表示它后面的字符是用十六进制表示的)。十六进制的7E的二进制表示是01111110)，标志字段表示一个帧的开始或结束。</li>
-<li>首部中的地址字段A规定为0xFF(即11111111)，没有携带PPP协议帧的信息。</li>
-<li>首部中的控制字段C规定为0x03(即00000011)，没有携带PPP协议帧的信息。</li>
-<li>首部中的2字节的协议字段：<br>
-(1) 当协议字段为0x0021时，PPP帧的信息字段就是IP数据报。<br>
-(2) 当协议字段为0xC021时，PPP帧的信息字段就是PPP链路控制协议LCP的数据。<br>
-(3) 当协议字段为0x8021时，PPP帧的信息字段就是网络层的控制数据。</li>
-<li>信息部分不超过1500字节。</li>
-<li>尾部中的第一个字段(2个字节)是使用CRC的帧检验序列FCS。</li>
-</ul>
-<p>透明传输的实现方法：</p>
-<ul>
-<li>当信息字段中出现和标志字段一样的比特(0x7E)组合时，就必须采取一些措施使这种形式上和标志字段一样的比特组合不出现在信息字段中。</li>
-</ul>
-<p>字节填充——PPP使用异步传输</p>
-<ul>
-<li>当 PPP 用在异步传输时，就使用一种特殊的字符填充法：将每一个 0x7E字节变为(0x7D, 0x5E)，0x7D转变成为(0x7D, 0x5D)。ASCII 码的控制字符（即数值小于 0x20 的字符），则在前面要加入0x7D，同时将该字符的编码加以改变。</li>
-</ul>
-<p>零比特填充——PPP使用同步传输</p>
-<ul>
-<li>只要发现有5个连续的1，则立即填入一个0。接收端把5个连续的1后的0比特删除。</li>
-</ul>
-</li>
-<li>
-<p>PPP 协议工作状态</p>
-<p><strong>链路静止  --  建立物理层  --  链路建立  --  PC发LCP  --  NCP分配IP地址  --  链路打开，网络层建立。（释放时倒过来）</strong></p>
-<figure data-type="image" tabindex="7"><img src="https://s1.ax1x.com/2020/06/04/tBFzh6.png" alt="tBFzh6.png" loading="lazy"></figure>
-</li>
-</ol>
-<h3 id="3-使用广播信道的数据链路层">3. 使用广播信道的数据链路层</h3>
-<h5 id="广播信道可以进行一对多的通信局域网具有广播功能局域网上的主机可共享连接在局-域网上的各种硬件和软件资源">广播信道可以进行一对多的通信，局域网具有广播功能，局域网上的主机可共享连接在局 域网上的各种硬件和软件资源。</h5>
-<ol>
-<li>
-<p>局域网的数据链路层（局域网的数据链路层被拆分为了两个子层）</p>
-<ul>
-<li><strong>逻辑链路控制LLC子层</strong>：与传输媒体无关。</li>
-<li><strong>媒体接入控制MAC子层</strong>：与接入到传输媒体有关的内容都放在 MAC 子层，和局域网都对 LLC 子层来说是透明的。</li>
-</ul>
-</li>
-<li>
-<p>适配器（网卡）的作用</p>
-<p>包含了***数据链路层***及***物理层***这两个层次的功能。</p>
-<figure data-type="image" tabindex="8"><img src="https://s1.ax1x.com/2020/06/04/tBAyLQ.png" alt="tBAyLQ.png" loading="lazy"></figure>
-</li>
-<li>
-<p><strong>CSMA/CD 协议</strong></p>
-<p>仅当数据帧中的目的地址与适配器 ROM 中存放的硬件地址(MAC 地址)一致时，该适配器才能接收这个数据帧。适配器对不是发送给自己的数据帧就丢弃。</p>
-<p>以太网采用 CSMA/CD协议(<em><strong>载波监听多点接入／碰撞检测</strong></em>) 的方式来协调总线上各计算机的工作。具有两个特点：</p>
-<ul>
-<li>提供的服务是尽最大努力的交付，即不可靠的交付。</li>
-<li>双向交替通信（半双工）。</li>
-</ul>
-<h5 id="csmacd协议的要点">CSMA/CD协议的要点：</h5>
 <ul>
 <li>
-<p><strong>多点接入</strong>就是计算机以多点接入（动态媒体接入控制）的方式连接在一根总线上。</p>
-</li>
-<li>
-<p><strong>载波监听</strong>就是”检测信道”，不管在发送前，还是在发送中，每个站都必须不停地检测信道。在发送前检测信道，是为了获得发送权。在发送中检测信道，是为了及时发现有 没有其他站的发送和本站发送的碰撞。即碰撞检测。</p>
-</li>
-<li>
-<p><strong>碰撞检测</strong>就是“边发送边监听”，即适配器边发送数据边检测信道上的信号电压的变化情况。当一个站检测到的信号电压摆动值超过一定的门限值时，就认为总线上至少有两个站同时在发送数据，表明产生了碰撞，就要立即停止发送，免得继续浪费网络资源，然后等待一段随机时间后再次发送。</p>
+<p>箭头函数，箭头函数内部没有 <code>this</code>，箭头函数的 <code>this</code> 是<code>上下文的 this</code></p>
+<pre><code class="language-js">// 在箭头函数定义的位置往上查找，这一行是可以打印出 this 的
+// 因为这里的 this 是 window
+// 所以箭头函数内部的 this 就是 window
+const obj = {
+  fn: function () {
+    console.log(this)
+  },
+  // 这个位置是箭头函数的上一行，但是不能打印出 this
+  fun: () =&gt; {
+    // 箭头函数内部的 this 是书写箭头函数的上一行一个可以打印出 this 的位置
+    console.log(this)
+  }
+}
+
+obj.fn()
+obj.fun()
+</code></pre>
 </li>
 </ul>
-<p>把总线上的单程端到端传播时延记为 <em>τ</em> ，A 发送数据后，最迟要经过 <em>2τ</em> 才能知道自己发送的数据和其他站发送的数据有没有发生碰撞。</p>
-<figure data-type="image" tabindex="9"><img src="https://s1.ax1x.com/2020/06/04/tBZtZ4.png" alt="tBZtZ4.png" loading="lazy"></figure>
-<p>电磁波在 1km 电缆的传播时延约为 <em>5µs</em>。</p>
-<p>以太网的端到端往返时间 <em>2τ</em> 称为<em><strong>争用期***，又叫</strong>碰撞窗口</em>* 。<strong>经过争用期这 段时间还没有检测到碰撞，才能肯定这次发送不会发生碰撞。</strong></p>
-<p>以太网使用<strong>截断二进制指数退避算法</strong>来确定碰撞后<strong>重传</strong>的时机。</p>
+<h4 id="显式函数绑定"><strong>显式函数绑定</strong></h4>
+<p>在 JavaScript 中函数也是对象，对象则有方法，<code>apply</code> 和 <code>call</code> 就是函数对象的方法。这两个方法异常强大，他们允许切换函数执行的上下文环境（context），即 <code>this</code> 绑定的对象。</p>
 <ul>
 <li>
-<p>协议规定了基本退避时间为争用期 <em>2τ</em>, 具体的争用期时间是 <em><strong>51.2 µs</strong></em> 。对于 10 Mbit/s 以太网，在争用期内可发送 512 bit, 即 64字节。也可以说争用期是 512 比特时间。可以直接使用<strong>比特</strong>作为争用期的单位。争用期是 512bit, 即争用期是发送 512bit 所需的时间。</p>
-</li>
-<li>
-<p>从 <em>[0,1, …，（2k -1)]</em> 中随机取出一个数，记为 <em>r</em> 。重传应推后的时间就是 <em><strong>r 倍的争用期</strong></em>。</p>
-<div align="center">k=Min［重传次数， 10]</div>
-</li>
-<li>
-<p>当重传达 16 次仍不能成功时（这表明同时打算发送数据的站太多，以致连续发生冲突），则丢弃该帧，并向高层报告。</p>
-</li>
+<p><code>apply</code></p>
+<ul>
+<li><code>apply</code> 方法是附加在函数调用后面使用，可以忽略函数本身的 <code>this</code> 指向</li>
+<li>语法： <code>函数名.apply(要改变的 this 指向，[要给函数传递的参数1， 要给函数传递的参数2， ...])</code></li>
 </ul>
-<p>最短帧长 64 字节，即 512 bit 。如果要发送的数据非常少，那么必须加入一些填充字节，使帧长不小于 64 字节。<strong>凡长度小于 64 字节的帧都是由于冲突而异常中止的无效帧</strong>。只要收到了这种无效帧，就应当立即将其丢弃。</p>
-<h5 id="强化碰撞">强化碰撞：</h5>
-<p>​		当发送数据的站一旦发现发生了碰撞时，除了立即停止发送数据外，还要再继续发送 32 比特或 48 比特的<em>人为干扰信号</em>，以便让所有用户都知道现在已经发生了碰撞。</p>
-<figure data-type="image" tabindex="10"><img src="https://s1.ax1x.com/2020/06/04/tBnhWR.png" alt="tBnhWR.png" loading="lazy"></figure>
-<p>​		总线被占用的时间是 <em>TB+ TJ + τ</em>。</p>
-<p><strong>规定帧间最小间隔为 9.6 µs</strong>, 相当于 96 比特时间。这样做是为了使刚刚收到数据帧的站的接收缓存来得及清理，做好接收下一帧的准备。</p>
-<h5 id="总结">总结：</h5>
-<div align="center"><img src="https://s1.ax1x.com/2020/06/04/tBuw7D.md.png" alt="tBuw7D.png" border="0" /></div>
-</li>
-<li>
-<h5 id="以太网的信道利用率">以太网的信道利用率</h5>
-<p><em>a</em> 是以太网单程端到端时延 <em>2τ</em> 与帧的发送时间 <em>To</em> 之比：</p>
-<figure data-type="image" tabindex="11"><img src="https://s1.ax1x.com/2020/06/04/tBMVs0.png" alt="tBMVs0.png" loading="lazy"></figure>
-<p>当 a -&gt; 0 时表示只要一发生碰撞，就立即可以检测出来，并立即停止发送，因而信道资源被浪费的时间非常非常少。反之，参数 <em>a</em> 越大，表明争用期所占的比例越大，使得信道利用率明显降低。当数据率一定时，以太网的连线的长度受到限制（否则 <em>τ</em> 的数值 会太大），同时以太网的帧长不能太短（否则 <em>τ</em> 的值会太小，使 <em>To</em> 值太大）。</p>
-<figure data-type="image" tabindex="12"><img src="https://s1.ax1x.com/2020/06/04/tBQccR.png" alt="tBQccR.png" loading="lazy"></figure>
-<p>只有当参数 <em>a</em> 远小于 1 才能得到尽可能高的极限信道利用率。</p>
-</li>
-</ol>
-<h3 id="4-以太网的mac层">4. 以太网的MAC层</h3>
+<pre><code class="language-js">const obj = { name: 'Jack' };
+function fn(a, b) {
+  console.log(this);
+  console.log(a);
+  console.log(b);
+}
+fn(1, 2); // this =&gt; window
+fn.call(obj, [1, 2]); // this =&gt; obj
+</code></pre>
 <ul>
-<li>
-<p>MAC地址<br>
-<strong>MAC地址</strong>又叫做硬件地址或物理地址，实际上就是适配器地址或适配器标识符EUI-48。高位24位：注册管理机构 RA，组织唯一标识符 OUI，低位24位：由厂家自行指派，称为扩展标识符。</p>
-<p>路由器如果同时连接到两个网络上，那么它就需要两个适配器和两个硬件地址。</p>
-</li>
-<li>
-<p>MAC帧的格式</p>
-<figure data-type="image" tabindex="13"><img src="https://s1.ax1x.com/2020/06/04/tBGEQJ.png" alt="tBGEQJ.png" loading="lazy"></figure>
-<p>以太网V2的MAC帧由五个字段组成。前两个字段分别为6字长的目标地址和源地址字段。第三个字段是2字节的类型字段，用来标志上一层使用的是什么协议，以便把收到的MAC帧的数据上交给上一层的这个协议。后面数据字段46~1500字节，帧检验序列FCS字段4个字节（使用 CRC 检验）。</p>
-<p><em>接收方可以很容易地通过发送方网络适配器的接口上的电压是否变化找到以太网帧的结束位置</em>。在这个位置往前数 4 字节 (FCS 字段长度是 4 字节），就能确定数据字段的结束位置。因此MAC帧首部中不需要帧长度字段。</p>
-<p>当数据字段的长度小千 46 字节时， MAC 子层就会在数据字段的后面加入一个整数字节的<em>填充字段</em>，以保证以太网的 MAC 帧长不小于 64 字节。</p>
-<p>为了接收端迅速实现位同步，从 MAC 子层向下传到物理层时还要在帧的前面插入8字节（由硬件生成），它由两个字段构成。</p>
+<li>使用 <code>apply</code> :
 <ul>
-<li>第一个字段是 个字节的前同步码 (1 交替码），它的作用是“实现位同步”（比特同步）。</li>
-<li>第二个字段是帧开始定界符，定义为 10101011 。它的前六位的作用和前同步码一样，最后的两个连续1的就是告诉接收端适配器： “MAC 帧的信息马上就要来了，请适配器注意接收'。MAC 帧的 FCS 字段的检验范围不包括前同步码和帧开始定界符。</li>
+<li>会立即执行函数</li>
+<li>第一个参数是你要改变的函数内部的 <code>this</code> 指向</li>
+<li>第二个参数是一个 <strong>数组</strong>，数组里面的每一项依次是向函数传递的参数</li>
 </ul>
-<p>无效的 MAC 帧：</p>
-<ul>
-<li>帧的长度不是整数个字节；</li>
-<li>用收到的帧检验序列 FCS 查出有差错；</li>
-<li>收到的帧的 MAC 客户数据字段的长度不在 46 ~ 1500 字节之间。</li>
-</ul>
-<p><strong>对于检查出的无效 MAC 帧就简单地丢弃。以太网不负责重传丢弃的帧。</strong></p>
-</li>
-</ul>
-<h3 id="5-扩展的以太网">5. 扩展的以太网</h3>
-<h5 id="扩展的以太网在网络层看来仍然是一个网络">扩展的以太网在网络层看来仍然是一个网络。</h5>
-<ol>
-<li>
-<p>在物理层扩展以太网</p>
-<p>扩展主机和集线器之间的距离的一种简单方法就是使用光纤（通常是一对光纤）和一对光纤调制解调器。</p>
-<p>光纤调制解调器的作用就是进行<em>电信号和光信号的转换</em>。</p>
-<figure data-type="image" tabindex="14"><img src="https://s1.ax1x.com/2020/06/04/tBYkr9.png" alt="tBYkr9.png" loading="lazy"></figure>
-<p>优点：</p>
-<ul>
-<li>跨网络通信。</li>
-<li>扩大了以太网覆盖的地理范围。</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>扩大了碰撞域。</li>
-<li>不同的局域网使用不同的以太网技术（如数据率不同），那么就不可能用集线器将它们互连起来（速率向下兼容）。</li>
-</ul>
-</li>
-<li>
-<p>在数据链路层扩展以太网</p>
-<h5 id="网桥自学习算法">网桥（自学习算法）</h5>
-<h5 id="以太网交换机第二层交换机-即多接口网桥强调这种交换机工作在数据链路层">以太网交换机（第二层交换机 ），即多接口网桥，强调这种交换机工作在数据链路层。</h5>
-<ul>
-<li>
-<p>特点</p>
-<ol>
-<li>全双工方式通信。</li>
-<li>并行。</li>
-<li>相互通信的主机都是独占传输媒体，无碰撞地传输数据。</li>
-<li>接口还有存储器，能在输出端口繁忙时把到来的帧进行缓存。</li>
-</ol>
-</li>
-<li>
-<p>自学习功能</p>
-<figure data-type="image" tabindex="15"><img src="https://s1.ax1x.com/2020/06/04/tBt5p8.png" alt="tBt5p8.png" loading="lazy"></figure>
-<p>​		A 先向 B 发送一帧，从接口 1 进入到交换机。交换机收到帧后，先查找交换表，没有查到应从哪个接口转发这个帧（在 MAC 地址这一列中，找不到目的地址为 B 的项目）。然后，交换机把这个帧的源地址 A 和接口 1 写入交换表中并向除接口,以外的所有接口广播这个帧。C 和 D 丢弃该帧，因为目的地址不对。只有 B 才收下这个目的地址正确的帧。此即为<strong>过滤</strong>。</p>
-<p>​		以后不管从哪一个接口收到帧，只要其目的地 址是 A, 就应当把收到的帧从接口 1 转发出去。</p>
-<p>​		B 向 A 发送帧时，交换机把这个帧的源地址 B 和接口 3 写入交换表中，此时不再广播，因为交换表中已经存在 A 的地址。</p>
 </li>
 </ul>
 </li>
 <li>
-<p>虚拟局域网VLAN</p>
-<p>每一个 VLAN 的帧都有一个明确的标识符，指明发送这个帧的计算机属于哪一个 VLAN，而与物理位置无关。</p>
-<figure data-type="image" tabindex="16"><img src="https://s1.ax1x.com/2020/06/04/tBUZan.png" alt="tBUZan.png" loading="lazy"></figure>
-<p>VLAN 标记的前两个字节总是设置为 0x8100 （即二进制的 10000001 00000000) ，称为 IEEE 802.1Q 标记类型。</p>
-<p>VLAN 标识符 VID(VLANID) ，它唯一地标志了这个以太网帧属于哪一个 VLAN。</p>
-<p>由于用于 VLAN 的以太网帧的首部增加了 4 个字节，因此以太网的最大帧长从原来的 1518 字节 (1500 字节的数据加上 18 字节的首部）变为 1522 字节。</p>
+<p><code>call</code></p>
+<ul>
+<li><code>call</code> 方法是附加在函数调用后面使用，可以忽略函数本身的 <code>this</code> 指向</li>
+<li>语法： <code>函数名.call(要改变的 this 指向，要给函数传递的参数1，要给函数传递的参数2， ...)</code></li>
+</ul>
+<pre><code class="language-js">const obj = { name: 'Jack' };
+function fn(a, b) {
+  console.log(this);
+  console.log(a);
+  console.log(b);
+}
+fn(1, 2); // this =&gt; window
+fn.call(obj, 1, 2); // this =&gt; obj
+</code></pre>
+<ul>
+<li>使用 <code>call</code>:
+<ul>
+<li>会立即执行函数</li>
+<li>第一个参数是你要改变的函数内部的 <code>this</code> 指向</li>
+<li>第二个参数开始，依次是向函数传递参数</li>
+</ul>
 </li>
-</ol>
-<h3 id="6-高速以太网">6. 高速以太网</h3>
-<p>此部分转载自CSDN，<a href="%5Bhttps://blog.csdn.net/KnightOnHourse/article/details/80198611?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522159127115919725219954270%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=159127115919725219954270&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-2-80198611.ecpm_v1_rank_ctr_v1&amp;utm_term=%E9%AB%98%E9%80%9F%E4%BB%A5%E5%A4%AA%E7%BD%91%5D(https://blog.csdn.net/KnightOnHourse/article/details/80198611?ops_request_misc=%7B%22request%5Fid%22%3A%22159127115919725219954270%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&amp;request_id=159127115919725219954270&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-2-80198611.ecpm_v1_rank_ctr_v1&amp;utm_term=%E9%AB%98%E9%80%9F%E4%BB%A5%E5%A4%AA%E7%BD%91)">原文地址</a>（如侵删）</p>
-<div class="htmledit_views prism-atom-one-light" id="content_views">
-                                            <div class="blogpost-body"><p><strong>1. 100M以太网</strong></p><p align="center">快速以太网（100M）标准</p><div align="center"><div class="table-box"><table border="1" cellpadding="0" cellspacing="0"><tbody><tr><td valign="top" width="95"><p align="center">名称</p></td><td valign="top" width="81"><p align="center">传输介质</p></td><td valign="top" width="130"><p align="center">网段最大长度</p></td><td valign="top" width="360"><p align="center">特点</p></td></tr><tr><td valign="top" width="95"><p align="center">100BASE-TX</p></td><td valign="top" width="81"><p align="center">铜缆</p></td><td valign="top" width="130"><p align="center">100m</p></td><td valign="top" width="360"><p align="left">两对UTP5类线或屏蔽双绞线</p></td></tr><tr><td valign="top" width="95"><p align="center">100BASE-T4</p></td><td valign="top" width="81"><p align="center">铜缆</p></td><td valign="top" width="130"><p align="center">100m</p></td><td valign="top" width="360"><p align="left">四对UTP3类线或5类线</p></td></tr><tr><td valign="top" width="95"><p align="center">100BASE-FX</p></td><td valign="top" width="81"><p align="center">光纤</p></td><td valign="top" width="130"><p align="center">2000m</p></td><td valign="top" width="360"><p align="left">两根光纤，发送和接收各用一根，全双工，长距离</p></td></tr></tbody></table></div></div><p>（1）100BASE-T是在双绞线上传送100Mb/s基带信号的星型拓扑的以太网，仍使用IEEE802.3的CSMA/CD协议，它又称为快速以太网（FastEthernet）</p><p>（2）使用交换机组建的100BASE-T以太网，可在全双工方式下工作而无冲突发生。因此，<span style="color:#ff00ff;"><strong>CSMA/CD协议对全双工方式工作的快速以太网是不起作用的</strong></span>。<span style="color:#ff0000;"><strong>因为其帧格式和以太网一样</strong></span>，所以依然称<span style="color:#ff0000;"><strong>交换机组成的网络为以太网</strong></span>。</p><p>（3）以太网的最短帧与带宽和链路长度有关。<span style="color:#ff0000;"><strong>100M以太网</strong></span>比10M以太网速率提高10位，要想和10M以太网兼容，就要确保最短帧也是64字节，那就将电缆最大长度由1000m降到<span style="color:#0000ff;"><strong>100m</strong></span>，因此以太网的争用期依然是51.2μs，最短帧依然是64字节。</p><p><strong>2. 吉比特以太网</strong></p><p align="center">吉比特以太网（1000M）标准</p><div align="center"><div class="table-box"><table border="1" cellpadding="0" cellspacing="0"><tbody><tr><td valign="top" width="95"><p align="center">名称</p></td><td valign="top" width="81"><p align="center">传输介质</p></td><td valign="top" width="130"><p align="center">网段最大长度</p></td><td valign="top" width="360"><p align="center">特点</p></td></tr><tr><td valign="top" width="95"><p align="center">1000BASE-SX</p></td><td valign="top" width="81"><p align="center">光缆</p></td><td valign="top" width="130"><p align="center">550m</p></td><td valign="top" width="360"><p align="left">多模光纤（10和62.5μm）</p></td></tr><tr><td valign="top" width="95"><p align="center">1000BASE-LX</p></td><td valign="top" width="81"><p align="center">光缆</p></td><td valign="top" width="130"><p align="center">5000m</p></td><td valign="top" width="360"><p align="left">单模光纤（10μm）、多模光纤（50和62.5μm）</p></td></tr><tr><td valign="top" width="95"><p align="center">1000BASE-CX</p></td><td valign="top" width="81"><p align="center">铜线</p></td><td valign="top" width="130"><p align="center">25m</p></td><td valign="top" width="360"><p align="left">使用两对屏蔽双绞线电缆STP</p></td></tr><tr><td valign="top" width="95"><p align="center">1000BASE-T</p></td><td valign="top" width="81"><p align="center">铜线</p></td><td valign="top" width="130"><p align="center">100m</p></td><td valign="top" width="360"><p align="left">使用四对UTP5类线</p></td></tr></tbody></table></div></div><p>（1）吉比特（1000M）以太网的特点</p><p>　　①允许在1Gb/s下<span style="color:#0000ff;"><strong>全双工和半双工</strong></span>两种方式下工作。</p><p>　　②使用IEEE802.3协议规定的帧格式</p><p>　　③在<span style="color:#ff0000;"><strong>半双工方式下使用CSMA/CD协议</strong>（<strong>全双工方式不需要使用CSMA/CD协议</strong>）</span></p><p>　　④与10BASE-T和100BASE-T技术向后兼容。</p><p>（2）“载波延伸”</p><p align="center"><img src="https://s1.ax1x.com/2020/06/04/tBw2J1.png" alt="" height="235" width="658">&nbsp;</p><p>　　①吉比特以太网工作<span style="color:#ff0000;"><strong>在半双工时</strong></span>，就必须进行碰撞检测。数据速率提高了，要想和10M以太网兼容，就要确保最短帧也是64字节，这只能减少最大电缆长度，<span style="color:#0000ff;"><strong>以太网最大电缆就要缩短到10m</strong></span>，短到几乎没有实用价值。</p><p>　　②吉比特以太网<span style="color:#ff0000;"><strong>为了增加最大传输距离</strong>，<strong>将最短帧由64字节增加到512字节</strong></span>。</p><p>　　③如果数据帧不超过512字节，则在<span style="color:#ff00ff;"><strong>FCS域后面添加“载波延伸”域</strong></span>，当主机发送完短数据帧后，继续发送载波延伸信号，冲突信号传回来时，发送端就能感知到了。</p><p>（3）分组突发</p><p align="center"><img src="https://s1.ax1x.com/2020/06/04/tBw4sO.png" alt="" height="251" width="756">&nbsp;</p><p>　　①如果发送的数据帧都是小于64字节的<span style="color:#ff0000;"><strong>短报文</strong></span>时，那么<span style="color:#ff00ff;"><strong>链路的利用率就会很低</strong></span>，因为“载波延伸”域占用了大量的带宽。于是，千兆以太网引入了“分组突发”机制来改善这个问题。</p><p>　　②当很多短帧要发送时，<span style="color:#ff0000;"><strong>第一个短帧采用“载波延伸”方法进行填充</strong></span>，<strong><span style="color:#0000ff;">后面的一些短帧可以一个接一个发送</span>，<span style="color:#ff0000;">它们之间只要留必要的帧间最小间隔即可</span></strong>。这样就形成一串分组突发，直到达到1500字节或稍多一些为止。从而提高链路的利用率。</p><p>　　③“载波延伸”和“分组突发”<span style="color:#0000ff;"><strong>仅用于千兆以太网的半双工模式</strong></span>；而全双工模式不需要使用CSMA/CD协议，也就不需要这两个特性。</p><p><strong>3. 10吉比特以太网</strong></p><p align="center">万兆以太网标准</p><div align="center"><div class="table-box"><table border="1" cellpadding="0" cellspacing="0"><tbody><tr><td valign="top" width="101"><p align="center">名称</p></td><td valign="top" width="81"><p align="center">传输介质</p></td><td valign="top" width="129"><p align="center">网段最大长度</p></td><td valign="top" width="220"><p align="center">特点</p></td></tr><tr><td valign="top" width="101"><p align="center">10GBASE-SR</p></td><td valign="top" width="81"><p align="center">光缆</p></td><td valign="top" width="129"><p align="center">300m</p></td><td valign="top" width="220"><p align="left">多模光纤（0.85μm）</p></td></tr><tr><td valign="top" width="101"><p align="center">10GBASE-LR</p></td><td valign="top" width="81"><p align="center">光缆</p></td><td valign="top" width="129"><p align="center">10km</p></td><td valign="top" width="220"><p align="left">单模光纤（1.3μm）</p></td></tr><tr><td valign="top" width="101"><p align="center">10GBASE-ER</p></td><td valign="top" width="81"><p align="center">光缆</p></td><td valign="top" width="129"><p align="center">40m</p></td><td valign="top" width="220"><p align="left">单模光纤（1.3μm）</p></td></tr><tr><td valign="top" width="101"><p>10GBASE-CX4</p></td><td valign="top" width="81"><p align="center">铜线</p></td><td valign="top" width="129"><p align="center">15m</p></td><td valign="top" width="220"><p align="left">使用四对双芯同轴电缆</p></td></tr><tr><td valign="top" width="101"><p align="center">10GBASE-T</p></td><td valign="top" width="81"><p align="center">铜线</p></td><td valign="top" width="129"><p align="center">100m</p></td><td valign="top" width="220"><p align="left">使用4对6A类的UTP双绞线</p></td></tr></tbody></table></div></div><p>（1）10GE的帧格式与10Mb/s、100Mb/s和1Gb/s以太网的帧格式完全相同。10GE还保留了802.3标准规定的了以太网最小和最长帧长。</p><p>（2）由于数据率很高，10GE不再使用铜线而只使用光纤作为传输媒体。它使用长距离（40km）的光收发器与单模光纤接口，以便能够工作在广域网和城域网的范围。</p><p>（3）10GE只工作在全双工模式，因此不存在争用问题，也不使用CSMA/CD协议。这就使用10GE的传输距离不再受碰撞检测的限制而大大提高了</p></div>                                    </div>
+</ul>
+</li>
+<li>
+<p><code>bind</code></p>
+<ul>
+<li><code>bind</code> 方法是附加在函数调用后面使用，可以忽略函数本身的 <code>this</code> 指向</li>
+<li>和 <code>call / apply</code> 有一些不一样，它不会立即执行函数，而是返回一个已经改变了 <code>this</code> 指向的函数</li>
+<li>语法： <code>const newFn = 函数名.bind(要改变的 this 指向); newFn(传递参数)</code></li>
+</ul>
+<pre><code class="language-js">const obj = { name: 'Jack' };
+function fn(a, b) {
+  console.log(this);
+  console.log(a);
+  console.log(b);
+}
+fn(1, 2);
+const newFn = fn.bind(obj); // 改变了 this 指向
+newFn(1, 2); // 执行结果一致，但是 this =&gt; obj
+</code></pre>
+</li>
+</ul>
+<h4 id="总结">总结</h4>
+<ul>
+<li><code>this</code> 是作用域内部使用的关键字</li>
+<li><code>this</code> 指向不看函数定义，只和调用方式有关
+<ul>
+<li>全局调用 <code>fn() this =&gt; window</code></li>
+<li>对象调用 <code>obj. fn() this =&gt; obj</code></li>
+<li>定时器函数 <code>this =&gt; window</code></li>
+<li>事件处理函数 <code>this =&gt; 事件源</code></li>
+<li>自执行函数 <code>this =&gt; window</code></li>
+<li>构造函数 <code>this =&gt; 当前实例</code></li>
+<li>箭头函数 <code>没有 this ，它的 this 是上下文，即外部作用域的 this</code></li>
+</ul>
+</li>
+</ul>
+
             </div>
             
             
@@ -898,7 +771,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/" title="计算机网络学习笔记（三）--  数据链路层">https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-san-shu-ju-lian-lu-ceng/</a>
+      <a href="https://keasar.com.cn/post/javascript-this-guan-jian-zi/" title="JavaScript -- this 关键字">https://keasar.com.cn/post/javascript-this-guan-jian-zi/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -907,21 +780,17 @@
   </ul>
   <div class="tags">
     
-      <a href="https://keasar.com.cn/tag/huZmcNfOq/"># 计算机网络</a>
+      <a href="https://keasar.com.cn/tag/5OF6wA66L/"># JavaScript</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="计算机网络学习笔记（四）--  网络层" href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">计算机网络学习笔记（四）--  网络层</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="计算机网络学习笔记（四）--  网络层" href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-si-wang-luo-ceng/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="计算机网络学习笔记（二）--  物理层" href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">计算机网络学习笔记（二）--  物理层</a>
-        <a class="nav-mobile-next" title="计算机网络学习笔记（二）--  物理层" href="https://keasar.com.cn/post/ji-suan-ji-wang-luo-xue-xi-bi-ji-er/">下一篇</a>
+        <a class="nav-pc-next" title="React 高级 -- Refs and DOM" href="https://keasar.com.cn/post/react-gao-ji-refs-and-dom/">React 高级 -- Refs and DOM</a>
+        <a class="nav-mobile-next" title="React 高级 -- Refs and DOM" href="https://keasar.com.cn/post/react-gao-ji-refs-and-dom/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
