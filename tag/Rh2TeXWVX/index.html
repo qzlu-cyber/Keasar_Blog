@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Keasar`Blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1598158333664">
+<link rel="shortcut icon" href="/favicon.ico?v=1598188105842">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -194,7 +194,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">16</span>
+        <span class="site-item-stat-count">17</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -272,6 +272,10 @@
           <small class="language" data-lan="tag">标签</small>
         </h2>
       </div>
+      
+      
+      
+      
       
       
       
@@ -1136,6 +1140,379 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://keasar.com.cn/post/react-jin-jie-gao-jie-zu-jian-hoc/"" data-c="
+          &lt;p&gt;高阶组件（HOC）是 React 中用于复用组件逻辑的一种高级技巧，是一种基于 React 的组合特性而形成的设计模式。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;高阶组件是参数为组件，返回值为新组件的函数&lt;/strong&gt;。组件是将 props 转换为 UI，而高阶组件是将组件转换为另一个组件。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h4 id=&#34;使用&#34;&gt;使用&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;const EnhancedComponent = higherOrderComponent(WrappedComponent);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以下代码及组件基于&lt;a href=&#34;https://react.docschina.org/docs/higher-order-components.html&#34;&gt;官方文档例子&lt;/a&gt;补充并扩展：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;DataSource数据源&lt;/code&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;let comments = [{
+    id: 0,
+    msg: &amp;quot;Hello&amp;quot;
+  },
+  {
+    id: 1,
+    msg: &amp;quot;Hello1&amp;quot;
+  },
+  {
+    id: 2,
+    msg: &amp;quot;Hello2&amp;quot;
+  },
+];
+
+let blogPosts = [{
+    id: 0,
+    msg: &amp;quot;文章1&amp;quot;
+  },
+  {
+    id: 1,
+    msg: &amp;quot;文章2&amp;quot;
+  },
+  {
+    id: 2,
+    msg: &amp;quot;文章3&amp;quot;
+  },
+];
+
+let listeners = []; // 存放所有监听事件
+
+const DataSource = {
+  getComments() { // 获取评论
+    return comments;
+  },
+  getBlogPosts() { // 获取所有文章
+    return blogPosts;
+  },
+  getBlogPost(id) { // 根据 id 获取文章
+    return blogPosts.find(function (blog) {
+      return blog.id === id;
+    })
+  },
+  addBlogPost(blog) { // 发布文章
+    blogPosts.push(blog);
+    DataSource.broadCast(); // 数据源更新，调用 broadCast 函数执行
+  },
+  updateBlogPost(blog) { // 更新文章
+    let hasUpdate = false;
+    for (let i = 0; i &amp;lt; blogPosts.length; i++) {
+      const curBlog = blogPosts[i];
+      if (blog.id === curBlog.id) {
+        blogPosts[i] = Object.assign({}, curBlog, blog);
+        hasUpdate = true;
+      }
+    }
+
+    if (hasUpdate) {
+      DataSource.broadCast(); // 数据源更新，调用 broadCast 函数执行
+    }
+  },
+  addComment(comment) { // 添加评论
+    comments.push(comment);
+    DataSource.broadCast(); // 数据源更新，调用 broadCast 函数执行
+  },
+  addChangeListener(hander) {
+    listeners.push(hander); // 添加监听，向 listeners 数组中添加需要执行的函数
+  },
+  removeChangeListener(hander) { // 移除监听
+    let listenersNew = [];
+    for (let i = 0; i &amp;lt; listeners.length; i++) {
+      if (listeners[i] !== hander) {
+        listenersNew.push(listeners[i]);
+      }
+    }
+    listeners = listenersNew; // 移除后覆盖
+  },
+  broadCast() {
+    listeners.map(listener =&amp;gt; listener()); // 遍历 listeners 并执行其中的每个监听函数
+  }
+}
+
+export default DataSource;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;CommentList&lt;/code&gt; 组件，它订阅外部数据源，用以渲染评论列表：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;class Comment extends Component {
+  render() {
+    return &amp;lt;div&amp;gt;{this.props.comment.msg}&amp;lt;/div&amp;gt;;
+  }
+}
+
+class CommentList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      comments: DataSource.getComments(),
+    };
+  }
+
+  componentDidMount() {
+    // 订阅更改
+    DataSource.addChangeListener(this.handleChange);
+  }
+
+  componentWillUnmount() {
+    // 清除订阅
+    DataSource.removeChangeListener(this.handleChange);
+  }
+
+  handleChange = () =&amp;gt; {
+    // 当数据源更新时，更新组件状态
+    this.setState({
+      comments: DataSource.getComments(),
+    });
+  };
+
+  handleAddNewComment = () =&amp;gt; {
+    const id = Date.now();
+    DataSource.addComment({ id: id, msg: &amp;quot;新评论&amp;quot; + id });
+  };
+
+  render() {
+    return (
+      &amp;lt;div&amp;gt;
+        {this.state.comments.map((comment) =&amp;gt; (
+          &amp;lt;Comment comment={comment} key={comment.id} /&amp;gt;
+        ))}
+        &amp;lt;button onClick={this.handleAddNewComment}&amp;gt;添加新评论&amp;lt;/button&amp;gt; {/*点击按钮添加新评论*/}
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/08/23/d04CW9.png&#34; alt=&#34;添加新评论&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;BlogList&lt;/code&gt; 组件用于订阅单个博客帖子：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;class BlogPost extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      blogPost: DataSource.getBlogPost(this.props.id),
+    };
+  }
+
+  componentDidMount() {
+    // 订阅更改
+    DataSource.addChangeListener(this.handleChange);
+  }
+
+  componentWillUnmount() {
+    // 清除订阅
+    DataSource.removeChangeListener(this.handleChange);
+  }
+
+  handleChange = () =&amp;gt; {
+    // 当数据源更新时，更新组件状态
+    this.setState({
+      blogPost: DataSource.getBlogPost(this.props.id),
+    });
+  };
+
+  handleChangeBlog = () =&amp;gt; {
+    const id = Date.now();
+    const newBlog = Object.assign({}, this.state.blogPost, {
+      msg: &amp;quot;修改后的文章&amp;quot; + id,
+    });
+    DataSource.updateBlogPost(newBlog);
+  };
+
+  render() {
+    return (
+      &amp;lt;div&amp;gt;
+        &amp;lt;div&amp;gt;{this.state.blogPost.msg}&amp;lt;/div&amp;gt;
+        &amp;lt;button onClick={this.handleChangeBlog}&amp;gt;修改文章&amp;lt;/button&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;对比 &lt;code&gt;CommentList&lt;/code&gt; 和 &lt;code&gt;BlogPost&lt;/code&gt; 组件我们可以发现：虽然它们在 &lt;code&gt;DataSource&lt;/code&gt; 上调用不同的方法，且渲染不同的结果，但它们的大部分实现都是一样的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在挂载时，向 &lt;code&gt;DataSource&lt;/code&gt; 添加一个更改侦听器。&lt;/li&gt;
+&lt;li&gt;在侦听器内部，当数据源发生变化时，调用 &lt;code&gt;setState&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;在卸载时，删除侦听器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以，当我们的应用很大时，订阅和调用将会发生很多次，高阶组件正是解决了这个问题。它允许我们在一个地方定义这个逻辑，并在许多组件之间共享它。&lt;/p&gt;
+&lt;p&gt;对于订阅了 &lt;code&gt;DataSource&lt;/code&gt; 的组件，比如 &lt;code&gt;CommentList&lt;/code&gt; 和 &lt;code&gt;BlogPost&lt;/code&gt;，我们可以编写一个创建组件函数。该函数将接受一个子组件作为它的其中一个参数，该子组件将订阅数据作为 &lt;code&gt;prop&lt;/code&gt;。让我们调用函数 &lt;code&gt;withSubscription&lt;/code&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;const CommentListWithSubscription = withSubscription(
+  CommentList,
+  (DataSource) =&amp;gt; DataSource.getComments()
+);
+
+const BlogPostWithSubscription = withSubscription(
+  BlogPost,
+  (DataSource, props) =&amp;gt; DataSource.getBlogPost(props.id)
+);
+// withSubscription 第一个参数是被包装组件。第二个参数通过 DataSource 和当前的 props 返回我们需要的数据。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;需要接收返回数据的通过 &lt;code&gt;props&lt;/code&gt; 传递：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;/*
+    //BlogPost里的 
+    state = {
+        blogPost: DataSource.getBlogPost(props.id)
+    }
+    //使用高阶组件
+    withSubscription(BlogPost, (DataSource,props) =&amp;gt; DataSource.getBlogPost(props.id))
+*/
+
+function withSubscription(WrappedComponent, selectData) {
+  return class extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        data: selectData(DataSource, props),
+      };
+    }
+
+    componentDidMount() {
+      // ...负责订阅相关的操作...
+      DataSource.addChangeListener(this.handleChange);
+    }
+
+    componentWillUnmount() {
+      DataSource.removeChangeListener(this.handleChange);
+    }
+
+    handleChange = () =&amp;gt; {
+      this.setState({
+        data: selectData(DataSource, this.props),
+      });
+    };
+
+    render() {
+      return &amp;lt;WrappedComponent data={this.state.data} {...this.props} /&amp;gt;;
+    }
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;完成了抽离后，我们就可以在多个不同的地方复用它：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;// 修改后的 CommentList 组件
+class CommentList extends Component {
+  handleAddNewComment = () =&amp;gt; {
+    const id = Date.now();
+    DataSource.addComment({ id: id, msg: &amp;quot;新评论&amp;quot; + id });
+  };
+
+  render() {
+    return (
+      &amp;lt;div&amp;gt;
+        {this.props.data.map((comment) =&amp;gt; (
+          &amp;lt;Comment comment={comment} key={comment.id} /&amp;gt;
+        ))}
+        &amp;lt;button onClick={this.handleAddNewComment}&amp;gt;添加新评论&amp;lt;/button&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+
+export default withSubscription(CommentList, (DataSource) =&amp;gt;
+  DataSource.getComments()
+);
+
+// 修改后的 BlogPost 组件
+class BlogPost extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: this.props.data,
+    };
+  }
+
+  handleChangeBlog = () =&amp;gt; {
+    const id = Date.now();
+    const newBlog = Object.assign({}, this.props.data, {
+      msg: &amp;quot;修改后的文章&amp;quot; + id,
+    });
+    DataSource.updateBlogPost(newBlog);
+  };
+
+  render() {
+    return (
+      &amp;lt;div&amp;gt;
+        &amp;lt;div&amp;gt;{this.props.data.msg}&amp;lt;/div&amp;gt;
+        &amp;lt;button onClick={this.handleChangeBlog}&amp;gt;修改文章&amp;lt;/button&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+
+export default withSubscription(BlogPost, (DataSource, props) =&amp;gt;
+  DataSource.getBlogPost(props.id)
+);
+
+// App.js
+function App() {
+  return (
+    &amp;lt;div className=&#39;App&#39;&amp;gt;
+      &amp;lt;CommentList /&amp;gt;
+      &amp;lt;BlogPost id={0} /&amp;gt;
+    &amp;lt;/div&amp;gt;
+  );
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://s1.ax1x.com/2020/08/23/d0o46s.png&#34; alt=&#34;最终效果&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;HOC 可以只接收被包裹的组件也可接收多个参数，例如 Redux 中的 &lt;code&gt;connect&lt;/code&gt; 函数：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;connect(mapStateToProps, mapDispatchToProps)(Component);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;不难看出 &lt;code&gt;connect&lt;/code&gt; 是一个返回高阶组件的高阶组件，它采用了类似下面的写法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;function connect(mapStateToProps, mapDispatchToProps){
+    return function(Component){
+        return class extends React.Component {}
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;注意&#34;&gt;注意&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;不要在 render 方法中使用 HOC&lt;/p&gt;
+&lt;p&gt;React 的 &lt;code&gt;diff&lt;/code&gt; 算法（称为协调）使用组件标识来确定它是应该更新现有子树还是将其丢弃并挂载新子树。 如果从 &lt;code&gt;render&lt;/code&gt; 返回的组件与前一个渲染中的组件相同（&lt;code&gt;===&lt;/code&gt;），则 React 通过将子树与新子树进行区分来递归更新子树。 如果它们不相等，则完全卸载前一个子树。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;render() {
+  // 每次调用 render 函数都会创建一个新的 EnhancedComponent，既损失性能又会导致该组件及其所有子组件的状态丢失
+  // EnhancedComponent1 !== EnhancedComponent2
+  const EnhancedComponent = enhance(MyComponent);
+  // 这将导致子树每次渲染都会进行卸载，和重新挂载的操作！
+  return &amp;lt;EnhancedComponent /&amp;gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;复制静态方法&lt;/p&gt;
+&lt;p&gt;当 React 组件上有静态方法，使用 HOC 包装后，新组件无法拥有原始组件的任何静态方法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;// 定义静态函数
+WrappedComponent.staticMethod = function() {/*...*/}
+// 现在使用 HOC
+const EnhancedComponent = enhance(WrappedComponent);
+
+// 增强组件没有 staticMethod
+typeof EnhancedComponent.staticMethod === &#39;undefined&#39; // true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以使用下面的方法解决：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-jsx&#34;&gt;// 1.返回之前把这些方法拷贝到容器组件上
+function enhance(WrappedComponent) {
+  class Enhance extends React.Component {/*...*/}
+  // 必须准确知道应该拷贝哪些方法
+  Enhance.staticMethod = WrappedComponent.staticMethod;
+  return Enhance;
+}
+
+// 2. 使用 hoist-non-react-statics 自动拷贝所有非 React 静态方法
+import hoistNonReactStatic from &#39;hoist-non-react-statics&#39;;
+function enhance(WrappedComponent) {
+  class Enhance extends React.Component {/*...*/}
+  hoistNonReactStatic(Enhance, WrappedComponent);
+  return Enhance;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Refs 无法被传递&lt;/p&gt;
+&lt;p&gt;如果将 &lt;code&gt;ref&lt;/code&gt; 添加到 HOC 的返回组件中，则 &lt;code&gt;ref&lt;/code&gt; 引用指向容器组件，而不是被包装组件。可以通过 &lt;code&gt;React.forwardRef&lt;/code&gt; API 解决该问题。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+">React 进阶 -- 高阶组件 HOC</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://keasar.com.cn/post/javascript-this-guan-jian-zi/"" data-c="
           &lt;p&gt;面向对象语言中 &lt;code&gt;this&lt;/code&gt; 表示当前对象的一个引用。但在 JavaScript 中 &lt;code&gt;this&lt;/code&gt; 不是固定不变的，它会随着执行环境的改变而改变。&lt;/p&gt;
 &lt;!-- more --&gt;
@@ -1456,7 +1833,7 @@ export default class CustomTextInput extends React.Component {
   }
 }
 &lt;/code&gt;&lt;/pre&gt;
-">React 高级 -- Refs and DOM</a>
+">React 进阶 -- Refs and DOM</a>
       </div>
       
       <div class="item">
@@ -1820,7 +2197,7 @@ class Test extends Component {
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;因此，将 &lt;code&gt;value&lt;/code&gt; 状态提升到父节点的 &lt;code&gt;state&lt;/code&gt; 中是更好的做法&lt;/p&gt;
-">React 高级 -- Context</a>
+">React 进阶 -- Context</a>
       </div>
       
       <div class="item">
@@ -1929,7 +2306,7 @@ export function tryConvert(value, convert) {
 &lt;li&gt;React 调用 &lt;code&gt;Calculator&lt;/code&gt; 组件的 &lt;code&gt;render&lt;/code&gt; 方法得到组件的 UI 呈现。汇率转换在这时进行，两个输入框中的数值通过当前输入值和其货币类型来重新计算获得。&lt;/li&gt;
 &lt;li&gt;React 使用 &lt;code&gt;Calculator&lt;/code&gt; 组件提供的新 props 分别调用两个 &lt;code&gt;Money&lt;/code&gt; 子组件的 &lt;code&gt;render&lt;/code&gt; 方法来获取子组件的 UI 呈现。&lt;/li&gt;
 &lt;/ol&gt;
-">React 高级 -- 状态提升</a>
+">React 进阶 -- 状态提升</a>
       </div>
       
       <div class="item">
@@ -2003,7 +2380,7 @@ export function tryConvert(value, convert) {
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-">React 高级 -- 表单</a>
+">React 进阶 -- 表单</a>
       </div>
       
       <div class="item">
