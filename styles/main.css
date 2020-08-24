@@ -2167,6 +2167,13 @@ body {
     .head-top-line {
       background: #000;
     }
+      .pace .pace-activity {
+        border-top-color: #000 !important;
+        border-left-color: #000 !important;
+      }
+      .pace-running .head-top-line {
+        background: transparent;
+      }
     .brand {
       background: #000000fe;
     }
