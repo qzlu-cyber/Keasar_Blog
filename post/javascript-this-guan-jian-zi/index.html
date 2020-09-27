@@ -15,7 +15,7 @@
 <title>JavaScript -- this 关键字 | Keasar`Blog</title>
 <link
   rel="shortcut icon"
-  href="/favicon.ico?v=1598270976177"
+  href="/favicon.ico?v=1601183723466"
 />
 <link
   rel="stylesheet"
@@ -604,7 +604,7 @@
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
       <span
-        >4<span class="language" data-lan="minute"
+        >5<span class="language" data-lan="minute"
           >分钟</span
         ></span
       >
@@ -613,7 +613,7 @@
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
       <span
-        >962<span class="pc-show language" data-lan="words"
+        >982<span class="pc-show language" data-lan="words"
           >字数</span
         ></span
       >
@@ -780,6 +780,9 @@ function fn(a, b) {
 fn(1, 2);
 const newFn = fn.bind(obj); // 改变了 this 指向
 newFn(1, 2); // 执行结果一致，但是 this =&gt; obj
+
+const foo = fn.bind(obj, 1); //柯里化，预设置参数
+foo(2); // 输出 1，2
 </code></pre>
 </li>
 </ul>
@@ -2420,6 +2423,9 @@ function fn(a, b) {
 fn(1, 2);
 const newFn = fn.bind(obj); // 改变了 this 指向
 newFn(1, 2); // 执行结果一致，但是 this =&amp;gt; obj
+
+const foo = fn.bind(obj, 1); //柯里化，预设置参数
+foo(2); // 输出 1，2
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
